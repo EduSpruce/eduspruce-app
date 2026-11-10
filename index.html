@@ -4,11 +4,8 @@
 <meta name="description" content="EduSpruce: avaliação, sumários, horários, reuniões e direção de turma numa só app para professores. Feita para iPad. Dados encriptados na sua própria conta.">
 <meta property="og:title" content="EduSpruce — Plataforma Integrada de Gestão Educativa"><meta property="og:description" content="Menos papelada. Mais tempo para ensinar."><meta property="og:image" content="img/avaliacao.webp"><meta property="og:type" content="website">
 <link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#1b93c6">
-<script>/* eduspruce.app: quem já usava a app (instalada ou com dados neste endereço) e o regresso do início de sessão seguem para a app */
-(function(){try{var q=location.search,h=location.hash;if(/[?&]landing\b/.test(q))return;
-if(/[?&](code|state|error)=/.test(q)||/(access_token|id_token|error)=/.test(h)){location.replace('app/'+q+h);return}
-if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone){location.replace('app/');return}
-if(indexedDB&&indexedDB.databases)indexedDB.databases().then(function(l){if(l.some(function(d){return d.name==='edugest'}))location.replace('app/')}).catch(function(){})}catch(e){}})();</script>
+<script>/* eduspruce.app mostra sempre a apresentação; a app está em eduspruce.pt. Só o regresso de um início de sessão antigo segue para app/ */
+(function(){try{var q=location.search,h=location.hash;if(/[?&](code|state|error)=/.test(q)||/(access_token|id_token|error)=/.test(h))location.replace('app/'+q+h)}catch(e){}})();</script>
 
 <style>
 :root{--bg:#f2f4f6;--panel:#fff;--ink:#333;--mut:#5f6b76;--line:#d5dbe0;--sge:#1b93c6;--sge2:#147aa6;--sgeL:#e8f4fa;--or:#f39200;--gr:#5b5b5b;--ok:#2e8b57;--r:4px;color-scheme:light}
