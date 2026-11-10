@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EduSpruce · Menos papelada. Mais tempo para ensinar.</title>
+<meta name="description" content="EduSpruce: avaliação, sumários, horários, reuniões e direção de turma numa só app para professores. Feita para iPad. Dados encriptados na sua própria conta.">
+<meta property="og:title" content="EduSpruce — Plataforma Integrada de Gestão Educativa"><meta property="og:description" content="Menos papelada. Mais tempo para ensinar."><meta property="og:image" content="img/avaliacao.webp"><meta property="og:type" content="website">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#1f4e79">
+<script>/* eduspruce.app: quem já usava a app (instalada ou com dados neste endereço) e o regresso do início de sessão seguem para a app */
+(function(){try{var q=location.search,h=location.hash;if(/[?&]landing\b/.test(q))return;
+if(/[?&](code|state|error)=/.test(q)||/(access_token|id_token|error)=/.test(h)){location.replace('app/'+q+h);return}
+if((window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone){location.replace('app/');return}
+if(indexedDB&&indexedDB.databases)indexedDB.databases().then(function(l){if(l.some(function(d){return d.name==='edugest'}))location.replace('app/')}).catch(function(){})}catch(e){}})();</script>
+
+<style>
+:root{--bg:#eef2f7;--panel:#fff;--ink:#1b2430;--mut:#55606e;--line:#d5dce5;--acc:#1f4e79;--acc2:#2f6ea5;--soft:#e4edf6;--gold:#e3b448;--ok:#1f7a4d;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1720;--panel:#16202b;--ink:#e6edf5;--mut:#a3b1c1;--line:#2a3746;--acc:#8fb8e0;--acc2:#9cc3ea;--soft:#1b2a3a;--ok:#5cc28f;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0f1720;--panel:#16202b;--ink:#e6edf5;--mut:#a3b1c1;--line:#2a3746;--acc:#8fb8e0;--acc2:#9cc3ea;--soft:#1b2a3a;--ok:#5cc28f;color-scheme:dark}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc2)}img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+/* topo */
+.nav{position:sticky;top:0;z-index:20;background:rgba(13,34,56,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
+.nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:800;font-size:19px}.brand svg{border-radius:10px;flex:none}.brand em{font-style:normal;color:#9cc3ea}
+.nav .lk{display:flex;gap:4px;margin-left:auto}.nav .lk a{color:#dbe6f2;text-decoration:none;font-size:14.5px;padding:8px 12px;border-radius:9px}.nav .lk a:hover{background:rgba(255,255,255,.1)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:15px;text-decoration:none;padding:12px 20px;border-radius:12px;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.btn.pri{background:var(--gold);color:#1b2430}.btn.pri:hover{filter:brightness(1.05)}
+.btn.sec{background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.28)}.btn.sec:hover{background:rgba(255,255,255,.15)}
+.btn.sm{padding:8px 14px;font-size:14px;border-radius:10px}
+.btn svg{flex:none}
+/* herói */
+.hero{background:linear-gradient(135deg,#0d2238,#14365a 45%,#1f4e79);color:#fff;overflow:hidden;position:relative}
+.hero::after{content:"";position:absolute;inset:auto -10% -40% 40%;height:70%;background:radial-gradient(closest-side,rgba(156,195,234,.22),transparent);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:48px;align-items:center;padding-top:72px;padding-bottom:84px;position:relative;z-index:1}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9cc3ea;background:rgba(156,195,234,.12);border:1px solid rgba(156,195,234,.25);padding:6px 12px;border-radius:999px}
+.hero h1{font-size:clamp(34px,5vw,56px);line-height:1.06;letter-spacing:-.025em;margin:18px 0 16px;text-wrap:balance}
+.hero h1 span{color:var(--gold)}
+.hero p.lead{font-size:clamp(17px,1.6vw,19px);color:#c6d4e3;margin:0 0 28px;max-width:34em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;color:#b6c7da;font-size:14px}.trust span{display:inline-flex;gap:7px;align-items:center}
+.shot{border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.12);background:#fff}
+.hero .shot{transform:perspective(1600px) rotateY(-6deg) rotateX(2deg);transform-origin:left center}
+/* secções */
+section{padding:84px 0}
+.sh{max-width:720px;margin:0 0 40px}.sh.c{margin-inline:auto;text-align:center}
+.kick{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--acc2)}
+h2{font-size:clamp(26px,3.2vw,38px);line-height:1.15;letter-spacing:-.02em;margin:8px 0 12px;text-wrap:balance}
+.sh p{color:var(--mut);font-size:17px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card h3{margin:12px 0 6px;font-size:17px}.card p{margin:0;color:var(--mut);font-size:15px}
+.ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:var(--soft);color:var(--acc)}
+/* destaques alternados */
+.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:48px;align-items:center;margin-bottom:72px}
+.feat:last-child{margin-bottom:0}.feat.r{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.feat.r .txt{order:2}
+.feat h3{font-size:clamp(22px,2.4vw,28px);letter-spacing:-.015em;margin:8px 0 10px;line-height:1.2}
+.feat p{color:var(--mut);margin:0 0 14px}
+.feat ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.feat li{display:flex;gap:10px;align-items:flex-start}.feat li svg{flex:none;margin-top:3px;color:var(--ok)}
+.feat .shot{box-shadow:0 20px 50px -18px rgba(13,34,56,.35),0 0 0 1px var(--line)}
+/* privacidade */
+.priv{background:linear-gradient(135deg,#0d2238,#14365a 60%,#1f4e79);color:#fff}
+.priv .sh p{color:#c6d4e3}.priv .kick{color:#9cc3ea}
+.priv .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14)}.priv .card p{color:#c6d4e3}.priv .ico{background:rgba(227,180,72,.16);color:var(--gold)}
+/* passos */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.steps .card{position:relative;padding-top:56px}.steps .card::before{counter-increment:s;content:counter(s);position:absolute;top:18px;left:22px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center}
+:root[data-theme=dark] .steps .card::before{color:#0f1720}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .steps .card::before{color:#0f1720}}
+/* ipad */
+.ipad{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:48px;align-items:center}
+.dev{max-width:380px;margin:0 auto;border-radius:34px;padding:14px;background:#1b2430;box-shadow:0 30px 70px -25px rgba(13,34,56,.5)}.dev img{border-radius:22px}
+/* faq */
+details{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:22px;line-height:1;color:var(--acc2)}details[open] summary::after{content:"–"}
+details p{margin:0 0 16px;color:var(--mut)}
+.final{text-align:center}.final .card{padding:48px 24px;background:linear-gradient(135deg,#14365a,#1f4e79);border:0;color:#fff}.final h2{color:#fff}.final p{color:#c6d4e3;margin:0 auto 24px;max-width:36em}.final .cta{justify-content:center}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:14px}footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}footer a{color:var(--mut)}
+@media (max-width:960px){.hero .wrap,.feat,.feat.r,.ipad{grid-template-columns:1fr;gap:32px}.feat.r .txt{order:0}.hero .shot{transform:none}.grid,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.nav .lk a.h{display:none}}
+@media (max-width:620px){section{padding:60px 0}.grid,.steps{grid-template-columns:1fr}.nav .lk{display:none}.nav .wrap{justify-content:space-between}.hero .wrap{padding-top:44px;padding-bottom:56px}.btn{width:100%;justify-content:center}.cta{flex-direction:column}.nav .btn{width:auto}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.34 9.1 4 4 0 0 0 7 19z"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10 10 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.9 8.3 2 12 2 12s4 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></symbol>
+<symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-5h4v5"/></symbol>
+<symbol id="i-grade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M8 7h8M8 11h6"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+<symbol id="i-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v10a2 2 0 0 1-2 2M8 8h5M8 12h5M8 16h3"/></symbol>
+<symbol id="i-board" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></symbol>
+<symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 17h4"/></symbol>
+<symbol id="i-gh" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+</defs></svg>
+
+<header class="nav"><div class="wrap">
+<a class="brand" href="#topo" aria-label="EduSpruce — início"><svg width="36" height="36" aria-hidden="true" viewBox="0 0 64 64"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f6ea5"/><stop offset="1" stop-color="#1c3f63"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#lg)"/><rect x="1" y="1" width="62" height="62" rx="14" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="1.5"/><path d="M29.29 47C36.53 47 40.84 43.690 40.84 38.14C40.84 33.47 37.57 30.65 31.92 29.41L29.39 28.82C26.78 28.24 25.08 27.37 25.08 25.57C25.08 23.94 26.51 22.75 29.27 22.75C32.06 22.75 33.61 23.98 33.8 26.1H40.45C40.37 20.69 36.06 17 29.29 17C22.67 17 17.92 20.63 17.92 26.04C17.92 30.43 20.98 32.96 26.020 34.12L29.12 34.84C32.31 35.57 33.84 36.45 33.84 38.12C33.84 39.98 32.08 41.25 29.22 41.25C26.06 41.25 23.96 39.8 23.8 36.96H17.16C17.27 43.71 21.98 47 29.29 47Z" fill="#fff"/><circle cx="46.2" cy="43" r="4.3" fill="#e3b448"/></svg><span>Edu<em>Spruce</em></span></a>
+<nav class="lk" aria-label="Secções"><a class="h" href="#funcoes">Funcionalidades</a><a class="h" href="#privacidade">Privacidade</a><a class="h" href="#comecar">Como começar</a><a href="#faq">Perguntas</a></nav>
+<a class="btn pri sm" href="https://eduspruce.pt/">Abrir a app</a>
+</div></header>
+
+<main id="topo">
+<div class="hero"><div class="wrap">
+  <div>
+    <span class="eyebrow">Para professores · Ensino básico, secundário e profissional</span>
+    <h1>Menos papelada.<br><span>Mais tempo para ensinar.</span></h1>
+    <p class="lead">Avaliação, sumários, horário, reuniões e direção de turma numa só app, feita para o iPad e para a forma como as escolas portuguesas trabalham. Os dados ficam encriptados na sua própria conta.</p>
+    <div class="cta"><a class="btn pri" href="https://eduspruce.pt/">Abrir o EduSpruce <svg width="18" height="18"><use href="#i-arrow"/></svg></a><a class="btn sec" href="#funcoes">Ver o que faz</a></div>
+    <div class="trust"><span><svg width="16" height="16"><use href="#i-lock"/></svg> Encriptação AES-256</span><span><svg width="16" height="16"><use href="#i-eye"/></svg> Sem publicidade nem rastreadores</span><span><svg width="16" height="16"><use href="#i-school"/></svg> Nunca escreve no programa da escola</span></div>
+  </div>
+  <div class="shot"><img src="img/avaliacao.webp" width="1600" height="1007" alt="Avaliação final de uma turma no EduSpruce, com percentagens por domínio, nível atribuído e menção" fetchpriority="high"></div>
+</div></div>
+
+<section id="funcoes"><div class="wrap">
+  <div class="sh c"><span class="kick">Tudo num só lugar</span><h2>O ano letivo inteiro, sem folhas soltas</h2><p>Do primeiro sumário à pauta final: o EduSpruce junta o trabalho que hoje está espalhado por cadernos, folhas de Excel e e-mails.</p></div>
+  <div class="grid">
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-grade"/></svg></div><h3>Avaliação por domínios</h3><p>Critérios, ponderações e perfis de aprendizagem. Classificações calculadas por período, com nível ou escala de 0 a 20 no secundário.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-book"/></svg></div><h3>Aulas e sumários</h3><p>Lições numeradas a partir do horário, faltas, presenças, substituições e reposições. Modo Aula para usar dentro da sala.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-cal"/></svg></div><h3>Horário importado</h3><p>Leia o horário a partir do PDF da escola. Calendário escolar, interrupções e contagem até ao fim do período.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-users"/></svg></div><h3>Direção de turma</h3><p>Conselho de turma, avaliação intercalar, contactos com encarregados de educação e atas.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-mic"/></svg></div><h3>Produção oral</h3><p>Grelhas por parâmetro com gravação, trabalho a pares e ligação direta ao instrumento de avaliação.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-tool"/></svg></div><h3>Cursos profissionais</h3><p>Módulos e UFCD, matriz e planeamento, pontos de situação e coordenação PROFIJ, sem misturar com o ensino regular.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-news"/></svg></div><h3>Jornal escolar</h3><p>Peças, prazos, equipa e paginação do jornal da escola, com um SpruceNote próprio para organizar ideias.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-board"/></svg></div><h3>SpruceNote</h3><p>Um quadro livre para notas, listas, imagens e ligações: planificar uma unidade ou preparar uma reunião.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-pdf"/></svg></div><h3>Documentos prontos</h3><p>Pautas, relatórios e fichas de aluno exportados para PDF ou Excel, prontos a entregar.</p></div>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <div class="feat">
+    <div class="txt"><span class="kick">Início</span><h3>Abre a app e sabe o que tem para hoje</h3><p>Um painel que se arruma à sua maneira: arraste cartões, mude-lhes a largura e o espaço que sobra fica livre para outro.</p>
+    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Contagem até ao fim do período e próxima interrupção</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Desempenho por critério em cada turma</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Avisos de tarefas, reuniões e prazos em atraso</li></ul></div>
+    <div class="shot"><img src="img/inicio.webp" width="1600" height="1007" alt="Ecrã inicial com contagem decrescente para o fim do período e desempenho por critério" loading="lazy"></div>
+  </div>
+  <div class="feat r">
+    <div class="txt"><span class="kick">Painel da turma</span><h3>Cada turma num relance</h3><p>Assiduidade, alunos abaixo do limiar, avaliações por lançar e o que vem nos próximos dias, com o passo seguinte a um toque.</p>
+    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Marque testes e momentos de avaliação no calendário</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Lance classificações por item ou por domínio</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Vista própria para o conselho de turma</li></ul></div>
+    <div class="shot"><img src="img/painel.webp" width="1600" height="1007" alt="Painel da turma com assiduidade, avaliações pendentes e próximos dias" loading="lazy"></div>
+  </div>
+  <div class="feat">
+    <div class="txt"><span class="kick">Horário e sumários</span><h3>O horário faz o resto</h3><p>Importe o horário e as lições numeram-se sozinhas. Escreva o sumário no fim da aula e marque faltas sem sair do mesmo ecrã.</p>
+    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Horário semanal com tempos letivos e não letivos</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Substituições e reposições contabilizadas</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Exportação para CSV, PDF e calendário</li></ul></div>
+    <div class="shot"><img src="img/meuhorario.webp" width="1600" height="1007" alt="Horário semanal do professor por cores de turma" loading="lazy"></div>
+  </div>
+  <div class="feat r">
+    <div class="txt"><span class="kick">Reuniões</span><h3>Reuniões com ata e tarefas</h3><p>Convocatórias importadas do PDF, mapa mensal, tarefas com prazo e o histórico de atas, tudo ligado às turmas certas.</p>
+    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Lembretes antes de cada reunião</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Deliberações que passam a tarefas</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Exportação para o calendário (.ics)</li></ul></div>
+    <div class="shot"><img src="img/reunioes.webp" width="1600" height="1007" alt="Lista de reuniões com próxima reunião, tarefas pendentes e atas por fazer" loading="lazy"></div>
+  </div>
+</div></section>
+
+<section class="priv" id="privacidade"><div class="wrap">
+  <div class="sh"><span class="kick">Privacidade desde a origem</span><h2>Os dados dos alunos não saem do seu controlo</h2><p>O EduSpruce não tem servidores que recebam dados de alunos. Tudo é encriptado no seu aparelho antes de ser guardado na sua própria nuvem.</p></div>
+  <div class="grid">
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-lock"/></svg></div><h3>Encriptado no aparelho</h3><p>AES-256 com uma palavra-passe que só o professor conhece. Nem o autor do EduSpruce nem o fornecedor da nuvem conseguem ler os dados.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-cloud"/></svg></div><h3>Na sua conta</h3><p>Sincroniza com o seu Google Drive ou OneDrive. Abre no iPad, no computador da escola ou em casa, sempre atualizado.</p></div>
+    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-school"/></svg></div><h3>Só leitura do programa da escola</h3><p>Pode importar listas, horários e pautas. O EduSpruce nunca escreve no programa de gestão da escola.</p></div>
+  </div>
+  <p style="margin:24px 0 0;color:#c6d4e3">Leia a <a href="privacidade.html" style="color:#fff">Política de Privacidade</a> e os <a href="termos.html" style="color:#fff">Termos de Serviço</a>.</p>
+</div></section>
+
+<section><div class="wrap ipad">
+  <div class="dev"><img src="img/ipad.webp" width="820" height="1180" alt="EduSpruce no iPad, em vista vertical" loading="lazy"></div>
+  <div><span class="kick">Feito para o iPad</span><h2>Na sala de aula, na sala de professores, em casa</h2><p style="color:var(--mut);font-size:17px">Instala-se a partir do navegador, sem loja de aplicações, e funciona como uma app: ecrã inteiro, notificações e uso com o teclado ou com o dedo.</p>
+  <div class="feat" style="margin:0;display:block"><ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>iPad, iPhone, Mac, Windows e Chromebook</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Sete temas, incluindo um próximo do programa da escola</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Código de acesso para bloquear a app em segundos</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Modo de privacidade para projetar sem mostrar notas</li></ul></div></div>
+</div></section>
+
+<section id="comecar" style="padding-top:0"><div class="wrap">
+  <div class="sh c"><span class="kick">Como começar</span><h2>Pronto em poucos minutos</h2></div>
+  <div class="steps">
+    <div class="card"><h3>Abra a app</h3><p>Entre em <a href="https://eduspruce.pt/">EduSpruce</a> no navegador. No iPad, toque em Partilhar › Adicionar ao ecrã principal.</p></div>
+    <div class="card"><h3>Ligue a sua nuvem</h3><p>Escolha Google Drive ou OneDrive e defina a palavra-passe de encriptação. Os dados passam a acompanhá-lo em todos os aparelhos.</p></div>
+    <div class="card"><h3>Importe as turmas</h3><p>Traga as listas de alunos e o horário da escola. Experimente primeiro com a demonstração, se preferir.</p></div>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap" style="max-width:820px">
+  <div class="sh c"><span class="kick">Perguntas frequentes</span><h2>Antes de começar</h2></div>
+  <details><summary>Preciso de instalar alguma coisa?</summary><p>Não. O EduSpruce abre no navegador. Se o adicionar ao ecrã principal, passa a abrir em ecrã inteiro como qualquer outra app.</p></details>
+  <details><summary>Onde ficam os dados dos meus alunos?</summary><p>Na sua conta Google Drive ou OneDrive, encriptados no aparelho antes de saírem dele. O EduSpruce não tem servidores com dados de alunos.</p></details>
+  <details><summary>O EduSpruce substitui o programa de gestão da escola?</summary><p>Não. É o caderno do professor: prepara a avaliação, os sumários e as reuniões. Pode importar dados do programa da escola, mas nunca escreve nele.</p></details>
+  <details><summary>Serve para cursos profissionais?</summary><p>Sim. Tem módulos e UFCD, matriz, planeamento e pontos de situação, e uma área de coordenação, separados do ensino regular.</p></details>
+  <details><summary>E se perder o iPad?</summary><p>Os dados estão na sua nuvem. Entre noutro aparelho com a mesma conta e a palavra-passe de encriptação e continua onde parou.</p></details>
+  <details><summary>Posso começar do zero?</summary><p>Sim. Nas Definições pode apagar tudo o que o EduSpruce guardou na sua conta e começar um novo ano limpo.</p></details>
+</div></section>
+
+<section class="final" style="padding-top:0"><div class="wrap"><div class="card">
+  <h2>Experimente com a sua próxima turma</h2><p>Abra a demonstração, explore com dados fictícios e, quando estiver pronto, traga as suas turmas.</p>
+  <div class="cta"><a class="btn pri" href="https://eduspruce.pt/">Abrir o EduSpruce <svg width="18" height="18"><use href="#i-arrow"/></svg></a><a class="btn sec" href="https://github.com/EduSpruce/eduspruce"><svg width="18" height="18"><use href="#i-gh"/></svg> Código no GitHub</a></div>
+</div></div></section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 EduSpruce · Plataforma Integrada de Gestão Educativa</span><span><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a> · <a href="https://github.com/EduSpruce/eduspruce/issues">Contacto</a></span></div></footer>
+</body></html>

@@ -1,0 +1,23 @@
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# NUNCA versionar dados reais de alunos (RGPD)
+*.json
+!manifest.webmanifest
+!eduspruce-config.json
+backups/
+copias/
+exportacoes/
+*.xlsx
+*.xls
+*.csv
+*.pdf
+!docs/**/*.pdf
+!manual/*.pdf
