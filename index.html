@@ -130,12 +130,69 @@ input[type=range]{width:100%;accent-color:var(--sge);height:28px}
 .leg{margin-top:14px;color:var(--ink2);min-height:3.2em;max-width:46em}
 
 /* tudo o resto: índice em colunas */
-.resto{padding:30px 0 90px}
-.resto h2{margin-bottom:28px}
-.idx{columns:3 240px;column-gap:40px}
-.idx div{break-inside:avoid;padding:13px 0;border-top:2px solid var(--ink)}
-.idx b{display:block;font:700 19px var(--disp);letter-spacing:-.01em}
-.idx span{color:var(--ink2);font-size:15.5px}
+
+/* todas as funcionalidades: mosaico com miniaturas animadas (só animam quando estão no ecrã) */
+.tudo{padding:30px 0 90px}
+.tudo h2{margin-bottom:10px}.tudo .lead{margin-bottom:22px}
+.filt{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filt button{border:0;background:#ffffffb0;box-shadow:inset 0 0 0 1.5px var(--line);border-radius:99px;padding:9px 16px;font-weight:600;font-size:15px}
+.filt button[aria-pressed=true]{background:var(--ink);color:#fff;box-shadow:none}
+.fx{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.f{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px var(--line);transition:transform .25s,opacity .25s}
+.f[hidden]{display:none}
+.f:hover{transform:translateY(-4px)}
+.f h3{font-size:19px;padding:14px 16px 3px;letter-spacing:-.01em}
+.f p{padding:0 16px 16px;color:var(--ink2);font-size:15px;line-height:1.45}
+.v{height:150px;position:relative;background:#eef6fa;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:8px;font:700 13px var(--disp);color:var(--ink)}
+.f:not(.go) .v *,.f:not(.go) .v *::before,.f:not(.go) .v *::after{animation-play-state:paused!important}
+.v *{animation-duration:5s;animation-iteration-count:infinite;animation-delay:var(--d,0s)}
+@keyframes pop{0%,6%{transform:scale(0);opacity:0}14%,90%{transform:scale(1);opacity:1}97%,100%{transform:scale(0);opacity:0}}
+@keyframes sobe{0%,5%{transform:scaleY(0)}30%,90%{transform:scaleY(1)}100%{transform:scaleY(0)}}
+@keyframes larg{0%,5%{transform:scaleX(0)}35%,92%{transform:scaleX(1)}100%{transform:scaleX(0)}}
+@keyframes escreve{0%,5%{width:0}45%,92%{width:var(--w)}100%{width:0}}
+@keyframes vai{0%,18%{transform:translate(0,0)}42%,86%{transform:translate(var(--x,0),var(--y,0))}100%{transform:translate(0,0)}}
+@keyframes tres{0%,30%{opacity:1}33%,97%{opacity:0}100%{opacity:1}}
+@keyframes dois{0%,45%{opacity:1}50%,95%{opacity:0}100%{opacity:1}}
+@keyframes traca{0%,5%{stroke-dashoffset:300}55%,92%{stroke-dashoffset:0}100%{stroke-dashoffset:300}}
+@keyframes onda{0%{transform:scale(.6);opacity:.8}100%{transform:scale(1.9);opacity:0}}
+@keyframes voto{0%{transform:scaleX(.2)}100%{transform:scaleX(1)}}
+@keyframes desce{0%,10%{transform:translateY(-130%)}22%,78%{transform:translateY(0)}90%,100%{transform:translateY(-130%)}}
+@keyframes varre{0%,100%{transform:translateY(0)}50%{transform:translateY(96px)}}
+@keyframes cores{0%,20%{background:#1b93c6}25%,45%{background:#ff385c}50%,70%{background:#17705a}75%,95%{background:#7a4fc4}100%{background:#1b93c6}}
+@keyframes desf{0%,35%{filter:blur(0)}45%,90%{filter:blur(5px)}100%{filter:blur(0)}}
+@keyframes lado{0%,40%{transform:translateX(0)}50%,90%{transform:translateX(26px)}100%{transform:translateX(0)}}
+.pop{animation-name:pop}.vai{animation-name:vai}
+.bk{border-radius:6px;background:var(--c,var(--sge))}
+.ln{display:block;height:8px;border-radius:9px;background:#c9dbe5;transform-origin:left;width:var(--w,70px)}
+.ln.a{animation-name:larg}
+.chip{padding:5px 10px;border-radius:99px;background:var(--c,var(--ink));color:#fff;white-space:nowrap}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--c,var(--sge));flex:none}
+.col{display:flex;flex-direction:column;gap:8px}.lin{display:flex;gap:8px;align-items:center}
+.pg{background:#fff;border-radius:8px;padding:12px;box-shadow:0 0 0 1.5px #c9dbe5;position:relative}
+.g5{display:grid;grid-template-columns:repeat(5,30px);gap:5px}.g5 i{height:20px}
+.g7{display:grid;grid-template-columns:repeat(7,16px);gap:6px}.g7 i{height:16px;border-radius:50%;background:#c9dbe5}.g7 i.o{background:var(--sun);animation-name:pop}
+.ty{display:inline-block;overflow:hidden;white-space:nowrap;animation-name:escreve;animation-timing-function:steps(22);border-right:2px solid var(--ink);font:600 13px var(--body)}
+.bars{display:flex;align-items:flex-end;gap:10px;height:96px}.bars i{width:24px;border-radius:6px 6px 0 0;transform-origin:bottom;animation-name:sobe;height:var(--h);background:var(--c,var(--sge))}
+.pil{position:absolute;animation-name:tres;animation-duration:6s}
+.st{font-size:30px;color:var(--sun);animation-name:pop}
+.vb{display:block;height:14px;border-radius:9px;transform-origin:left;animation:voto var(--t,2s) ease-in-out infinite alternate;background:var(--c);width:150px}
+.tel{width:74px;height:124px;border-radius:14px;border:3px solid var(--ink);background:#fff;position:relative;overflow:hidden;display:grid;place-items:center}
+.qr{display:grid;grid-template-columns:repeat(4,9px);gap:3px}.qr i{height:9px;background:var(--ink)}.qr i:nth-child(3n){opacity:.15}
+.ok{width:34px;height:34px;border-radius:50%;background:var(--spruce);color:#fff;display:grid;place-items:center;font-size:18px}
+.cb{width:16px;height:16px;border-radius:4px;box-shadow:inset 0 0 0 2px var(--ink);display:grid;place-items:center;font-size:12px;flex:none}
+.cb b{animation-name:pop;color:var(--spruce)}
+.anel{position:absolute;width:44px;height:44px;border-radius:50%;border:3px solid var(--sge);animation:onda 1.8s infinite}
+.kan{display:grid;grid-template-columns:repeat(3,62px);gap:8px}.kan>i{height:100px;border-radius:8px;background:#dcebf2}
+.nota1{width:62px;height:54px;padding:6px;font:600 10px/1.2 var(--body);background:var(--c,#ffe08a);box-shadow:0 4px 8px -4px #0006;animation-name:pop}
+.mini{width:170px;height:104px;border-radius:10px;background:#fff;overflow:hidden;box-shadow:0 0 0 1.5px #c9dbe5;display:grid;grid-template-columns:28px 1fr;grid-template-rows:22px 1fr}
+.mini .tb{grid-column:1/-1;animation-name:cores;animation-duration:8s}.mini .sb{background:#5b5b5b}.mini .ct{padding:8px;display:grid;gap:6px;align-content:start}
+.ban{position:absolute;top:6px;left:5px;right:5px;border-radius:8px;background:var(--ink);color:#fff;font:600 8px/1.25 var(--body);padding:5px;animation-name:desce}
+.scan{position:absolute;left:0;right:0;top:0;height:3px;background:var(--sun);box-shadow:0 0 12px 4px #f3920088;animation:varre 2.6s ease-in-out infinite}
+.sw{width:56px;height:30px;border-radius:99px;background:var(--ink);padding:3px}.sw i{display:block;width:24px;height:24px;border-radius:50%;background:var(--sun);animation-name:lado;animation-duration:6s}
+.tbl{display:grid;grid-template-columns:54px repeat(3,26px);gap:5px;align-items:center}.tbl u{height:22px;border-radius:5px;background:#dcebf2;display:grid;place-items:center;text-decoration:none}.tbl u b{animation-name:pop;color:var(--spruce)}
+.blur{animation-name:desf}
+@media (max-width:560px){.fx{grid-template-columns:1fr 1fr;gap:10px}.v{height:120px;transform-origin:center}.v>*{zoom:.8}.f h3{font-size:16px;padding:10px 12px 2px}.f p{font-size:13.5px;padding:0 12px 12px}}
+@media (max-width:340px){.fx{grid-template-columns:1fr}}
 
 /* noite */
 .noite{position:relative;background:linear-gradient(#0c2f4200,#0c2f42 190px);color:#e9f3f8;padding:230px 0 90px;margin-top:-40px}
@@ -160,8 +217,8 @@ details p{padding:0 0 18px;color:#b9d0dc;max-width:40em}
 .fim .cta{justify-content:center}.fim .bt.a{background:var(--sun);color:var(--ink);box-shadow:0 6px 0 -1px #fff}.fim .bt.b{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff}
 footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}footer .w{display:flex;gap:10px 22px;flex-wrap:wrap;justify-content:space-between}footer a{color:#e9f3f8}
 
-@media (max-width:900px){.abre .w,.tempo .w{grid-template-columns:1fr;gap:30px}.tempo.inv .tx{order:0}.noite .tri,.pas{grid-template-columns:1fr;gap:26px}.bar a.t{display:none}.tempo{padding:54px 0}#sol{width:38px;height:38px}}
-@media (max-width:520px){.cham{grid-template-columns:repeat(4,1fr)}.w{padding:0 18px}.bt.s{padding:8px 12px}.relogio{padding:5px 10px;font-size:14px}.res .n{font-size:52px}.res .nv i{width:28px;height:28px}}
+@media (max-width:900px){.abas,.filt{flex-wrap:nowrap;overflow-x:auto;margin-inline:-18px;padding:2px 18px 8px;scrollbar-width:none}.abas button,.filt button{flex:none}.hora{-webkit-text-stroke-width:1.5px}.abre .w,.tempo .w{grid-template-columns:1fr;gap:30px}.tempo.inv .tx{order:0}.noite .tri,.pas{grid-template-columns:1fr;gap:26px}.bar a.t{display:none}.tempo{padding:54px 0}#sol{width:38px;height:38px}}
+@media (max-width:520px){h1{font-size:clamp(38px,12.5vw,60px)}h2{font-size:clamp(26px,8vw,34px)}.abre{padding:30px 0}.cta .bt{flex:1 1 auto}.res{flex-wrap:wrap}.arena .ops button{font-size:16px;padding:14px 10px}.noite{padding-top:190px}.fim h2{font-size:clamp(32px,10vw,48px)}.tempo{padding:44px 0}.palco{border-radius:10px}.cham{grid-template-columns:repeat(4,1fr)}.w{padding:0 18px}.bt.s{padding:8px 12px}.relogio{padding:5px 10px;font-size:14px}.res .n{font-size:52px}.res .nv i{width:28px;height:28px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}#sol{display:none}}
 </style></head>
 <body>
@@ -241,22 +298,12 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
   <p class="leg" id="leg"></p>
 </div></section>
 
-<section class="resto" data-h="17:20"><div class="w">
-  <h2>E ainda cabe o resto do ano letivo</h2>
-  <div class="idx">
-    <div><b>Direção de turma</b><span>Processos, encarregados de educação, contactos, assiduidade, conselhos e apreciação global.</span></div>
-    <div><b>Reuniões</b><span>Convocatórias lidas do PDF ou do e-mail, atas, decisões que passam a tarefas.</span></div>
-    <div><b>Marcação de testes</b><span>Calendário de avaliações com limite por semana e matriz lembrada a tempo.</span></div>
-    <div><b>Documentos</b><span>Convocatórias, comunicações, planos e declarações preenchidos com os dados já registados.</span></div>
-    <div><b>O Meu Calendário</b><span>Aulas, reuniões, testes e tarefas juntos com os seus eventos, ao estilo do Outlook.</span></div>
-    <div><b>Ensino profissional e PROFIJ</b><span>Módulos e UFCD, mecanismo de recuperação, FPCT, pautas oficiais e coordenação.</span></div>
-    <div><b>Produção oral</b><span>Momentos com grelha própria, individuais, a pares ou em grupo.</span></div>
-    <div><b>Medidas de suporte</b><span>Quadro MSAI da turma e acomodações de cada aluno sempre à vista.</span></div>
-    <div><b>Autoavaliação</b><span>Os alunos respondem no telemóvel por QR code, sem conta.</span></div>
-    <div><b>Jornal escolar</b><span>Plano anual de atividades, peças, edições e equipa de redação.</span></div>
-    <div><b>SpruceNote</b><span>Quadros livres com notas, listas, imagens, áudio e desenho.</span></div>
-    <div><b>Modo de apresentação</b><span>Projete a app na aula sem mostrar dados pessoais dos alunos.</span></div>
-  </div>
+<section class="tudo" data-h="17:20"><div class="w">
+  <span class="hora">17:20</span>
+  <h2>Tudo o que a EduSpruce faz, <span id="nfx">37</span> funcionalidades</h2>
+  <p class="lead">Já experimentou cinco lá em cima. Aqui estão as restantes, cada uma a mostrar o que faz. Filtre pelo que lhe interessa.</p>
+  <div class="filt" id="filt" role="group" aria-label="Filtrar funcionalidades"></div>
+  <div class="fx" id="fx"></div>
 </div></section>
 
 <section class="noite" data-h="21:30"><div class="estrelas" id="est" aria-hidden="true"></div><div class="w" style="position:relative">
@@ -290,7 +337,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 </div></section>
 </main>
 
-<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa</span><span><a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a> &nbsp; <a href="https://github.com/EduSpruce/EduSpruce/issues">Contacto</a></span></div></footer>
+<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa</span><span><a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a></span></div></footer>
 
 <script>
 (()=>{const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -366,6 +413,50 @@ const abas=$('#abas'),palco=$('#palco');let auto=0;
 function ecra(i,man){[...abas.children].forEach((b,k)=>b.setAttribute('aria-selected',k===i));[...palco.children].forEach((m,k)=>{if(k===i&&!m.src)m.src=m.dataset.s;m.classList.toggle('on',k===i)});$('#leg').textContent=E[i][2];if(man){clearInterval(auto);auto=0}}
 E.forEach(([f,n,l],i)=>{const b=document.createElement('button');b.type='button';b.role='tab';b.textContent=n;b.onclick=()=>ecra(i,1);abas.appendChild(b);const m=new Image();m.dataset.s='img/'+f+'.webp';m.alt='Ecrã da app: '+n+'. '+l;m.width=1600;m.height=1007;palco.appendChild(m)});
 ecra(0);ver(palco,()=>{if(RM)return;let i=0;auto=setInterval(()=>{i=(i+1)%E.length;ecra(i)},3800)});
+
+/* ---------- todas as funcionalidades ---------- */
+const rep=(n,f)=>Array.from({length:n},(_,i)=>f(i)).join('');
+const HC=['#1b93c6','#f39200','#17705a','#7a4fc4','#d8432f'];
+const FX=[
+['org','Horário importado','Lê o PDF do seu horário e monta a semana, com tempos letivos e não letivos.',`<div class="g5">${rep(20,i=>[1,2,5,7,8,11,13,14,16,19].includes(i)?`<i class="bk pop" style="--c:${HC[i%5]};--d:${(i*.12).toFixed(2)}s"></i>`:'<i class="bk" style="--c:#dcebf2"></i>')}</div>`],
+['org','Calendário escolar','Períodos, interrupções e feriados do PDF oficial. Conta os dias letivos e as aulas previstas.',`<div class="col" style="align-items:center"><div class="g7">${rep(28,i=>`<i class="${[5,6,12,13,17,19,20,26,27].includes(i)?'o':''}" style="--d:${(i*.06).toFixed(2)}s"></i>`)}</div><span>179 dias letivos</span></div>`],
+['org','O Meu Calendário','Escreva «Reunião de pais 18h30» e fica marcado. Junta aulas, testes, reuniões e tarefas.',`<div class="col"><span class="pg"><span class="ty" style="--w:21ch">Reunião de pais 18h30</span></span><span class="chip pop" style="--c:var(--spruce);--d:2.4s">18:30 Reunião de pais</span></div>`],
+['org','Turmas a partir do Excel','O ficheiro do programa da escola cria a turma com números, nomes e fotografias.',`<span class="chip vai" style="--c:var(--spruce);--x:-6px;--y:8px;border-radius:6px">XLSX</span><div class="col">${rep(3,i=>`<span class="lin pop" style="--d:${1+i*.35}s"><i class="dot" style="--c:${HC[i]}"></i><i class="ln"></i></span>`)}</div>`],
+['org','Várias escolas','Cada escola com o seu calendário, organização do ano e cargos. Nunca se misturam.',`<div class="col" style="align-items:center"><span class="sw"><i></i></span><span style="position:relative;width:150px;height:18px;text-align:center"><span class="pil" style="inset:0;animation-name:dois;animation-duration:6s">Escola Secundária</span><span class="pil" style="inset:0;animation-name:dois;animation-duration:6s;--d:-3s">Escola Profissional</span></span></div>`],
+['aul','Planta da sala','Arraste cada aluno para o seu lugar. Serve a chamada e o modo de apresentação.',`<div style="position:relative"><div class="g5" style="grid-template-columns:repeat(4,34px)">${rep(8,i=>`<i class="bk" style="--c:#dcebf2;height:30px"></i>`)}</div><span class="chip vai" style="position:absolute;left:1px;top:3px;--c:var(--sge);--x:78px;--y:35px;padding:4px 7px">MS</span></div>`],
+['aul','Tarefas','Listas ao estilo do To Do: o meu dia, planeado, importante e as decisões das reuniões.',`<div class="col">${rep(3,i=>`<span class="lin"><i class="cb"><b style="--d:${.6+i*.8}s">✓</b></i><i class="ln" style="--w:${[96,70,84][i]}px"></i></span>`)}</div>`],
+['aul','Avisos com a app fechada','Aula a começar, sumário por escrever, avaliações de amanhã. Chegam ao telemóvel bloqueado.',`<div class="tel"><div class="ban">10:00 começa a aula do 10.º A, sala 2.17</div><span style="font-size:22px;opacity:.25">08:55</span></div>`],
+['aul','Modo de apresentação','Projete a app sem mostrar nomes completos, fotografias nem dados sensíveis.',`<div class="col"><span class="lin"><i class="dot blur"></i><span class="blur" style="font:600 13px var(--body)">Ana Sofia Medeiros</span></span><span class="lin"><i class="dot blur" style="--c:var(--sun)"></i><span class="blur" style="font:600 13px var(--body)">Rodrigo Botelho</span></span><span class="chip" style="align-self:flex-start">olho ligado</span></div>`],
+['ava','Marcação de testes','Calendário de avaliações do ano. Arraste um teste para outro dia; o limite por semana avisa.',`<div style="position:relative"><div class="g5">${['S','T','Q','Q','S'].map(d=>`<i style="height:auto;text-align:center;font-style:normal">${d}</i>`).join('')}${rep(5,i=>'<i class="bk" style="--c:#dcebf2;height:44px"></i>')}</div><span class="chip vai" style="position:absolute;left:33px;top:36px;--c:var(--no);--x:70px;padding:3px 6px;font-size:11px">T</span></div>`],
+['ava','Instrumentos e grelhas','Lança as cotações por item; o total, a nota e a percentagem por domínio saem sozinhos.',`<div class="lin">${[15,18,12,20].map((n,i)=>`<span class="pg pop" style="--d:${.3+i*.4}s;padding:8px 9px">${n}</span>`).join('')}<span class="chip pop" style="--c:var(--spruce);--d:2.2s">= 81%</span></div>`],
+['ava','Análise de resultados','Por domínio, instrumento, turma e aluno, com as dificuldades persistentes sinalizadas.',`<div class="bars">${[[68,'#127fa6'],[52,'#c0392b'],[88,'#3442b8'],[40,'#4b9b1f'],[74,'#f39200']].map(([h,c],i)=>`<i style="--h:${h}px;--c:${c};--d:${i*.15}s"></i>`).join('')}</div>`],
+['ava','Evolução por domínio','A linha de cada aluno e da turma ao longo dos instrumentos e dos períodos.',`<svg width="180" height="100" viewBox="0 0 180 100" fill="none"><path d="M5 80 45 60 85 68 125 34 175 18" stroke="#1b93c6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="300" style="animation-name:traca"/><path d="M5 88 45 78 85 74 125 62 175 50" stroke="#c9dbe5" stroke-width="4" stroke-linecap="round"/></svg>`],
+['ava','Avaliação intercalar','Menção sugerida a partir das classificações, observação e faltas de cada aluno.',`<div style="position:relative;width:130px;height:30px">${[['Insuficiente','#d8432f'],['Suficiente','#b8860b'],['Bom','#1f7fd0']].map(([t,c],i)=>`<span class="chip pil" style="--c:${c};--d:${-i*2}s;left:50%;transform:translateX(-50%)">${t}</span>`).join('')}</div>`],
+['ava','Relatórios individuais','Um PDF por aluno com domínios, gráfico e síntese descritiva, pronto a imprimir.',`<div class="pg col" style="width:110px">${rep(4,i=>`<i class="ln a" style="--w:${[80,60,84,46][i]}px;--d:${i*.25}s"></i>`)}<span class="chip pop" style="--c:var(--no);--d:1.6s;position:absolute;right:-14px;bottom:-8px">PDF</span></div>`],
+['ava','Produção oral','Momentos individuais, a pares ou em grupo, com grelha própria e guiões A e B.',`<span style="position:relative;display:grid;place-items:center;width:60px;height:60px"><i class="anel"></i><i class="anel" style="animation-delay:.9s"></i><i class="dot" style="width:34px;height:34px"></i></span><span class="chip" style="--c:var(--sun)">A</span><span class="chip" style="--c:var(--spruce)">B</span>`],
+['ava','Medidas de suporte','O quadro MSAI da turma e as acomodações de cada aluno sempre à vista.',`<div class="tbl">${rep(3,r=>`<i class="ln" style="--w:50px"></i>${rep(3,c=>`<u>${(r+c)%2?'':`<b style="--d:${(r*3+c)*.25}s">✓</b>`}</u>`)}`)}</div>`],
+['dig','Provas','Testes digitais com dez tipos de exercício, correção automática e estatísticas.',`<div class="col">${[['✓','var(--spruce)'],['✗','var(--no)'],['✓','var(--spruce)']].map(([m,c],i)=>`<span class="lin"><i class="ln" style="--w:90px"></i><b class="pop" style="--d:${.5+i*.6}s;color:${c};font-size:16px">${m}</b></span>`).join('')}<span class="chip pop" style="--d:2.6s;align-self:flex-start">2 em 3</span></div>`],
+['dig','Forms','Inquéritos e fichas por QR code, com estrelas, escalas e perguntas abertas.',`<div class="lin" style="gap:2px">${rep(5,i=>`<span class="st" style="--d:${i*.3}s">★</span>`)}</div>`],
+['dig','Pulso','Pergunta rápida, bilhete de saída e corrida de equipas, com resultados ao vivo.',`<div class="col">${[['#e2453c','1.7s'],['#1f7fd0','2.3s'],['#d99a00','1.3s'],['#2f9e44','2.9s']].map(([c,t])=>`<i class="vb" style="--c:${c};--t:${t}"></i>`).join('')}</div>`],
+['dig','Autoavaliação','Os alunos respondem no telemóvel por QR code. As respostas chegam ao perfil de cada um.',`<div class="tel"><div class="qr pil" style="animation-name:dois;animation-duration:6s">${rep(16,()=>'<i></i>')}</div><span class="ok pil" style="animation-name:dois;animation-duration:6s;--d:-3s">✓</span></div>`],
+['dig','Digitalizar testes','Fotografe a folha de cada aluno com o telemóvel. Fica selada junto ao instrumento.',`<div class="pg col" style="width:96px;height:110px;overflow:hidden">${rep(5,i=>`<i class="ln" style="--w:${[70,54,66,40,60][i]}px"></i>`)}<i class="scan"></i></div>`],
+['esc','Reuniões','Convocatórias lidas do PDF ou do e-mail, atas e decisões que passam a tarefas.',`<div class="pg col" style="width:86px"><b>Ata</b>${rep(3,i=>`<i class="ln a" style="--w:${[60,48,56][i]}px;--d:${i*.25}s"></i>`)}</div><div class="col">${rep(2,i=>`<span class="chip pop" style="--d:${1.4+i*.5}s;--c:var(--sge2)">tarefa ${i+1}</span>`)}</div>`],
+['esc','Direção de turma','Processos, contactos com encarregados de educação, assiduidade e conselhos de turma.',`<span class="chip" style="--c:var(--no)">4 faltas</span><span class="pg vai" style="--x:46px;padding:7px 10px">✉</span><span class="dot pop" style="--c:var(--spruce);--d:2.2s;margin-left:40px"></span>`],
+['esc','Documentos','Convocatórias, comunicações e declarações preenchidas com os dados já registados.',`<div class="pg" style="font:600 12px var(--body);width:170px">Exmo(a). Sr(a).<br><span style="position:relative;display:block;height:20px"><span class="pil" style="left:0;animation-name:dois;animation-duration:6s;color:var(--sge2)">{{encarregado}}</span><span class="pil" style="left:0;animation-name:dois;animation-duration:6s;--d:-3s">Martim Botelho</span></span><i class="ln" style="--w:120px;margin-top:4px"></i></div>`],
+['esc','Biblioteca','Fichas, testes e apresentações em pastas por turma, com etiquetas e pesquisa.',`<div style="position:relative;width:130px;height:110px">${rep(3,i=>`<span class="chip vai" style="position:absolute;left:${10+i*38}px;top:0;--c:${HC[i]};--y:62px;--d:${i*.3}s;border-radius:5px;padding:3px 6px;font-size:10px">${['PDF','DOC','PPT'][i]}</span>`)}<i class="bk" style="position:absolute;left:0;right:0;bottom:0;height:42px;--c:#f3920033;box-shadow:inset 0 0 0 2px var(--sun)"></i></div>`],
+['esc','Contactos','Os colegas por departamento, com importação de Excel ou vCard.',`<div class="col">${rep(3,i=>`<span class="lin pop" style="--d:${i*.4}s"><i class="dot" style="--c:${HC[i+1]}"></i><span class="col" style="gap:4px"><i class="ln" style="--w:${[80,64,72][i]}px"></i><i class="ln" style="--w:46px;height:5px"></i></span></span>`)}</div>`],
+['esc','Jornal escolar','Plano anual de atividades, peças por estado, edições e equipa de redação.',`<div style="position:relative"><div class="kan"><i></i><i></i><i></i></div><span class="pg vai" style="position:absolute;left:6px;top:10px;width:50px;height:30px;padding:6px;--x:140px"><i class="ln" style="--w:36px;height:5px"></i></span></div>`],
+['esc','SpruceNote','Quadros livres com notas, listas, imagens, áudio e desenho para planear o que quiser.',`<span class="nota1" style="--d:.2s;rotate:-4deg">rever critérios</span><span class="nota1" style="--c:#bfe6d5;--d:.8s;rotate:3deg">projeto de turma</span><span class="nota1" style="--c:#cfe3ff;--d:1.4s;rotate:-2deg">teste 2</span>`],
+['pro','Ensino profissional','Módulos e UFCD com horas, aprovados e mecanismo de recuperação por módulo.',`<div class="col">${[['Módulo 5',1],['Módulo 6',.8],['Módulo 7',.35]].map(([t,w],i)=>`<span class="lin"><span style="width:58px">${t}</span><i class="ln a" style="--w:${Math.round(90*w)}px;background:var(--spruce);--d:${i*.3}s"></i></span>`).join('')}</div>`],
+['pro','PROFIJ e coordenação','Criação do curso, pontos de situação, FPCT, classificações e pautas oficiais.',`<div class="lin" style="gap:14px">${rep(4,i=>`<span style="position:relative;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;box-shadow:inset 0 0 0 2.5px var(--ink)"><i class="dot pop" style="position:absolute;width:34px;height:34px;--c:var(--sun);--d:${i*.7}s"></i><b style="position:relative">${i}</b></span>`)}</div>`],
+['app','Nove estilos','SGE por omissão, mais oito à escolha, tema claro ou escuro e modo leve para PCs antigos.',`<div class="mini"><i class="tb"></i><i class="sb"></i><div class="ct"><i class="ln" style="--w:100px"></i><i class="ln" style="--w:70px"></i><i class="ln" style="--w:86px"></i></div></div>`]
+];
+const CAT=[['','Tudo'],['org','Organização'],['aul','Na aula'],['ava','Avaliação'],['dig','Alunos no telemóvel'],['esc','Escola'],['pro','Profissional e PROFIJ'],['app','A app']];
+const fx=$('#fx'),filt=$('#filt');
+fx.innerHTML=FX.map(([c,t,d,h])=>`<article class="f" data-c="${c}"><div class="v" aria-hidden="true">${h}</div><h3>${t}</h3><p>${d}</p></article>`).join('');
+const io=new IntersectionObserver(E=>E.forEach(e=>e.target.classList.toggle('go',e.isIntersecting&&!RM)),{rootMargin:'-40px'});[...fx.children].forEach(f=>io.observe(f));
+CAT.forEach(([c,n],i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed',!i);b.onclick=()=>{[...filt.children].forEach(x=>x.setAttribute('aria-pressed',x===b));[...fx.children].forEach(f=>f.hidden=!!c&&f.dataset.c!==c)};filt.appendChild(b)});
+$('#nfx').textContent=FX.length+5;
 
 /* ---------- 21:30 · estrelas ---------- */
 const est=$('#est');for(let i=0;i<46;i++){const s=document.createElement('i');s.style.cssText='left:'+Math.random()*100+'%;top:'+(160+Math.random()*900)+'px;animation-delay:'+(Math.random()*3)+'s;opacity:'+(.3+Math.random()*.6);est.appendChild(s)}
