@@ -1,255 +1,374 @@
 <!doctype html>
 <html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EduSpruce · Menos papelada. Mais tempo para ensinar.</title>
-<meta name="description" content="EduSpruce: avaliação, sumários, horários, reuniões e direção de turma numa só app para professores. Feita para iPad. Dados encriptados na sua própria conta.">
-<meta property="og:title" content="EduSpruce — Plataforma Integrada de Gestão Educativa"><meta property="og:description" content="Menos papelada. Mais tempo para ensinar."><meta property="og:image" content="img/avaliacao.webp"><meta property="og:type" content="website">
-<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#1b93c6">
-<script>/* eduspruce.app mostra sempre a apresentação; a app está em eduspruce.pt. Só o regresso de um início de sessão antigo segue para app/ */
-(function(){try{var q=location.search,h=location.hash;if(/[?&](code|state|error)=/.test(q)||/(access_token|id_token|error)=/.test(h))location.replace('app/'+q+h)}catch(e){}})();</script>
-
+<title>EduSpruce — um dia de escola, sem papelada</title>
+<meta name="description" content="A EduSpruce acompanha o dia do professor: chamada, sumários, testes, jogos de perguntas, avaliação por domínios, reuniões e direção de turma. Experimente aqui mesmo, sem conta.">
+<meta property="og:title" content="EduSpruce — um dia de escola, sem papelada"><meta property="og:description" content="Faça a chamada, sorteie um aluno e calcule uma nota aqui mesmo na página."><meta property="og:image" content="img/avaliacao.webp"><meta property="og:type" content="website">
+<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#e6f3fa">
+<link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-:root{--bg:#f2f4f6;--panel:#fff;--ink:#333;--mut:#5f6b76;--line:#d5dbe0;--sge:#1b93c6;--sge2:#147aa6;--sgeL:#e8f4fa;--or:#f39200;--gr:#5b5b5b;--ok:#2e8b57;--r:4px;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#15191d;--panel:#1d2227;--ink:#e7ebee;--mut:#a5b0b9;--line:#2f373e;--sgeL:#16313f;--gr:#2a3036;--ok:#5cc28f;color-scheme:dark}}
-:root[data-theme=dark]{--bg:#15191d;--panel:#1d2227;--ink:#e7ebee;--mut:#a5b0b9;--line:#2f373e;--sgeL:#16313f;--gr:#2a3036;--ok:#5cc28f;color-scheme:dark}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Roboto,"Segoe UI",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}
-a{color:var(--sge)}img{max-width:100%;height:auto;display:block}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
-/* cabeçalho ao estilo SGE */
-.nav{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,var(--sge),var(--sge2));box-shadow:0 2px 8px rgba(0,0,0,.18)}
-.nav .wrap{display:flex;align-items:center;gap:18px;height:60px}
-.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700;font-size:20px;letter-spacing:.01em}.brand svg{flex:none}
-.nav .lk{display:flex;gap:2px;margin-left:auto}.nav .lk a{color:#fff;text-decoration:none;font-size:14.5px;padding:8px 12px;border-radius:var(--r);opacity:.92}.nav .lk a:hover{background:rgba(255,255,255,.16);opacity:1}
-.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:500;font-size:15px;text-decoration:none;padding:11px 20px;border-radius:var(--r);border:1px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.01em}
-.btn.pri{background:var(--or);color:#fff;box-shadow:0 2px 0 rgba(0,0,0,.12)}.btn.pri:hover{filter:brightness(1.06)}
-.btn.sec{background:#fff;color:var(--sge2);border-color:var(--line)}.btn.sec:hover{border-color:var(--sge)}
-.btn.wh{background:#fff;color:var(--sge2)}.btn.wh:hover{background:#f3fbff}
-.btn.sm{padding:8px 14px;font-size:14px}
-.btn svg{flex:none}
-/* herói */
-.hero{background:var(--panel);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0 0 auto 0;height:6px;background:linear-gradient(90deg,var(--sge),var(--or))}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:48px;align-items:center;padding-top:64px;padding-bottom:72px}
-.eyebrow{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sge2)}
-:root[data-theme=dark] .eyebrow{color:#7cc7ea}@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .eyebrow{color:#7cc7ea}}
-.hero h1{font-size:clamp(34px,4.8vw,54px);line-height:1.08;letter-spacing:-.02em;margin:14px 0 16px;font-weight:700;text-wrap:balance}
-.hero h1 span{color:var(--or)}
-.hero p.lead{font-size:clamp(17px,1.5vw,19px);color:var(--mut);margin:0 0 26px;max-width:33em}
-.cta{display:flex;gap:10px;flex-wrap:wrap}
-.trust{display:flex;gap:8px 18px;flex-wrap:wrap;margin-top:24px;color:var(--mut);font-size:14px}.trust span{display:inline-flex;gap:7px;align-items:center}.trust svg{color:var(--sge)}
-.shot{border-radius:var(--r);overflow:hidden;box-shadow:0 18px 50px -18px rgba(0,0,0,.35),0 0 0 1px var(--line);background:#fff}
-.hero .shot{border-top:4px solid var(--sge)}
-/* secções */
-section{padding:76px 0}
-.sh{max-width:720px;margin:0 0 34px}.sh.c{margin-inline:auto;text-align:center}
-.kick{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sge)}
-h2{font-size:clamp(26px,3vw,36px);line-height:1.15;letter-spacing:-.015em;margin:8px 0 12px;font-weight:700;text-wrap:balance}
-.sh p{color:var(--mut);font-size:17px;margin:0}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--sge);border-radius:var(--r);padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.card h3{margin:12px 0 6px;font-size:17px;font-weight:700}.card p{margin:0;color:var(--mut);font-size:15px}
-.ico{width:42px;height:42px;border-radius:var(--r);display:grid;place-items:center;background:var(--sgeL);color:var(--sge2)}
-/* faixa de números */
-.strip{background:var(--sge);color:#fff}
-.strip .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0}
-.strip div div{padding:22px 16px;border-left:1px solid rgba(255,255,255,.22)}.strip div div:first-child{border-left:0}
-.strip b{display:block;font-size:26px;font-weight:700;line-height:1.1}.strip span{font-size:14px;opacity:.9}
-/* destaques */
-.feat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:48px;align-items:center;margin-bottom:64px}
-.feat:last-child{margin-bottom:0}.feat.r{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}.feat.r .txt{order:2}
-.feat h3{font-size:clamp(22px,2.3vw,28px);letter-spacing:-.01em;margin:8px 0 10px;line-height:1.2;font-weight:700}
-.feat p{color:var(--mut);margin:0 0 14px}
-.feat ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-.feat li{display:flex;gap:10px;align-items:flex-start}.feat li svg{flex:none;margin-top:3px;color:var(--ok)}
-.feat .shot{border-top:3px solid var(--sge)}
-/* privacidade: faixa cinzenta como o menu do SGE */
-.priv{background:var(--gr);color:#fff}
-.priv .sh p{color:#e3e6e8}.priv .kick{color:#9fd6ef}
-.priv .card{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);border-top-color:var(--or);box-shadow:none}.priv .card p{color:#e3e6e8}.priv .ico{background:rgba(243,146,0,.18);color:var(--or)}
-/* passos */
-.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.steps .card{position:relative;padding-top:56px}.steps .card::before{counter-increment:s;content:counter(s);position:absolute;top:18px;left:20px;width:28px;height:28px;border-radius:var(--r);background:var(--sge);color:#fff;font-weight:700;font-size:14px;display:grid;place-items:center}
-/* temas */
-.temas{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.temas span{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:var(--r);padding:6px 10px;font-size:14px;background:var(--panel)}.temas i{width:14px;height:14px;border-radius:3px;display:inline-block}
-/* ipad */
-.ipad{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);gap:48px;align-items:center}
-.dev{max-width:380px;margin:0 auto;border-radius:30px;padding:13px;background:#2b3136;box-shadow:0 30px 70px -25px rgba(0,0,0,.45)}.dev img{border-radius:18px}
-/* faq */
-details{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:2px 18px;margin-bottom:8px}
-details[open]{border-left:3px solid var(--sge)}
-summary{cursor:pointer;font-weight:500;padding:13px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-size:22px;line-height:1;color:var(--sge)}details[open] summary::after{content:"–"}
-details p{margin:0 0 14px;color:var(--mut)}
-.final{text-align:center}.final .card{padding:44px 24px;background:linear-gradient(180deg,var(--sge),var(--sge2));border:0;color:#fff}.final h2{color:#fff}.final p{color:#e8f6fd;margin:0 auto 22px;max-width:36em}.final .cta{justify-content:center}
-.final .btn.sec{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
-footer{background:var(--gr);color:#d9dde0;padding:24px 0;font-size:14px}footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}footer a{color:#fff}
-@media (max-width:960px){.hero .wrap,.feat,.feat.r,.ipad{grid-template-columns:1fr;gap:30px}.feat.r .txt{order:0}.grid,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.strip .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.strip div div:nth-child(3){border-left:0}.nav .lk a.h{display:none}}
-@media (max-width:620px){section{padding:54px 0}.grid,.steps{grid-template-columns:1fr}.nav .lk{display:none}.nav .wrap{justify-content:space-between;gap:10px}.nav .btn{padding:8px 12px;font-size:14px}.brand{font-size:18px}.hero .wrap{padding-top:40px;padding-bottom:48px}.cta .btn{width:100%;justify-content:center}.cta{flex-direction:column}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@font-face{font-family:Bricolage;src:url(fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:Figtree;src:url(fonts/figtree.woff2) format("woff2");font-weight:300 900;font-display:swap}
+:root{--ink:#0c2f42;--ink2:#3d5a69;--sge:#1b93c6;--sge2:#11698f;--sun:#f39200;--spruce:#17705a;--paper:#fff;--line:#0c2f4222;--sky:#e6f3fa;--no:#d8432f;
+  --disp:Bricolage,"Avenir Next","Segoe UI",system-ui,sans-serif;--body:Figtree,"Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--sky);color:var(--ink);font:400 17px/1.55 var(--body);overflow-x:hidden}
+img{max-width:100%;display:block;height:auto}a{color:var(--sge2)}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.w{max-width:1160px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.02em;text-wrap:balance}
+h2{font-size:clamp(30px,4.4vw,54px);line-height:1.02;font-weight:700}
+p{margin:0}.lead{font-size:clamp(18px,1.7vw,21px);color:var(--ink2);max-width:34em}
 
-/* ajuda */
-.ajman{display:flex;gap:16px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--or);border-radius:var(--r);padding:18px 20px;margin-bottom:22px}
-.ajman b{display:block;font-size:18px}.ajman span{color:var(--mut)}
-.ajg{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.ajc{margin:0;background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--sge);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
-.ajb{all:unset;cursor:zoom-in;display:block;background:#eef2f5;aspect-ratio:820/514}.ajb:focus-visible{outline:3px solid var(--or);outline-offset:-3px}
-.ajb img{display:block;width:100%;height:100%;object-fit:cover}
-.ajc figcaption{padding:12px 14px 14px}.ajc b{display:block;font-size:16px}.ajc span{color:var(--mut);font-size:14px}
-#ajdlg{border:0;padding:0;border-radius:var(--r);max-width:min(1100px,96vw);background:var(--panel);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-#ajdlg::backdrop{background:rgba(10,15,20,.7)}#ajdlg img{display:block;width:100%;height:auto}#ajdlg p{margin:0;padding:10px 16px;font-weight:700}
-.ajx{position:absolute;top:8px;right:8px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:24px;line-height:1;cursor:pointer}
-/* mais responsivo: aproveita os ecrãs largos e arruma melhor os pequenos */
-.wrap{max-width:min(1440px,100%);padding-inline:clamp(16px,4vw,56px)}
-@media (min-width:1500px){.hero .wrap{gap:72px;padding-top:88px;padding-bottom:96px}.hero h1{font-size:clamp(54px,3.9vw,72px)}.hero p.lead{font-size:21px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}section{padding:96px 0}.feat{gap:72px}.sh{max-width:860px}h2{font-size:clamp(36px,2.6vw,46px)}}
-@media (min-width:1900px){.wrap{max-width:1640px}.ajg{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}}
-img{max-width:100%;height:auto}
-@media (max-width:960px){.nav .wrap{flex-wrap:wrap;height:auto;padding-block:8px}.nav .lk{order:3;width:100%;display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;padding:4px 0 2px}.nav .lk::-webkit-scrollbar{display:none}.nav .lk a,.nav .lk a.h{display:inline-block;white-space:nowrap}}
-@media (max-width:620px){.nav .lk{display:flex}.ajg{grid-template-columns:1fr}.ajman .cta{width:100%}.strip b{font-size:22px}}
-@media (max-width:420px){.strip .wrap{grid-template-columns:1fr}.strip div div{border-left:0;border-top:1px solid rgba(255,255,255,.22)}.strip div div:first-child{border-top:0}}
+/* o sol: o ponto do logótipo atravessa a página ao longo do dia */
+#sol{position:fixed;left:0;top:0;width:54px;height:54px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 14px #f3920022,0 0 0 34px #f3920011;z-index:0;pointer-events:none;will-change:transform}
+main,header,footer{position:relative;z-index:1}
 
-/* ocupa toda a largura do ecrã, com margens proporcionais */
-.wrap,.wrap[style]{max-width:none!important;width:100%;padding-inline:clamp(16px,4.5vw,120px)}
-.sh,.sh.c{max-width:min(1100px,100%)}
-#faq .wrap{max-width:none!important}
-#faq details,#faq .q{max-width:none}
-@media (min-width:1500px){.hero .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}.ajg{grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}}
-@media (min-width:2200px){html{font-size:18px}body{font-size:18px}.hero h1{font-size:clamp(72px,3.6vw,96px)}.grid{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}}
-@media (min-width:2200px){.hero p.lead{font-size:24px;max-width:36em}.eyebrow,.kick{font-size:15px}.btn{font-size:18px;padding:14px 22px}.trust{font-size:16px}.nav .lk a{font-size:16px}.strip b{font-size:32px}.card h3{font-size:20px}.card p,.feat p,.sh p{font-size:19px}}
+/* barra */
+.bar{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:#ffffffb8;border-bottom:1px solid var(--line)}
+.bar .w{display:flex;align-items:center;gap:14px;height:62px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 21px var(--disp);letter-spacing:-.02em}
+.relogio{margin-left:auto;display:flex;align-items:center;gap:8px;font:600 15px var(--disp);font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff}
+.relogio i{width:8px;height:8px;border-radius:50%;background:var(--sun);animation:pulsa 1.6s infinite}
+@keyframes pulsa{50%{opacity:.25}}
+.bar a.t{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;padding:8px 6px}
+.bt{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:13px 22px;font:700 16px var(--body);text-decoration:none;transition:transform .15s,box-shadow .15s}
+.bt:hover{transform:translateY(-2px)}.bt:active{transform:translateY(1px)}
+.bt.a{background:var(--ink);color:#fff;box-shadow:0 6px 0 -1px var(--sun)}
+.bt.b{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.bt.s{padding:9px 16px;font-size:15px;box-shadow:none;white-space:nowrap}
+.bar,.logo,.relogio{transition:background .4s,color .4s}
+.n .bar{background:#0c2f42d9;border-color:#ffffff22}.n .logo,.n .bar a.t{color:#fff}.n .relogio{background:#fff;color:var(--ink)}.n .bar .bt.a{background:var(--sun);color:var(--ink)}
+
+/* abertura: 08:15 */
+.abre{padding:56px 0 40px}
+.abre .w{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
+h1{font-size:clamp(46px,7.6vw,104px);line-height:.92;font-weight:800;letter-spacing:-.045em}
+h1 span{display:block}
+h1 .l2{font-weight:300;color:var(--sge2)}
+.abre .lead{margin:26px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.nota{margin-top:18px;font-size:14.5px;color:var(--ink2)}
+
+/* peça interativa (janela da app) */
+.jan{background:var(--paper);border-radius:18px;box-shadow:0 30px 60px -30px #0c2f4266,0 0 0 1px var(--line);overflow:hidden}
+.jan .top{background:var(--sge);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;font:600 15px var(--disp)}
+.jan .top small{margin-left:auto;font:500 13px var(--body);opacity:.9;font-variant-numeric:tabular-nums}
+.jan .cx{padding:16px}
+.cham{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.al{position:relative;border:2px solid #cfe6d6;background:#f2fbf5;border-radius:12px;padding:9px 4px 7px;text-align:center;font:700 17px var(--disp);color:var(--spruce);transition:transform .18s,background .18s,border-color .18s;user-select:none}
+.al small{display:block;font:500 11px var(--body);color:var(--ink2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.al::after{content:"✓";position:absolute;top:-7px;left:-7px;width:20px;height:20px;border-radius:50%;background:var(--spruce);color:#fff;font:700 12px/20px var(--body)}
+.al.f{background:#fdeeeb;border-color:#f3b9b0;color:var(--no);transform:rotate(-3deg)}
+.al.f::after{content:"F";background:var(--no)}
+.al:hover{transform:translateY(-3px)}.al.f:hover{transform:rotate(-3deg) translateY(-3px)}
+.pe{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.pe b{font:700 22px var(--disp);font-variant-numeric:tabular-nums}
+.pe span{color:var(--ink2);font-size:14.5px}
+.pe .bt{margin-left:auto}
+.selo{display:none;margin-top:12px;padding:10px 14px;border-radius:10px;background:#f2fbf5;color:var(--spruce);font-weight:600}
+.selo.on{display:block;animation:entra .35s}
+@keyframes entra{from{opacity:0;transform:scale(.96)}}
+
+/* o dia: cada tempo tem a sua hora */
+.tempo{padding:74px 0}
+.tempo .w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.tempo.inv .tx{order:2}
+.hora{display:inline-block;font:800 clamp(54px,8vw,112px)/.85 var(--disp);letter-spacing:-.05em;color:transparent;-webkit-text-stroke:2px var(--ink);font-variant-numeric:tabular-nums;margin-bottom:14px}
+.tempo h2{margin-bottom:14px}.tempo .lead{margin-bottom:16px}
+.lst{margin:0;padding:0;list-style:none;display:grid;gap:7px;color:var(--ink2)}
+.lst li{padding-left:22px;position:relative}.lst li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;border-radius:50%;background:var(--sun)}
+
+/* sumário a escrever-se */
+.sum{font:500 18px/1.5 var(--body);min-height:5.2em;border:2px solid var(--line);border-radius:12px;padding:12px 14px;background:#fbfdfe}
+.sum::after{content:"";display:inline-block;width:2px;height:1.1em;background:var(--ink);vertical-align:-3px;margin-left:2px;animation:pulsa 1s infinite}
+.lic{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-weight:600}.lic b{background:var(--sky);padding:3px 10px;border-radius:8px;font-family:var(--disp)}
+.grv{margin-top:10px;color:var(--spruce);font-weight:600;opacity:0;transition:opacity .4s}.grv.on{opacity:1}
+
+/* sorteio */
+.roda{position:relative;width:min(300px,70vw);aspect-ratio:1;margin:0 auto}
+.roda canvas{width:100%;height:100%;border-radius:50%;box-shadow:0 0 0 6px #fff,0 0 0 8px var(--ink);transition:transform 3.6s cubic-bezier(.12,.75,.1,1)}
+.roda::before{content:"";position:absolute;left:50%;top:-14px;transform:translateX(-50%);border:12px solid transparent;border-top:20px solid var(--ink);z-index:2}
+.saiu{text-align:center;margin-top:16px;min-height:3.2em}.saiu b{display:block;font:800 30px var(--disp);letter-spacing:-.02em}
+.cen{display:flex;justify-content:center;margin-top:8px}
+
+/* arena */
+.arena{background:var(--ink);color:#fff;border-radius:18px;padding:20px;box-shadow:0 30px 60px -30px #0c2f4299}
+.arena .q{font:700 clamp(20px,2.3vw,26px)/1.15 var(--disp);margin:6px 0 14px;min-height:2.4em}
+.arena .tp{height:8px;border-radius:9px;background:#ffffff22;overflow:hidden}.arena .tp i{display:block;height:100%;width:100%;background:var(--sun);transform-origin:left}
+.arena .ops{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.arena .ops button{border:0;border-radius:12px;padding:16px 12px;font:700 18px var(--disp);color:#fff;text-align:left;display:flex;gap:10px;align-items:center;transition:transform .15s,opacity .3s}
+.arena .ops button:hover{transform:scale(1.03)}
+.arena .ops button:nth-child(1){background:#e2453c}.arena .ops button:nth-child(2){background:#1f7fd0}.arena .ops button:nth-child(3){background:#d99a00}.arena .ops button:nth-child(4){background:#2f9e44}
+.arena .ops.fim button{opacity:.28}.arena .ops.fim button.ok{opacity:1;transform:scale(1.04)}
+.arena .pl{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-variant-numeric:tabular-nums}
+.arena .pl b{font:800 24px var(--disp);color:var(--sun)}
+.arena .msg{min-height:1.6em;margin-top:12px;font-weight:600}
+
+/* avaliação */
+.dom{display:grid;grid-template-columns:42px 1fr 52px;gap:12px;align-items:center;margin-bottom:10px;font-weight:600}
+.dom span:first-child{font:800 16px var(--disp);color:#fff;border-radius:8px;text-align:center;padding:4px 0}
+.dom output{text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--sge);height:28px}
+.res{display:flex;align-items:flex-end;gap:18px;margin-top:14px;padding-top:14px;border-top:2px dashed var(--line)}
+.res .n{font:800 64px/.9 var(--disp);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.res .nv{display:flex;gap:6px;margin-bottom:6px}
+.res .nv i{width:34px;height:34px;border-radius:9px;background:#e8eef1;display:grid;place-items:center;font:800 16px var(--disp);font-style:normal;color:#8aa0ac;transition:all .25s}
+.res .nv i.on{background:var(--c);color:#fff;transform:translateY(-6px) scale(1.12)}
+.res .me{font-weight:700}
+.calc{font-size:14px;color:var(--ink2);margin-top:10px;font-variant-numeric:tabular-nums}
+
+/* ecrãs reais */
+.ecras{padding:80px 0 70px}
+.ecras h2{max-width:14em;margin-bottom:10px}.ecras .lead{margin-bottom:26px}
+.abas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.abas button{border:0;background:#ffffffb0;box-shadow:inset 0 0 0 1.5px var(--line);border-radius:99px;padding:9px 16px;font-weight:600;font-size:15px;transition:background .2s,color .2s}
+.abas button[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:none}
+.palco{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -40px #0c2f4288,0 0 0 1px var(--line);background:#fff;aspect-ratio:1600/1007}
+.palco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .45s,transform .6s}
+.palco img.on{opacity:1;transform:none}
+.leg{margin-top:14px;color:var(--ink2);min-height:3.2em;max-width:46em}
+
+/* tudo o resto: índice em colunas */
+.resto{padding:30px 0 90px}
+.resto h2{margin-bottom:28px}
+.idx{columns:3 240px;column-gap:40px}
+.idx div{break-inside:avoid;padding:13px 0;border-top:2px solid var(--ink)}
+.idx b{display:block;font:700 19px var(--disp);letter-spacing:-.01em}
+.idx span{color:var(--ink2);font-size:15.5px}
+
+/* noite */
+.noite{position:relative;background:linear-gradient(#0c2f4200,#0c2f42 190px);color:#e9f3f8;padding:230px 0 90px;margin-top:-40px}
+.noite .hora{-webkit-text-stroke-color:#e9f3f8}.noite .lead{color:#b9d0dc}
+.noite .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:40px}
+.noite .tri h3{font-size:22px;margin-bottom:6px;color:#fff}.noite .tri p{color:#b9d0dc;font-size:16px}
+.noite .tri div{border-top:2px solid var(--sun);padding-top:14px}
+.noite a{color:#fff}
+.estrelas{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.estrelas i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:pulsa 3s infinite}
+.pas{counter-reset:p;display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:70px}
+.pas div{counter-increment:p}.pas div::before{content:counter(p);display:block;font:800 64px/.9 var(--disp);color:var(--sun);margin-bottom:8px}
+.pas h3{font-size:22px;color:#fff;margin-bottom:6px}.pas p{color:#b9d0dc;font-size:16px}
+.faq{max-width:780px;margin-top:80px}
+.faq h2{margin-bottom:18px;color:#fff}
+details{border-top:1px solid #ffffff33}details:last-child{border-bottom:1px solid #ffffff33}
+summary{list-style:none;cursor:pointer;padding:16px 0;font:600 19px var(--disp);display:flex;justify-content:space-between;gap:16px}summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:26px;line-height:.8;color:var(--sun);transition:transform .25s}details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 18px;color:#b9d0dc;max-width:40em}
+.fim{text-align:center;padding:90px 0 30px}
+.fim h2{font-size:clamp(38px,6.5vw,84px);font-weight:800;letter-spacing:-.04em;color:#fff;margin-bottom:26px}
+.fim .cta{justify-content:center}.fim .bt.a{background:var(--sun);color:var(--ink);box-shadow:0 6px 0 -1px #fff}.fim .bt.b{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #fff}
+footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}footer .w{display:flex;gap:10px 22px;flex-wrap:wrap;justify-content:space-between}footer a{color:#e9f3f8}
+
+@media (max-width:900px){.abre .w,.tempo .w{grid-template-columns:1fr;gap:30px}.tempo.inv .tx{order:0}.noite .tri,.pas{grid-template-columns:1fr;gap:26px}.bar a.t{display:none}.tempo{padding:54px 0}#sol{width:38px;height:38px}}
+@media (max-width:520px){.cham{grid-template-columns:repeat(4,1fr)}.w{padding:0 18px}.bt.s{padding:8px 12px}.relogio{padding:5px 10px;font-size:14px}.res .n{font-size:52px}.res .nv i{width:28px;height:28px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}#sol{display:none}}
 </style></head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<symbol id="i-ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
-<symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
-<symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.34 9.1 4 4 0 0 0 7 19z"/></symbol>
-<symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A10 10 0 0 1 12 5c6 0 10 7 10 7a17 17 0 0 1-3.2 3.9M6.6 6.6C3.9 8.3 2 12 2 12s4 7 10 7a9.7 9.7 0 0 0 5.4-1.6"/></symbol>
-<symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-5 7 5v11M10 21v-5h4v5"/></symbol>
-<symbol id="i-grade" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
-<symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M8 7h8M8 11h6"/></symbol>
-<symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></symbol>
-<symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></symbol>
-<symbol id="i-mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
-<symbol id="i-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13v16H6a2 2 0 0 1-2-2z"/><path d="M17 8h3v10a2 2 0 0 1-2 2M8 8h5M8 12h5M8 16h3"/></symbol>
-<symbol id="i-board" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 17.5h7M17.5 14v7"/></symbol>
-<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="m8 12 3 3 5-6"/></symbol>
-<symbol id="i-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></symbol>
-<symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 17h4"/></symbol>
-<symbol id="i-gh" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.39-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
-</defs></svg>
+<div id="sol" aria-hidden="true"></div>
 
-<header class="nav"><div class="wrap">
-<a class="brand" href="#topo" aria-label="EduSpruce — início"><svg width="38" height="38" aria-hidden="true" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#fff" fill-opacity=".18"/><rect x="9" y="9" width="46" height="46" rx="6" fill="#fff"/><g transform="translate(32 32) scale(.8) translate(-33.8 -32)"><path d="M29.29 47C36.53 47 40.84 43.69 40.84 38.14C40.84 33.47 37.57 30.65 31.92 29.41L29.39 28.82C26.78 28.24 25.08 27.37 25.08 25.57C25.08 23.94 26.51 22.75 29.27 22.75C32.06 22.75 33.61 23.98 33.8 26.1H40.45C40.37 20.69 36.06 17 29.29 17C22.67 17 17.92 20.63 17.92 26.04C17.92 30.43 20.98 32.96 26.02 34.12L29.12 34.84C32.31 35.57 33.84 36.45 33.84 38.12C33.84 39.98 32.08 41.25 29.22 41.25C26.06 41.25 23.96 39.8 23.8 36.96H17.16C17.27 43.71 21.98 47 29.29 47Z" fill="#1b93c6"/><circle cx="46.2" cy="43" r="4.3" fill="#f39200"/></g></svg><span>EduSpruce</span></a>
-<nav class="lk" aria-label="Secções"><a class="h" href="#funcoes">Funcionalidades</a><a class="h" href="#privacidade">Privacidade</a><a class="h" href="#comecar">Como começar</a><a class="h" href="#ajuda">Ajuda</a><a href="#faq">Perguntas</a></nav>
-<a class="btn wh sm" href="https://eduspruce.pt/">Abrir a app</a>
+<header class="bar"><div class="w">
+  <a class="logo" href="#topo" aria-label="EduSpruce, início"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1b93c6"/><g transform="translate(32 32) scale(.9) translate(-33.8 -32)"><path d="M29.29 47C36.53 47 40.84 43.69 40.84 38.14C40.84 33.47 37.57 30.65 31.92 29.41L29.39 28.82C26.78 28.24 25.08 27.37 25.08 25.57C25.08 23.94 26.51 22.75 29.27 22.75C32.06 22.75 33.61 23.98 33.8 26.1H40.45C40.37 20.69 36.06 17 29.29 17C22.67 17 17.92 20.63 17.92 26.04C17.92 30.43 20.98 32.96 26.02 34.12L29.12 34.84C32.31 35.57 33.84 36.45 33.84 38.12C33.84 39.98 32.08 41.25 29.22 41.25C26.06 41.25 23.96 39.8 23.8 36.96H17.16C17.27 43.71 21.98 47 29.29 47Z" fill="#fff"/><circle cx="46.2" cy="43" r="4.3" fill="#f39200"/></g></svg>EduSpruce</a>
+  <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:15</span></span>
+  <a class="t" href="manual/EduSpruce-Manual.pdf">Manual</a>
+  <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a>
 </div></header>
 
 <main id="topo">
-<div class="hero"><div class="wrap">
+<section class="abre"><div class="w">
   <div>
-    <span class="eyebrow">Para professores · Ensino básico, secundário e profissional</span>
-    <h1>Menos papelada.<br><span>Mais tempo para ensinar.</span></h1>
-    <p class="lead">Avaliação, sumários, horário, reuniões e direção de turma numa só app, feita para o iPad e para a forma como as escolas portuguesas trabalham. Os dados ficam encriptados na sua própria conta.</p>
-    <div class="cta"><a class="btn pri" href="https://eduspruce.pt/">Abrir o EduSpruce <svg width="18" height="18"><use href="#i-arrow"/></svg></a><a class="btn sec" href="#funcoes">Ver o que faz</a></div>
-    <div class="trust"><span><svg width="16" height="16"><use href="#i-lock"/></svg> Encriptação AES-256</span><span><svg width="16" height="16"><use href="#i-eye"/></svg> Sem publicidade nem rastreadores</span><span><svg width="16" height="16"><use href="#i-school"/></svg> Nunca escreve no programa da escola</span></div>
+    <h1><span>Menos papelada.</span><span class="l2">Mais tempo para ensinar.</span></h1>
+    <p class="lead">A EduSpruce acompanha o seu dia de escola, da chamada das 08:15 à pauta do fim do período. Desça a página e experimente cada momento do dia, aqui mesmo.</p>
+    <div class="cta"><a class="bt a" href="https://eduspruce.pt/">Abrir a EduSpruce</a><a class="bt b" href="manual/EduSpruce-Manual.pdf">Ler o manual</a></div>
+    <p class="nota">Entra-se com a conta Google. Funciona no computador, no iPad e no telemóvel.</p>
   </div>
-  <div class="shot"><img src="img/avaliacao.webp" width="1600" height="1007" alt="Avaliação final de uma turma no EduSpruce, com percentagens por domínio, nível atribuído e menção" fetchpriority="high"></div>
-</div></div>
-
-<div class="strip"><div class="wrap"><div><b>1 app</b><span>avaliação, sumários, horário, reuniões</span></div><div><b>AES-256</b><span>encriptado antes de sair do aparelho</span></div><div><b>0 servidores</b><span>com dados de alunos</span></div><div><b>7 temas</b><span>SGE predefinido</span></div></div></div>
-<section id="funcoes"><div class="wrap">
-  <div class="sh c"><span class="kick">Tudo num só lugar</span><h2>O ano letivo inteiro, sem folhas soltas</h2><p>Do primeiro sumário à pauta final: o EduSpruce junta o trabalho que hoje está espalhado por cadernos, folhas de Excel e e-mails.</p></div>
-  <div class="grid">
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-grade"/></svg></div><h3>Avaliação por domínios</h3><p>Critérios, ponderações e perfis de aprendizagem. Classificações calculadas por período, com nível ou escala de 0 a 20 no secundário.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-book"/></svg></div><h3>Aulas e sumários</h3><p>Lições numeradas a partir do horário, faltas, presenças, substituições e reposições. Modo Aula para usar dentro da sala.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-cal"/></svg></div><h3>Horário importado</h3><p>Leia o horário a partir do PDF da escola. Calendário escolar, interrupções e contagem até ao fim do período.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-users"/></svg></div><h3>Direção de turma</h3><p>Conselho de turma, avaliação intercalar, contactos com encarregados de educação e atas.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-mic"/></svg></div><h3>Produção oral</h3><p>Grelhas por parâmetro com gravação, trabalho a pares e ligação direta ao instrumento de avaliação.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-tool"/></svg></div><h3>Cursos profissionais</h3><p>Módulos e UFCD, matriz e planeamento, pontos de situação e coordenação PROFIJ, sem misturar com o ensino regular.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-news"/></svg></div><h3>Jornal escolar</h3><p>Peças, prazos, equipa e paginação do jornal da escola, com o JornalNote para organizar ideias.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-board"/></svg></div><h3>SpruceNote</h3><p>Um quadro livre com notas, listas, tabelas, áudio, vídeo, mapas, esboços e ficheiros: planificar uma unidade ou preparar uma reunião.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-pdf"/></svg></div><h3>Documentos prontos</h3><p>Pautas, relatórios e fichas de aluno exportados para PDF ou Excel, prontos a entregar.</p></div>
+  <div class="jan" id="chamada">
+    <div class="top">7.º A, Inglês <small>Lição 25, 08:15</small></div>
+    <div class="cx">
+      <div class="cham" id="cham" role="group" aria-label="Chamada: toque num aluno para marcar falta"></div>
+      <div class="pe"><b id="pres">20/20</b><span>presentes. Toque num aluno para marcar falta.</span><button class="bt a s" id="conf">Confirmar chamada</button></div>
+      <div class="selo" id="selo" role="status"></div>
+    </div>
   </div>
 </div></section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="feat">
-    <div class="txt"><span class="kick">Início</span><h3>Abre a app e sabe o que tem para hoje</h3><p>Um painel que se arruma à sua maneira: arraste cartões, mude-lhes a largura e o espaço que sobra fica livre para outro.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Contagem até ao fim do período e próxima interrupção</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Desempenho por critério em cada turma</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Avisos de tarefas, reuniões e prazos em atraso</li></ul></div>
-    <div class="shot"><img src="img/inicio.webp" width="1600" height="1007" alt="Ecrã inicial com contagem decrescente para o fim do período e desempenho por critério" loading="lazy"></div>
-  </div>
-  <div class="feat r">
-    <div class="txt"><span class="kick">Painel da turma</span><h3>Cada turma num relance</h3><p>Assiduidade, alunos abaixo do limiar, avaliações por lançar e o que vem nos próximos dias, com o passo seguinte a um toque.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Marque testes e momentos de avaliação no calendário</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Lance classificações por item ou por domínio</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Vista própria para o conselho de turma</li></ul></div>
-    <div class="shot"><img src="img/painel.webp" width="1600" height="1007" alt="Painel da turma com assiduidade, avaliações pendentes e próximos dias" loading="lazy"></div>
-  </div>
-  <div class="feat">
-    <div class="txt"><span class="kick">Horário e sumários</span><h3>O horário faz o resto</h3><p>Importe o horário e as lições numeram-se sozinhas. Escreva o sumário no fim da aula e marque faltas sem sair do mesmo ecrã.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Horário semanal com tempos letivos e não letivos</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Substituições e reposições contabilizadas</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Exportação para CSV, PDF e calendário</li></ul></div>
-    <div class="shot"><img src="img/meuhorario.webp" width="1600" height="1007" alt="Horário semanal do professor por cores de turma" loading="lazy"></div>
-  </div>
-  <div class="feat r">
-    <div class="txt"><span class="kick">Marcação de testes</span><h3>O calendário de avaliações do ano inteiro</h3><p>Marque testes e momentos de avaliação completos: a produção oral fica na aula seguinte e as revisões na aula anterior, já no sumário.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Limite de testes por semana e testes de outras disciplinas</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Arraste para mudar de dia</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Envio da matriz lembrado a tempo</li></ul></div>
-    <div class="shot"><img src="img/testes.webp" width="1600" height="1007" alt="Calendário de avaliações com testes marcados por mês" loading="lazy"></div>
-  </div>
-  <div class="feat">
-    <div class="txt"><span class="kick">Reuniões</span><h3>Reuniões com ata e tarefas</h3><p>Convocatórias importadas do PDF, mapa mensal, tarefas com prazo e o histórico de atas, tudo ligado às turmas certas.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Lembretes antes de cada reunião</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Deliberações que passam a tarefas</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Exportação para o calendário (.ics)</li></ul></div>
-    <div class="shot"><img src="img/reunioes.webp" width="1600" height="1007" alt="Lista de reuniões com próxima reunião, tarefas pendentes e atas por fazer" loading="lazy"></div>
-  </div>
-  <div class="feat r">
-    <div class="txt"><span class="kick">Aulas e sumários</span><h3>Cada lição no seu lugar</h3><p>Faltas, presenças, substituições e reposições contadas sem esforço, com o sumário escrito na própria aula.</p>
-    <ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>Numeração automática das lições</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Modo Aula para usar na sala</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Exportação para CSV e PDF</li></ul></div>
-    <div class="shot"><img src="img/sumarios.webp" width="1600" height="1007" alt="Lista de aulas e sumários de uma turma" loading="lazy"></div>
+<section class="tempo inv" data-h="09:00"><div class="w">
+  <div class="tx"><span class="hora">09:00</span><h2>O sumário escreve-se na aula, não ao domingo</h2>
+    <p class="lead">As lições numeram-se sozinhas a partir do seu horário. Escreve o sumário, confirma as presenças e fica feito.</p>
+    <ul class="lst"><li>Faltas do professor, substituições e reposições contadas</li><li>Aulas previstas e dadas por período</li><li>Planta da sala e observações rápidas por aluno</li></ul></div>
+  <div class="jan"><div class="top">Aulas e sumários <small>guarda sozinho</small></div><div class="cx">
+    <div class="lic"><b>Lição 25</b><span>Terça, 09:00 às 09:45</span></div>
+    <div class="sum" id="sum" aria-live="off"></div><div class="grv" id="grv">Guardado. A lição 26 já tem data.</div></div></div>
+</div></section>
+
+<section class="tempo" data-h="10:05"><div class="w">
+  <div class="tx"><span class="hora">10:05</span><h2>Quem vai ao quadro?</h2>
+    <p class="lead">Rode a roda. O sorteio só escolhe entre os presentes e não repete ninguém até todos terem saído.</p>
+    <ul class="lst"><li>Um aluno, pares ou grupos</li><li>Em ecrã inteiro, para projetar</li><li>Pares equilibrados para a produção oral</li></ul></div>
+  <div><div class="roda"><canvas id="roda" width="600" height="600" aria-hidden="true"></canvas></div>
+    <div class="saiu" id="saiu" role="status"><span>Ainda ninguém saiu.</span></div>
+    <div class="cen"><button class="bt a" id="rodar">Rodar a roda</button></div></div>
+</div></section>
+
+<section class="tempo inv" data-h="11:45"><div class="w">
+  <div class="tx"><span class="hora">11:45</span><h2>Cinco minutos de Arena antes do almoço</h2>
+    <p class="lead">Jogos de perguntas com onze modos. Os alunos entram pelo telemóvel com um código, sem contas. A Arena nunca conta para a nota.</p>
+    <ul class="lst"><li>Pulso: verificação rápida, sempre formativa</li><li>Provas e Forms: testes digitais com correção automática</li><li>As classificações entram na grelha só se quiser</li></ul></div>
+  <div class="arena" id="arena"><div class="pl"><span id="aq">Pergunta 1 de 3</span><b id="ap">0 pts</b></div>
+    <div class="q" id="aqt"></div><div class="tp"><i id="at"></i></div>
+    <div class="ops" id="aops"></div><div class="msg" id="amsg" role="status"></div></div>
+</div></section>
+
+<section class="tempo" data-h="14:30"><div class="w">
+  <div class="tx"><span class="hora">14:30</span><h2>A nota faz-se à sua frente</h2>
+    <p class="lead">Mexa nos domínios e veja a classificação a mudar. Na app é igual: lança os itens do teste e a percentagem de cada domínio, a nota e o nível calculam-se sozinhos.</p>
+    <ul class="lst"><li>Critérios e ponderações por turma</li><li>Níveis de 1 a 5 ou escala de 0 a 20</li><li>Análise por domínio, instrumento, turma e aluno</li></ul></div>
+  <div class="jan"><div class="top">Avaliação, 1.º período <small>4 domínios de 25%</small></div><div class="cx" id="aval">
+    <div class="dom"><span style="background:#127fa6">PO</span><input type="range" min="0" max="100" value="62" aria-label="Produção oral"><output>62%</output></div>
+    <div class="dom"><span style="background:#c0392b">CO</span><input type="range" min="0" max="100" value="74" aria-label="Compreensão oral"><output>74%</output></div>
+    <div class="dom"><span style="background:#3442b8">CE</span><input type="range" min="0" max="100" value="81" aria-label="Compreensão escrita"><output>81%</output></div>
+    <div class="dom"><span style="background:#4b9b1f">PE</span><input type="range" min="0" max="100" value="55" aria-label="Produção escrita"><output>55%</output></div>
+    <div class="res"><div class="n" id="nota">68%</div><div><div class="nv" id="nv"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i></div><div class="me" id="men">Suficiente</div></div></div>
+    <div class="calc" id="calc"></div></div></div>
+</div></section>
+
+<section class="ecras" data-h="16:10"><div class="w">
+  <span class="hora">16:10</span>
+  <h2>Agora os ecrãs verdadeiros</h2>
+  <p class="lead">O que experimentou acima é uma amostra. Estes são ecrãs da app, com os dados de demonstração.</p>
+  <div class="abas" id="abas" role="tablist" aria-label="Ecrãs da app"></div>
+  <div class="palco" id="palco"></div>
+  <p class="leg" id="leg"></p>
+</div></section>
+
+<section class="resto" data-h="17:20"><div class="w">
+  <h2>E ainda cabe o resto do ano letivo</h2>
+  <div class="idx">
+    <div><b>Direção de turma</b><span>Processos, encarregados de educação, contactos, assiduidade, conselhos e apreciação global.</span></div>
+    <div><b>Reuniões</b><span>Convocatórias lidas do PDF ou do e-mail, atas, decisões que passam a tarefas.</span></div>
+    <div><b>Marcação de testes</b><span>Calendário de avaliações com limite por semana e matriz lembrada a tempo.</span></div>
+    <div><b>Documentos</b><span>Convocatórias, comunicações, planos e declarações preenchidos com os dados já registados.</span></div>
+    <div><b>O Meu Calendário</b><span>Aulas, reuniões, testes e tarefas juntos com os seus eventos, ao estilo do Outlook.</span></div>
+    <div><b>Ensino profissional e PROFIJ</b><span>Módulos e UFCD, mecanismo de recuperação, FPCT, pautas oficiais e coordenação.</span></div>
+    <div><b>Produção oral</b><span>Momentos com grelha própria, individuais, a pares ou em grupo.</span></div>
+    <div><b>Medidas de suporte</b><span>Quadro MSAI da turma e acomodações de cada aluno sempre à vista.</span></div>
+    <div><b>Autoavaliação</b><span>Os alunos respondem no telemóvel por QR code, sem conta.</span></div>
+    <div><b>Jornal escolar</b><span>Plano anual de atividades, peças, edições e equipa de redação.</span></div>
+    <div><b>SpruceNote</b><span>Quadros livres com notas, listas, imagens, áudio e desenho.</span></div>
+    <div><b>Modo de apresentação</b><span>Projete a app na aula sem mostrar dados pessoais dos alunos.</span></div>
   </div>
 </div></section>
 
-<section class="priv" id="privacidade"><div class="wrap">
-  <div class="sh"><span class="kick">Privacidade desde a origem</span><h2>Os dados dos alunos não saem do seu controlo</h2><p>O EduSpruce não tem servidores que recebam dados de alunos. Tudo é encriptado no seu aparelho antes de ser guardado na sua própria nuvem.</p></div>
-  <div class="grid">
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-lock"/></svg></div><h3>Encriptado no aparelho</h3><p>AES-256 com uma palavra-passe que só o professor conhece. Nem o autor do EduSpruce nem o fornecedor da nuvem conseguem ler os dados.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-cloud"/></svg></div><h3>Na sua conta</h3><p>Sincroniza com o seu Google Drive ou OneDrive. Abre no iPad, no computador da escola ou em casa, sempre atualizado.</p></div>
-    <div class="card"><div class="ico"><svg width="22" height="22"><use href="#i-school"/></svg></div><h3>Só leitura do programa da escola</h3><p>Pode importar listas, horários e pautas. O EduSpruce nunca escreve no programa de gestão da escola.</p></div>
+<section class="noite" data-h="21:30"><div class="estrelas" id="est" aria-hidden="true"></div><div class="w" style="position:relative">
+  <span class="hora">21:30</span>
+  <h2 style="color:#fff;max-width:13em">O computador fecha-se e os dados ficam guardados</h2>
+  <p class="lead" style="margin-top:14px">No aparelho não fica nada. Amanhã abre a app noutro computador, entra com Google e continua onde parou.</p>
+  <div class="tri">
+    <div><h3>Cifrados</h3><p>Os dados vão cifrados para a base de dados, na União Europeia. Só a sua conta os lê.</p></div>
+    <div><h3>Só contas autorizadas</h3><p>Ter uma conta Google não chega: o administrador decide quem entra e com que perfil.</p></div>
+    <div><h3>Nunca escreve no programa da escola</h3><p>Importa listas, horários e calendários. Não altera nada no sistema de gestão da escola.</p></div>
   </div>
-  <p style="margin:24px 0 0;color:#c6d4e3">Leia a <a href="privacidade.html" style="color:#fff">Política de Privacidade</a> e os <a href="termos.html" style="color:#fff">Termos de Serviço</a>.</p>
-</div></section>
+  <p style="margin-top:26px;color:#b9d0dc">Leia a <a href="privacidade.html">Política de Privacidade</a> e os <a href="termos.html">Termos de Serviço</a>.</p>
 
-<section><div class="wrap ipad">
-  <div class="dev"><img src="img/ipad.webp" width="820" height="1180" alt="EduSpruce no iPad, em vista vertical" loading="lazy"></div>
-  <div><span class="kick">Feito para o iPad</span><h2>Na sala de aula, na sala de professores, em casa</h2><p style="color:var(--mut);font-size:17px">Instala-se a partir do navegador, sem loja de aplicações, e funciona como uma app: ecrã inteiro, notificações e uso com o teclado ou com o dedo.</p>
-  <div class="temas" aria-label="Temas"><span><i style="background:#1b93c6"></i>SGE</span><span><i style="background:#1f4e79"></i>Institucional</span><span><i style="background:#ff385c"></i>Coral</span><span><i style="background:#1877f2"></i>Social</span><span><i style="background:linear-gradient(135deg,#f58529,#dd2a7b,#8134af)"></i>Gradiente</span><span><i style="background:#0077c8"></i>Académico</span><span><i style="background:#007aff"></i>iOS</span></div>
-  <div class="feat" style="margin:16px 0 0;display:block"><ul><li><svg width="18" height="18"><use href="#i-ok"/></svg>iPad, iPhone, Mac, Windows e Chromebook</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Tema SGE por predefinição, com outros seis à escolha</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Código de acesso para bloquear a app em segundos</li><li><svg width="18" height="18"><use href="#i-ok"/></svg>Modo de privacidade para projetar sem mostrar notas</li></ul></div></div>
-</div></section>
-
-<section id="comecar" style="padding-top:0"><div class="wrap">
-  <div class="sh c"><span class="kick">Como começar</span><h2>Pronto em poucos minutos</h2></div>
-  <div class="steps">
-    <div class="card"><h3>Abra a app</h3><p>Entre em <a href="https://eduspruce.pt/">EduSpruce</a> no navegador. No iPad, toque em Partilhar › Adicionar ao ecrã principal.</p></div>
-    <div class="card"><h3>Ligue a sua nuvem</h3><p>Escolha Google Drive ou OneDrive e defina a palavra-passe de encriptação. Os dados passam a acompanhá-lo em todos os aparelhos.</p></div>
-    <div class="card"><h3>Importe as turmas</h3><p>Traga as listas de alunos e o horário da escola. Experimente primeiro com a demonstração, se preferir.</p></div>
+  <div class="pas">
+    <div><h3>Entre com Google</h3><p>Abra eduspruce.pt e toque em Entrar com Google. Não há nada para instalar.</p></div>
+    <div><h3>Traga as turmas</h3><p>O Excel do programa da escola cria a turma com os alunos e as fotografias.</p></div>
+    <div><h3>Importe o horário e o calendário</h3><p>Dois PDF bastam para a app numerar as lições e contar as aulas previstas.</p></div>
   </div>
-</div></section>
 
-<section id="ajuda" style="padding-top:0"><div class="wrap">
-<div class="sh c"><span class="kick">Ajuda</span><h2>Veja como se faz</h2><p>Pequenas animações de cada parte da app e o manual completo em PDF. Todas as imagens usam a turma de demonstração, com nomes inventados.</p></div>
-<div class="ajman"><div><b>Manual de instruções completo</b><span>46 páginas, do primeiro acesso à avaliação final, sincronização e segurança.</span></div><div class="cta"><a class="btn" href="manual/EduSpruce-Manual.pdf" target="_blank" rel="noopener">Abrir o manual (PDF)</a><a class="btn sec" href="manual/EduSpruce-Manual.pdf" download>Descarregar</a></div></div>
-<div class="ajg"><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/alunos.gif" data-t="Turmas e alunos" aria-label="Ver em grande: Turmas e alunos"><img src="ajuda/gifs/alunos.gif" alt="Animação: Turmas e alunos" loading="lazy" width="820" height="514"></button><figcaption><b>Turmas e alunos</b><span>Turmas, disciplinas e a ficha de cada aluno.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/horario.gif" data-t="Horários" aria-label="Ver em grande: Horários"><img src="ajuda/gifs/horario.gif" alt="Animação: Horários" loading="lazy" width="820" height="514"></button><figcaption><b>Horários</b><span>O seu horário e o horário de cada turma.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/naoletivo.gif" data-t="Tempos não letivos" aria-label="Ver em grande: Tempos não letivos"><img src="ajuda/gifs/naoletivo.gif" alt="Animação: Tempos não letivos" loading="lazy" width="820" height="514"></button><figcaption><b>Tempos não letivos</b><span>Cargos, apoios e reuniões na grelha.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/arrastar.gif" data-t="Arrastar tempos" aria-label="Ver em grande: Arrastar tempos"><img src="ajuda/gifs/arrastar.gif" alt="Animação: Arrastar tempos" loading="lazy" width="820" height="514"></button><figcaption><b>Arrastar tempos</b><span>Mudar um tempo de dia ou de hora.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/horedit.gif" data-t="Editar o horário" aria-label="Ver em grande: Editar o horário"><img src="ajuda/gifs/horedit.gif" alt="Animação: Editar o horário" loading="lazy" width="820" height="514"></button><figcaption><b>Editar o horário</b><span>Corrigir salas, disciplinas e tempos.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/calendario.gif" data-t="Calendário escolar" aria-label="Ver em grande: Calendário escolar"><img src="ajuda/gifs/calendario.gif" alt="Animação: Calendário escolar" loading="lazy" width="820" height="514"></button><figcaption><b>Calendário escolar</b><span>Períodos, interrupções e feriados.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/sumarios.gif" data-t="Aulas e sumários" aria-label="Ver em grande: Aulas e sumários"><img src="ajuda/gifs/sumarios.gif" alt="Animação: Aulas e sumários" loading="lazy" width="820" height="514"></button><figcaption><b>Aulas e sumários</b><span>A aula de hoje, sumário e presenças.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/faltas.gif" data-t="Faltas e reposições" aria-label="Ver em grande: Faltas e reposições"><img src="ajuda/gifs/faltas.gif" alt="Animação: Faltas e reposições" loading="lazy" width="820" height="514"></button><figcaption><b>Faltas e reposições</b><span>Lições numeradas, faltas e reposições.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/testes.gif" data-t="Marcação de testes" aria-label="Ver em grande: Marcação de testes"><img src="ajuda/gifs/testes.gif" alt="Animação: Marcação de testes" loading="lazy" width="820" height="514"></button><figcaption><b>Marcação de testes</b><span>Só os dias com aulas da turma.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/avaliacao.gif" data-t="Avaliação" aria-label="Ver em grande: Avaliação"><img src="ajuda/gifs/avaliacao.gif" alt="Animação: Avaliação" loading="lazy" width="820" height="514"></button><figcaption><b>Avaliação</b><span>Critérios, instrumentos e avaliação final.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/planta.gif" data-t="Planta da sala" aria-label="Ver em grande: Planta da sala"><img src="ajuda/gifs/planta.gif" alt="Animação: Planta da sala" loading="lazy" width="820" height="514"></button><figcaption><b>Planta da sala</b><span>Arrastar os alunos para os lugares.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/direcao.gif" data-t="Direção de turma" aria-label="Ver em grande: Direção de turma"><img src="ajuda/gifs/direcao.gif" alt="Animação: Direção de turma" loading="lazy" width="820" height="514"></button><figcaption><b>Direção de turma</b><span>Faltas, contactos e atendimentos.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/reunimp.gif" data-t="Reuniões" aria-label="Ver em grande: Reuniões"><img src="ajuda/gifs/reunimp.gif" alt="Animação: Reuniões" loading="lazy" width="820" height="514"></button><figcaption><b>Reuniões</b><span>Próximas reuniões, mapa mensal e atas.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/tarefas.gif" data-t="Minhas tarefas" aria-label="Ver em grande: Minhas tarefas"><img src="ajuda/gifs/tarefas.gif" alt="Animação: Minhas tarefas" loading="lazy" width="820" height="514"></button><figcaption><b>Minhas tarefas</b><span>O Meu Dia, Importante e Planeado.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/avisos.gif" data-t="Início e avisos" aria-label="Ver em grande: Início e avisos"><img src="ajuda/gifs/avisos.gif" alt="Animação: Início e avisos" loading="lazy" width="820" height="514"></button><figcaption><b>Início e avisos</b><span>O que tem para hoje e o que se aproxima.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/documentos.gif" data-t="Documentos" aria-label="Ver em grande: Documentos"><img src="ajuda/gifs/documentos.gif" alt="Animação: Documentos" loading="lazy" width="820" height="514"></button><figcaption><b>Documentos</b><span>Modelos e documentos em Word e PDF.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/recursos.gif" data-t="Biblioteca" aria-label="Ver em grande: Biblioteca"><img src="ajuda/gifs/recursos.gif" alt="Animação: Biblioteca" loading="lazy" width="820" height="514"></button><figcaption><b>Biblioteca</b><span>Recursos por disciplina e ano.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/multidisc.gif" data-t="Várias disciplinas" aria-label="Ver em grande: Várias disciplinas"><img src="ajuda/gifs/multidisc.gif" alt="Animação: Várias disciplinas" loading="lazy" width="820" height="514"></button><figcaption><b>Várias disciplinas</b><span>Turmas com turnos ou várias disciplinas.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/importados.gif" data-t="Ficheiros importados" aria-label="Ver em grande: Ficheiros importados"><img src="ajuda/gifs/importados.gif" alt="Animação: Ficheiros importados" loading="lazy" width="820" height="514"></button><figcaption><b>Ficheiros importados</b><span>O registo do que foi importado.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/professor.gif" data-t="Escola e professor" aria-label="Ver em grande: Escola e professor"><img src="ajuda/gifs/professor.gif" alt="Animação: Escola e professor" loading="lazy" width="820" height="514"></button><figcaption><b>Escola e professor</b><span>Nome da escola, logotipo e o seu perfil.</span></figcaption></figure><figure class="ajc"><button type="button" class="ajb" data-gif="ajuda/gifs/tema.gif" data-t="Temas" aria-label="Ver em grande: Temas"><img src="ajuda/gifs/tema.gif" alt="Animação: Temas" loading="lazy" width="820" height="514"></button><figcaption><b>Temas</b><span>SGE, iOS 27, Institucional e outros.</span></figcaption></figure></div></div></section>
-<dialog id="ajdlg" aria-label="Animação em grande"><form method="dialog"><button class="ajx" aria-label="Fechar">×</button></form><img alt=""><p></p></dialog>
-<section id="faq" style="padding-top:0"><div class="wrap" style="max-width:820px">
-  <div class="sh c"><span class="kick">Perguntas frequentes</span><h2>Antes de começar</h2></div>
-  <details><summary>Preciso de instalar alguma coisa?</summary><p>Não. O EduSpruce abre no navegador. Se o adicionar ao ecrã principal, passa a abrir em ecrã inteiro como qualquer outra app.</p></details>
-  <details><summary>Onde ficam os dados dos meus alunos?</summary><p>Na sua conta Google Drive ou OneDrive, encriptados no aparelho antes de saírem dele. O EduSpruce não tem servidores com dados de alunos.</p></details>
-  <details><summary>O EduSpruce substitui o programa de gestão da escola?</summary><p>Não. É o caderno do professor: prepara a avaliação, os sumários e as reuniões. Pode importar dados do programa da escola, mas nunca escreve nele.</p></details>
-  <details><summary>Serve para cursos profissionais?</summary><p>Sim. Tem módulos e UFCD, matriz, planeamento e pontos de situação, e uma área de coordenação, separados do ensino regular.</p></details>
-  <details><summary>E se perder o iPad?</summary><p>Os dados estão na sua nuvem. Entre noutro aparelho com a mesma conta e a palavra-passe de encriptação e continua onde parou.</p></details>
-  <details><summary>Posso começar do zero?</summary><p>Sim. Nas Definições pode apagar tudo o que o EduSpruce guardou na sua conta e começar um novo ano limpo.</p></details>
-</div></section>
+  <div class="faq"><h2>Perguntas de quem ainda não experimentou</h2>
+    <details><summary>Preciso de instalar alguma coisa?</summary><p>Não. A EduSpruce abre no navegador. No iPad e no telemóvel pode adicioná-la ao ecrã principal e passa a abrir em ecrã inteiro.</p></details>
+    <details><summary>Os alunos precisam de conta?</summary><p>Não. Na Arena, no Pulso, no Forms, nas Provas e na autoavaliação entram com um código ou QR code que o professor mostra.</p></details>
+    <details><summary>Substitui o programa de gestão da escola?</summary><p>Não. É o caderno do professor: prepara a avaliação, os sumários e as reuniões. Pode importar dados do programa da escola, mas nunca escreve nele.</p></details>
+    <details><summary>Serve para cursos profissionais e PROFIJ?</summary><p>Sim. Tem módulos e UFCD, mecanismo de recuperação, planos de recuperação e uma área para a coordenação do PROFIJ, sem misturar com o ensino regular.</p></details>
+    <details><summary>Dou aulas em duas escolas. Funciona?</summary><p>Sim. Cada escola tem o seu calendário, a sua organização do ano e os seus cargos, e os dados nunca se misturam.</p></details>
+    <details><summary>Onde aprendo a usar tudo?</summary><p>No <a href="manual/EduSpruce-Manual.pdf">manual em PDF</a>, que percorre todos os menus com imagens e exemplos, e no botão de ajuda de cada ecrã da app.</p></details>
+  </div>
 
-<section class="final" style="padding-top:0"><div class="wrap"><div class="card">
-  <h2>Experimente com a sua próxima turma</h2><p>Abra a demonstração, explore com dados fictícios e, quando estiver pronto, traga as suas turmas.</p>
-  <div class="cta"><a class="btn pri" href="https://eduspruce.pt/">Abrir o EduSpruce <svg width="18" height="18"><use href="#i-arrow"/></svg></a><a class="btn sec" href="https://github.com/EduSpruce/eduspruce"><svg width="18" height="18"><use href="#i-gh"/></svg> Código no GitHub</a></div>
-</div></div></section>
+  <div class="fim"><h2>Amanhã às 08:15, experimente com a sua turma</h2>
+    <div class="cta"><a class="bt a" href="https://eduspruce.pt/">Abrir a EduSpruce</a><a class="bt b" href="manual/EduSpruce-Manual.pdf">Ler o manual</a></div></div>
+</div></section>
 </main>
 
-<footer><div class="wrap"><span>© 2026 EduSpruce · Plataforma Integrada de Gestão Educativa</span><span><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a> · <a href="https://github.com/EduSpruce/eduspruce/issues">Contacto</a></span></div></footer>
-<script>(function(){var d=document.getElementById('ajdlg');if(!d)return;document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.ajb');if(!b)return;d.querySelector('img').src=b.dataset.gif;d.querySelector('img').alt='Animação: '+b.dataset.t;d.querySelector('p').textContent=b.dataset.t;if(d.showModal)d.showModal();else d.setAttribute('open','')});d.addEventListener('click',function(e){if(e.target===d)d.close()})})();</script></body></html>
+<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa</span><span><a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a> &nbsp; <a href="https://github.com/EduSpruce/EduSpruce/issues">Contacto</a></span></div></footer>
+
+<script>
+(()=>{const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+/* nomes fictícios (os da demonstração da app) */
+const AL=[['AS','Ana'],['RB','Rodrigo'],['TA','Teresa'],['GF','Guilherme'],['MS','Marta'],['MB','Martim'],['RA','Rita'],['LV','Leonardo'],['CF','Catarina'],['HT','Henrique'],['MR','Mariana'],['VC','Vasco'],['RC','Raquel'],['DP','Diogo'],['JR','Joana'],['SÁ','Santiago'],['LG','Luísa'],['LR','Luís'],['GM','Gabriela'],['PP','Pedro']];
+const falt=new Set();
+
+/* ---------- 08:15 · chamada ---------- */
+const cham=$('#cham'),pres=$('#pres'),selo=$('#selo');
+const conta=()=>{pres.textContent=(AL.length-falt.size)+'/'+AL.length;selo.classList.remove('on');desenhaRoda()};
+AL.forEach(([i,n],k)=>{const b=document.createElement('button');b.className='al';b.type='button';b.innerHTML=i+'<small>'+n+'</small>';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',n+', presente');
+  b.onclick=()=>{const f=b.classList.toggle('f');f?falt.add(k):falt.delete(k);b.setAttribute('aria-pressed',f);b.setAttribute('aria-label',n+(f?', falta':', presente'));conta()};cham.appendChild(b)});
+$('#conf').onclick=()=>{const n=falt.size;selo.textContent='Chamada confirmada às 08:17. '+(n?n+(n>1?' faltas registadas':' falta registada')+' e contadas na assiduidade.':'Turma completa.');selo.classList.remove('on');void selo.offsetWidth;selo.classList.add('on')};
+/* um único momento orquestrado ao abrir: duas faltas marcam-se sozinhas */
+if(!RM)[[2,900],[19,1500]].forEach(([k,t])=>setTimeout(()=>{if(!falt.size||k===19)cham.children[k].click()},t));
+
+/* ---------- relógio, sol e céu acompanham a página ---------- */
+const secs=[...document.querySelectorAll('[data-h]')],rel=$('#rel'),sol=$('#sol');
+const min=h=>{const[a,b]=h.split(':');return a*60+ +b},fmt=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(Math.round(m%60)).padStart(2,'0');
+const CEU=[[0,[230,243,250]],[.3,[244,250,253]],[.55,[255,250,238]],[.78,[253,232,208]],[1,[236,188,160]]];
+const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+let tk=0;function rola(){tk=0;const y=scrollY+innerHeight*.45;let m=495;const P=[[0,495],...secs.map(s=>[s.offsetTop,min(s.dataset.h)])];
+  for(let i=0;i<P.length;i++){const a=P[i],b=P[i+1];if(!b||y<b[0]){m=b?a[1]+(b[1]-a[1])*Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0]))):a[1];break}}
+  rel.textContent=fmt(Math.round(m/5)*5);
+  const noite=$('.noite').offsetTop,p=Math.max(0,Math.min(1,scrollY/(noite-innerHeight*.5)));
+  let c=CEU[0][1];for(let i=0;i<CEU.length-1;i++){const a=CEU[i],b=CEU[i+1];if(p>=a[0]&&p<=b[0]){c=mix(a[1],b[1],(p-a[0])/(b[0]-a[0]));break}}
+  document.body.style.background='rgb('+c+')';
+  /* arco do sol: nasce à direita em cima, põe-se à esquerda em baixo */
+  const W=innerWidth,H=innerHeight,x=W-80-(W-140)*p,yy=H*.16+Math.pow(Math.abs(p-.5)*2,2)*H*.5+(p>.9?(p-.9)*10*H*.5:0);
+  sol.style.transform='translate('+x+'px,'+yy+'px)';sol.style.opacity=p>.97?0:.9;document.body.classList.toggle('n',scrollY>noite+120)}
+addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(rola)},{passive:true});addEventListener('resize',rola);rola();
+
+/* dispara uma vez quando a peça entra no ecrã */
+const ver=(el,f)=>{const o=new IntersectionObserver(e=>{if(e[0].isIntersecting){o.disconnect();f()}},{threshold:.5});o.observe(el)};
+
+/* ---------- 09:00 · sumário ---------- */
+const TXT='Correção da ficha de trabalho. Leitura e interpretação do texto «A viagem». Trabalho de pares: descrever uma rotina.';
+ver($('#sum'),()=>{const s=$('#sum'),g=$('#grv');if(RM){s.textContent=TXT;g.classList.add('on');return}let i=0;(function t(){s.textContent=TXT.slice(0,++i);if(i<TXT.length)setTimeout(t,22+Math.random()*40);else g.classList.add('on')})()});
+
+/* ---------- 10:05 · sorteio ---------- */
+const cv=$('#roda'),cx=cv.getContext('2d');let ang=0,sairam=new Set();
+const COR=['#1b93c6','#f39200','#17705a','#0c2f42','#d8432f','#7a4fc4'];
+function presentes(){return AL.map((a,k)=>k).filter(k=>!falt.has(k))}
+function desenhaRoda(){const P=presentes(),n=P.length,r=300;cx.clearRect(0,0,600,600);P.forEach((k,i)=>{const a0=i/n*Math.PI*2-Math.PI/2,a1=(i+1)/n*Math.PI*2-Math.PI/2;cx.beginPath();cx.moveTo(r,r);cx.arc(r,r,r,a0,a1);cx.closePath();cx.fillStyle=COR[i%COR.length];cx.globalAlpha=sairam.has(k)?.3:1;cx.fill();cx.globalAlpha=1;
+  cx.save();cx.translate(r,r);cx.rotate((a0+a1)/2);cx.fillStyle='#fff';cx.font='700 26px Bricolage,sans-serif';cx.textAlign='right';cx.textBaseline='middle';cx.fillText(AL[k][0],r-18,0);cx.restore()});
+  cx.beginPath();cx.arc(r,r,34,0,7);cx.fillStyle='#fff';cx.fill()}
+$('#rodar').onclick=()=>{const P=presentes();let L=P.filter(k=>!sairam.has(k));if(!L.length){sairam.clear();L=P;desenhaRoda()}
+  const k=L[Math.floor(Math.random()*L.length)],i=P.indexOf(k),n=P.length,alvo=360-(i+.5)/n*360;ang=Math.ceil(ang/360)*360+360*4+alvo;cv.style.transform='rotate('+ang+'deg)';
+  const b=$('#rodar');b.disabled=true;$('#saiu').innerHTML='<span>A rodar…</span>';setTimeout(()=>{sairam.add(k);desenhaRoda();$('#saiu').innerHTML='<b>'+AL[k][1]+'</b><span>Faltam '+(L.length-1)+' até todos terem saído.</span>';b.disabled=false;b.textContent='Rodar outra vez'},RM?0:3700)};
+document.fonts&&document.fonts.ready.then(desenhaRoda);desenhaRoda();
+
+/* ---------- 11:45 · arena ---------- */
+const Q=[['Qual destes números é primo?',['21','27','29','33'],2],['«She ___ to school every day.»',['go','goes','going','gone'],1],['Qual é a capital da Austrália?',['Sydney','Melbourne','Perth','Camberra'],3]];
+const F=['▲','◆','●','■'];let qi=0,pts=0,t0=0,raf=0,aberto=false;
+function perg(){const [q,o]=Q[qi];$('#aq').textContent='Pergunta '+(qi+1)+' de '+Q.length;$('#aqt').textContent=q;$('#amsg').textContent='';const ops=$('#aops');ops.className='ops';ops.innerHTML='';
+  o.forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<span aria-hidden="true">'+F[i]+'</span>'+t;b.onclick=()=>resp(i);ops.appendChild(b)});
+  aberto=true;t0=performance.now();cancelAnimationFrame(raf);(function tic(){const p=Math.min(1,(performance.now()-t0)/15000);$('#at').style.transform='scaleX('+(1-p)+')';if(p<1&&aberto)raf=requestAnimationFrame(tic);else if(aberto)resp(-1)})()}
+function resp(i){if(!aberto)return;aberto=false;const c=Q[qi][2],ops=$('#aops');ops.classList.add('fim');ops.children[c].classList.add('ok');const dt=(performance.now()-t0)/1000;
+  if(i===c){const g=Math.round(1000-dt*45);pts+=g;$('#amsg').textContent='Certo! +'+g+' pontos (quem responde mais depressa ganha mais).'}else $('#amsg').textContent=i<0?'Acabou o tempo.':'Não era essa. A certa fica destacada.';
+  $('#ap').textContent=pts+' pts';setTimeout(()=>{qi++;if(qi<Q.length)perg();else{$('#aq').textContent='Fim do jogo';$('#aqt').textContent=pts>=2400?'Pódio! Na aula, a turma inteira joga ao mesmo tempo.':'Fez '+pts+' pontos. Na aula, a turma inteira joga ao mesmo tempo.';ops.className='ops';ops.innerHTML='';const b=document.createElement('button');b.type='button';b.textContent='Jogar outra vez';b.style.gridColumn='1/-1';b.onclick=()=>{qi=0;pts=0;$('#ap').textContent='0 pts';perg()};ops.appendChild(b);$('#amsg').textContent='Na app há onze modos: Clássico, Colheita, Corrida, Pesca no Lago e mais sete.'}},1900)}
+ver($('#arena'),perg);
+
+/* ---------- 14:30 · avaliação ---------- */
+const R=[...document.querySelectorAll('#aval input')],NC=['#c0392b','#e67e22','#b8860b','#1f7fd0','#2f9e44'],MEN=['Insuficiente','Insuficiente','Suficiente','Bom','Muito bom'];
+function nota(){const v=R.map(r=>+r.value);R.forEach((r,i)=>r.nextElementSibling.textContent=v[i]+'%');const n=Math.round(v.reduce((a,b)=>a+b,0)/4),nv=n<20?1:n<50?2:n<70?3:n<90?4:5;
+  $('#nota').textContent=n+'%';$('#men').textContent='Nível '+nv+', '+MEN[nv-1];$('#men').style.color=NC[nv-1];[...$('#nv').children].forEach((e,i)=>{e.classList.toggle('on',i===nv-1);e.style.setProperty('--c',NC[nv-1])});
+  $('#calc').textContent='0,25 × ('+v.join(' + ')+') = '+n+'%'}
+R.forEach(r=>r.oninput=nota);nota();
+
+/* ---------- 16:10 · ecrãs ---------- */
+const E=[['inicio','Início','O painel do dia: contagem até ao fim do período, tarefas, aulas de hoje e desempenho por critério.'],['painel','Painel da turma','Assiduidade, alunos abaixo do limiar, avaliações por lançar e o que vem nos próximos dias.'],['aula','Modo Aula','Chamada, sumário e sorteio no mesmo ecrã, pensado para usar com o dedo.'],['meuhorario','Horário','O horário importado do PDF, com tempos letivos e não letivos.'],['testes','Marcação de testes','O calendário de avaliações do ano, com os tempos dados até cada teste.'],['avaliacao','Pauta','Percentagem por domínio, nota, nível proposto e nível atribuído em conselho.'],['analise','Análise','Resultados por domínio, por instrumento, por turma e por aluno.'],['provas','Provas','Testes digitais com dez tipos de exercício e correção automática.'],['arena','Arena','O editor de um conjunto de perguntas para os jogos.'],['meucal','Calendário','Aulas, reuniões, testes e tarefas junto com os seus eventos.'],['direcao','Direção de turma','Alunos a acompanhar, reuniões e diligências de toda a turma.'],['reunioes','Reuniões','Próximas reuniões, atas por fazer e tarefas que saíram das decisões.'],['sprucenote','SpruceNote','Um quadro livre para planear uma unidade ou preparar uma reunião.']];
+const abas=$('#abas'),palco=$('#palco');let auto=0;
+function ecra(i,man){[...abas.children].forEach((b,k)=>b.setAttribute('aria-selected',k===i));[...palco.children].forEach((m,k)=>{if(k===i&&!m.src)m.src=m.dataset.s;m.classList.toggle('on',k===i)});$('#leg').textContent=E[i][2];if(man){clearInterval(auto);auto=0}}
+E.forEach(([f,n,l],i)=>{const b=document.createElement('button');b.type='button';b.role='tab';b.textContent=n;b.onclick=()=>ecra(i,1);abas.appendChild(b);const m=new Image();m.dataset.s='img/'+f+'.webp';m.alt='Ecrã da app: '+n+'. '+l;m.width=1600;m.height=1007;palco.appendChild(m)});
+ecra(0);ver(palco,()=>{if(RM)return;let i=0;auto=setInterval(()=>{i=(i+1)%E.length;ecra(i)},3800)});
+
+/* ---------- 21:30 · estrelas ---------- */
+const est=$('#est');for(let i=0;i<46;i++){const s=document.createElement('i');s.style.cssText='left:'+Math.random()*100+'%;top:'+(160+Math.random()*900)+'px;animation-delay:'+(Math.random()*3)+'s;opacity:'+(.3+Math.random()*.6);est.appendChild(s)}
+})();
+</script>
+</body></html>
