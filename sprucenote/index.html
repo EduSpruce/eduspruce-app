@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SpruceNote · O quadro onde as ideias da escola ganham forma</title>
+<meta name="description" content="SpruceNote: quadros visuais para planear aulas, projetos, reuniões e o jornal escolar. Notas, listas, imagens, ligações, ficheiros e desenhos num só sítio. Parte da EduSpruce.">
+<meta property="og:title" content="SpruceNote — o quadro onde as ideias da escola ganham forma">
+<meta property="og:description" content="Notas, listas, imagens, ligações e desenhos num quadro visual. Para professores.">
+<meta property="og:image" content="../img/sprucenote.webp"><meta property="og:type" content="website">
+<link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<meta name="theme-color" content="#14532d">
+<style>
+@font-face{font-family:Bricolage;src:url(../fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:Figtree;src:url(../fonts/figtree.woff2) format("woff2");font-weight:300 900;font-display:swap}
+:root{
+  --pin:#166534;--pin2:#14532d;--pinL:#4ade80;--pinXL:#dcfce7;--sun:#f39200;--sky:#38bdf8;
+  --ink:#10261b;--ink2:#46594f;--bg:#fbfaf6;--paper:#fff;--line:#10261b1a;--cream:#f4f1e8;
+  --disp:Bricolage,Georgia,serif;--r:14px;color-scheme:light
+}
+@media (prefers-color-scheme:dark){:root{--ink:#e8f1ec;--ink2:#a9bab1;--bg:#0f1713;--paper:#17211c;--line:#ffffff1c;--cream:#141e19;--pinXL:#173826;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font:17px/1.6 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+.w{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.02em;line-height:1.05;margin:0}
+.bt{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;font:700 16px/1 Figtree,sans-serif;padding:15px 24px;border-radius:999px;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.bt:hover{transform:translateY(-2px)}
+.bt.a{background:var(--pin);color:#fff;box-shadow:0 10px 24px -10px #16653499}
+.bt.a:hover{background:var(--pin2)}
+.bt.o{border-color:currentColor;background:transparent}
+.bt.s{padding:10px 18px;font-size:15px}
+.mut{color:var(--ink2)}
+.eyebrow{display:inline-block;font:700 13px/1 Figtree;letter-spacing:.12em;text-transform:uppercase;color:var(--pin);background:var(--pinXL);padding:7px 12px;border-radius:999px}
+@media (prefers-color-scheme:dark){.eyebrow{color:var(--pinL)}}
+
+/* ---------- barra de topo ---------- */
+.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+.bar.sc{border-color:var(--line)}
+.bar .w{display:flex;align-items:center;gap:22px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 21px/1 var(--disp);letter-spacing:-.02em}
+.logo small{white-space:nowrap;font:600 12px/1 Figtree;color:var(--ink2);border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.nav{display:flex;gap:4px;margin-left:12px}
+.nav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:15px;color:var(--ink2);padding:8px 12px;border-radius:999px}
+.nav a:hover{color:var(--ink);background:var(--pinXL)}
+.bar .sp{flex:1}
+.bar .t{font-weight:600;font-size:15px;text-decoration:none;color:var(--ink2)}
+.menu{display:none;background:none;border:0;color:inherit;padding:6px}
+@media (max-width:560px){.logo small,.hs{display:none}.bar .w{gap:12px}}
+@media (max-width:1040px){.nav,.bar .t{display:none}.menu{display:block}
+  .nav.on{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--paper);padding:12px 20px;border-bottom:1px solid var(--line);margin:0}}
+
+/* ---------- herói ---------- */
+.hero{padding:48px 0 40px;text-align:center;position:relative}
+.hero h1{font-size:clamp(44px,7.4vw,96px);font-weight:700;max-width:980px;margin:18px auto 18px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--pin) 10%,#22a35a 60%,var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(18px,2vw,22px);max-width:640px;margin:0 auto 28px;color:var(--ink2)}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero .nota{margin-top:14px;font-size:14px;color:var(--ink2)}
+
+/* quadro de demonstração (interativo) */
+.demo-wrap{margin:44px auto 0;max-width:1120px;position:relative}
+.demo{position:relative;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 40px 90px -30px rgba(16,38,27,.45),0 0 0 1px rgba(16,38,27,.08);text-align:left;color:#1d2a23;font:14px/1.45 Figtree,sans-serif}
+.dtop{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px;border-bottom:1px solid #e6e3da;background:#fff}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#e5e1d6}
+.dcr{font-size:13px;color:#6b7a72}.dcr b{color:#1d2a23}
+.dtop .dsp{flex:1}
+.dchip{font-size:12px;padding:5px 10px;border-radius:999px;background:#f0fdf4;color:var(--pin);font-weight:700}
+.dbody{display:flex;height:560px}
+.dside{width:64px;background:#14532d;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0}
+.dtool{width:54px;border:0;background:none;color:#d9f2e3;font:600 10px/1.1 Figtree;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:8px;cursor:grab;touch-action:none}
+.dtool:hover{background:rgba(255,255,255,.1)}
+.dtool svg{width:20px;height:20px}
+.dcv{flex:1;position:relative;overflow:hidden;background:#f6f4ee radial-gradient(#d9d4c4 1.1px,transparent 1.2px) 0 0/22px 22px;touch-action:none}
+.dcv svg.ln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.dc{position:absolute;background:#fff;border:1px solid #e6e3da;border-radius:7px;box-shadow:0 1px 2px rgba(20,40,30,.08),0 4px 12px rgba(20,40,30,.06);padding:12px 14px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;animation:pop .6s var(--d,0s) cubic-bezier(.2,.8,.3,1.25) both}
+.dc.drag{cursor:grabbing;box-shadow:0 18px 40px rgba(0,0,0,.18);z-index:20;transform:rotate(-1.5deg)}
+.dc[data-c]{border-top:4px solid var(--k)}
+.dc h4{margin:0 0 4px;font:700 15px/1.25 Figtree}
+.dc p{margin:0;color:#46594f;font-size:13px}
+.dc .ed{outline:none;cursor:text}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.95)}}
+.dtodo li{list-style:none;display:flex;gap:7px;align-items:center;font-size:13px;padding:2px 0}
+.dtodo ul{margin:6px 0 0;padding:0}
+.dtodo i{width:14px;height:14px;border-radius:4px;border:1.6px solid #9aa9a1;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dtodo li.ok i{background:#22a35a;border-color:#22a35a}
+.dtodo li.ok i::after{content:"";width:4px;height:7px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.dtodo li.ok span{text-decoration:line-through;color:#9aa9a1}
+.dprog{height:4px;background:#ebe7dc;border-radius:3px;overflow:hidden;margin-top:6px}.dprog b{display:block;height:100%;background:#22a35a;transition:width .3s}
+.dimg{padding:0;overflow:hidden}
+.dimg svg{display:block;width:100%}
+.dimg small{display:block;padding:7px 10px;color:#6b7a72;font-size:12px}
+.dcol{background:#ece9df;padding:10px}
+.dcol>b{display:block;font-size:13.5px;padding:0 2px 8px}
+.dcol .k{background:#fff;border-radius:6px;padding:9px 10px;font-size:12.5px;margin-bottom:7px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.dlink{display:flex;gap:10px;align-items:center}
+.dlink .f{width:34px;height:34px;border-radius:7px;background:#166534;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.dlink small{color:#22a35a;font-size:11.5px}
+.dsw{padding:0;overflow:hidden;width:120px}
+.dsw div{height:64px}.dsw small{display:block;padding:6px 9px;font-size:11.5px;color:#6b7a72}
+.dboard{text-align:center;width:118px}
+.dboard .bi{width:56px;height:56px;margin:0 auto 6px;border-radius:12px;background:linear-gradient(140deg,#4ade80,#166534);display:flex;align-items:center;justify-content:center;font-size:26px}
+.dboard b{font-size:13px}.dboard small{display:block;color:#8a978f;font-size:11px}
+.dcm{background:#fff8e1;border-color:#f5d97a}
+.dcm .av{width:24px;height:24px;border-radius:50%;background:#22a35a;color:#fff;font-size:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;vertical-align:middle}
+.dhint{position:absolute;right:14px;bottom:12px;background:#14532d;color:#fff;font-size:12.5px;padding:7px 12px;border-radius:999px;pointer-events:none;opacity:.92}
+.cursor{position:absolute;width:22px;height:22px;pointer-events:none;z-index:30;transition:left 1s cubic-bezier(.5,0,.2,1),top 1s cubic-bezier(.5,0,.2,1)}
+.flt{position:absolute;z-index:5;font:700 13px/1.2 Figtree;background:var(--paper);color:var(--ink);padding:9px 13px;border-radius:12px;box-shadow:0 12px 30px -10px rgba(0,0,0,.3);display:flex;gap:8px;align-items:center;animation:bob 5s ease-in-out infinite}
+.flt b{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.flt.f1{left:-52px;bottom:70px}.flt.f2{right:-36px;top:300px;animation-delay:-2.5s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media (max-width:1200px){.flt{display:none}}
+.demo-wrap{--sc:1}
+.demo-sz{position:relative;width:100%}
+.demo-sz>.demo{transform-origin:0 0;transform:scale(var(--sc));position:absolute;left:0;top:0}
+
+/* ---------- blocos de funcionalidades ---------- */
+section{position:relative}
+.sec{padding:110px 0}
+.sec-h{text-align:center;max-width:760px;margin:0 auto 56px}
+.sec-h h2{font-size:clamp(34px,4.6vw,58px);font-weight:700;margin:14px 0 14px}
+.sec-h p{font-size:19px;color:var(--ink2);margin:0}
+.feat{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.feat:first-of-type{border-top:0}
+.feat.rev .ft{order:2}
+.ft h3{font-size:clamp(28px,3.2vw,40px);font-weight:700;margin:12px 0 14px}
+.ft p{color:var(--ink2);font-size:18px;margin:0 0 16px}
+.ft ul{list-style:none;padding:0;margin:0 0 18px}
+.ft li{padding:6px 0 6px 30px;position:relative}
+.ft li::before{content:"";position:absolute;left:0;top:10px;width:18px;height:18px;border-radius:6px;background:var(--pinXL) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23166534' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat}
+.ft a.more{font-weight:700;color:var(--pin);text-decoration:none}
+@media (prefers-color-scheme:dark){.ft a.more{color:var(--pinL)}}
+.ft a.more:hover{text-decoration:underline}
+.art{position:relative;aspect-ratio:1.18;border-radius:22px;overflow:hidden;background:var(--k,#e8f6ee)}
+.art .in{position:absolute;inset:0}
+@media (max-width:860px){.feat{grid-template-columns:1fr;gap:28px}.feat.rev .ft{order:0}}
+/* peças das ilustrações (cores fixas, como imagens) */
+.pc{position:absolute;background:#fff;border-radius:8px;box-shadow:0 8px 24px -8px rgba(16,38,27,.3);padding:12px 14px;font:13px/1.4 Figtree;color:#1d2a23}
+.pc b{display:block;font-size:14px;margin-bottom:3px}
+.rv .pc{opacity:0;transform:translateY(24px) rotate(var(--rot,0deg));transition:opacity .6s var(--d,0s),transform .7s var(--d,0s) cubic-bezier(.2,.8,.3,1.2)}
+.rv.on .pc{opacity:1;transform:translateY(0) rotate(var(--rot,0deg))}
+.mic{display:flex;align-items:center;gap:8px}
+.mic i{width:30px;height:30px;border-radius:50%;background:#e2775f;display:flex;align-items:center;justify-content:center;flex:none}
+.wave{display:flex;gap:2px;align-items:center;height:24px}
+.wave span{width:3px;background:#e2775f;border-radius:2px;animation:wv 1s ease-in-out infinite}
+@keyframes wv{50%{height:4px!important}}
+.brw{position:absolute;left:8%;top:9%;width:84%;height:62%;background:#fff;border-radius:10px;box-shadow:0 14px 40px -12px rgba(0,0,0,.3);overflow:hidden}
+.brw .bt0{height:28px;background:#eef1ee;display:flex;align-items:center;gap:5px;padding:0 10px}
+.brw .bt0 i{width:8px;height:8px;border-radius:50%;background:#cfd6d1}
+.brw .bt0 span{margin-left:10px;flex:1;height:14px;border-radius:7px;background:#fff}
+.brw .ext{position:absolute;right:10px;top:4px;width:22px;height:20px;border-radius:5px;background:linear-gradient(140deg,#4ade80,#166534)}
+.pop{position:absolute;right:10px;top:34px;width:180px;background:#fff;border:1px solid #e3e8e4;border-radius:10px;box-shadow:0 10px 30px -10px rgba(0,0,0,.3);padding:10px;font:12px/1.35 Figtree;color:#1d2a23}
+.pop .bt1{margin-top:8px;background:#166534;color:#fff;border-radius:6px;text-align:center;padding:6px;font-weight:700}
+.sk{position:absolute;inset:0;width:100%;height:100%}
+.sk path{stroke-dasharray:600;stroke-dashoffset:600}
+.rv.on .sk path{animation:draw 2.2s .4s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- para quem ---------- */
+.uses{background:var(--cream)}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.uc{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.uc:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(16,38,27,.35)}
+.uc .th{height:150px;position:relative;background:var(--k);overflow:hidden}
+.uc .th .pc{padding:7px 9px;font-size:10.5px;border-radius:6px}
+.uc .th .pc b{font-size:11px;margin:0}
+.uc .tx{padding:16px 18px 18px}
+.uc h3{font-size:20px;margin:0 0 4px}
+.uc p{margin:0;color:var(--ink2);font-size:15px;line-height:1.45}
+
+/* ---------- valores ---------- */
+.vals{padding:44px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.vals .w{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.vals b{display:block;font:700 19px/1.2 var(--disp);margin-bottom:4px}
+.vals span{color:var(--ink2);font-size:14.5px}
+.vals svg{width:30px;height:30px;color:var(--pin);margin-bottom:8px}
+@media (prefers-color-scheme:dark){.vals svg{color:var(--pinL)}}
+@media (max-width:760px){.vals .w{grid-template-columns:1fr 1fr}}
+
+/* ---------- modelos ---------- */
+.tpl-row{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 24px 24px;margin:0 -24px;scrollbar-width:thin}
+.tp{flex:0 0 280px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tp .th{height:170px;background:var(--k);position:relative}
+.tp .tx{padding:14px 16px 16px}.tp h3{font-size:19px;margin:0 0 4px}.tp p{margin:0;color:var(--ink2);font-size:14.5px;line-height:1.45}
+.mini-col{position:absolute;top:18px;width:26%;bottom:18px;background:rgba(255,255,255,.55);border-radius:6px;padding:6px}
+.mini-col i{display:block;height:20px;background:#fff;border-radius:4px;margin-bottom:5px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* ---------- aparelhos ---------- */
+.devs{display:flex;align-items:flex-end;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
+.mon{width:min(560px,100%)}
+.mon .sc{border:12px solid #1d2a23;border-bottom-width:16px;border-radius:14px;aspect-ratio:16/10;overflow:hidden;background:#f6f4ee}
+.mon .sc img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.mon .st{width:120px;height:46px;margin:0 auto;background:linear-gradient(#2b3a32,#1d2a23);clip-path:polygon(28% 0,72% 0,86% 100%,14% 100%)}
+.tab{width:250px;aspect-ratio:3/4;border:12px solid #1d2a23;border-radius:22px;overflow:hidden;background:#f6f4ee;position:relative}
+.pho{width:130px;aspect-ratio:9/19;border:8px solid #1d2a23;border-radius:22px;overflow:hidden;background:#f6f4ee;position:relative}
+.scr{position:absolute;inset:0;background:#f6f4ee radial-gradient(#d9d4c4 1px,transparent 1.1px) 0 0/14px 14px}
+.scr .pc{padding:6px 8px;font-size:9.5px;border-radius:5px}
+
+/* ---------- web clipper ---------- */
+.clip{background:linear-gradient(160deg,#14532d,#0f3d22);color:#fff;border-radius:28px;padding:64px;display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center;overflow:hidden;position:relative}
+.clip h2{font-size:clamp(32px,4vw,50px);margin:14px 0}
+.clip p{color:#cfe9d9;font-size:18px}
+.clip .eyebrow{background:rgba(255,255,255,.12);color:#bbf7d0}
+.clip .bt.a{background:#4ade80;color:#0f3d22}
+.clip .bt.o{color:#fff}
+.clip .steps{counter-reset:s;list-style:none;padding:0;margin:20px 0 26px}
+.clip .steps li{counter-increment:s;padding:6px 0 6px 40px;position:relative;color:#e2f5ea}
+.clip .steps li::before{content:counter(s);position:absolute;left:0;top:5px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.clip .art{background:rgba(255,255,255,.08)}
+@media (max-width:860px){.clip{grid-template-columns:1fr;padding:36px 26px}}
+
+/* ---------- final e rodapé ---------- */
+.final{text-align:center;padding:120px 0;background:radial-gradient(ellipse at 50% 120%,#bbf7d0 0,transparent 60%)}
+@media (prefers-color-scheme:dark){.final{background:radial-gradient(ellipse at 50% 120%,#14532d 0,transparent 60%)}}
+.final h2{font-size:clamp(38px,6vw,76px);font-weight:700;margin:0 auto 18px;max-width:880px}
+.final p{font-size:20px;color:var(--ink2);margin:0 0 30px}
+.tree{width:84px;height:84px;margin:0 auto 18px}
+footer{background:#0f2219;color:#b9cdc2;padding:64px 0 34px;font-size:15px}
+footer .g{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:30px}
+footer h4{color:#fff;font:700 14px/1 Figtree;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 14px}
+footer a{display:block;text-decoration:none;padding:4px 0;color:#b9cdc2}
+footer a:hover{color:#fff}
+footer .logo{color:#fff;margin-bottom:12px}
+footer .cp{border-top:1px solid #ffffff1a;margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13.5px}
+@media (max-width:860px){footer .g{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv .pc{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar"><div class="w">
+  <a class="logo" href="#topo" aria-label="SpruceNote, início">
+    <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#166534"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#lg)"/><path d="M32 11 21 25h6l-9 11h7l-9 11h32l-9-11h7l-9-11h6z" fill="#fff"/><rect x="29.5" y="47" width="5" height="7" rx="1.5" fill="#fff" opacity=".85"/></svg>
+    SpruceNote <small>da EduSpruce</small>
+  </a>
+  <nav class="nav" id="nav">
+    <a href="#funcionalidades">Funcionalidades</a>
+    <a href="#para-quem">Para quem</a>
+    <a href="#modelos">Modelos</a>
+    <a href="#web-clipper">Web Clipper</a>
+    <a href="#aparelhos">Aparelhos</a>
+  </nav>
+  <span class="sp"></span>
+  <a class="t" href="../?landing">EduSpruce</a>
+  <a class="bt a s" href="https://eduspruce.pt/"><span>Abrir<span class="hs"> o SpruceNote</span></span></a>
+  <button class="menu" id="menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<main id="topo">
+<!-- ===================== HERÓI ===================== -->
+<section class="hero"><div class="w">
+  <span class="eyebrow">Quadros visuais para a escola</span>
+  <h1>Onde as ideias da escola <em>ganham forma</em></h1>
+  <p class="lead">Junte notas, tarefas, imagens, ligações, ficheiros e desenhos num quadro onde vê tudo de uma vez — da ideia solta ao projeto acabado.</p>
+  <div class="cta">
+    <a class="bt a" href="https://eduspruce.pt/">Começar a criar →</a>
+    <a class="bt o" href="#funcionalidades">Ver como funciona</a>
+  </div>
+  <p class="nota">Incluído na EduSpruce · Entra com a sua conta Google · Sem anúncios</p>
+
+  <div class="demo-wrap">
+    <div class="flt f1"><b style="background:#e2775f">✎</b>Arraste os cartões</div>
+    <div class="flt f2"><b style="background:#38bdf8">＋</b>Experimente aqui mesmo</div>
+    <div class="demo-sz" id="dsz"><div class="demo" id="demo">
+      <div class="dtop"><span class="dots"><i></i><i></i><i></i></span><span class="dcr">Início › <b>Visita de estudo às Fajãs</b></span><span class="dsp"></span><span class="dchip">Guardado</span></div>
+      <div class="dbody">
+        <div class="dside" id="dside">
+          <button class="dtool" data-t="nota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h6"/></svg>Nota</button>
+          <button class="dtool" data-t="tarefas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="5" height="5" rx="1"/><path d="m4 15 2 2 3-4M11 6.5h10M11 15h10"/></svg>Tarefas</button>
+          <button class="dtool" data-t="ligacao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>Ligação</button>
+          <button class="dtool" data-t="cor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="4"/><circle cx="16" cy="9" r="3"/><circle cx="11" cy="17" r="4"/></svg>Cor</button>
+          <button class="dtool" data-t="quadro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><rect x="7" y="7" width="4" height="4"/><rect x="13" y="7" width="4" height="10"/><rect x="7" y="13" width="4" height="4"/></svg>Quadro</button>
+          <button class="dtool" data-t="comentario"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>Comentário</button>
+        </div>
+        <div class="dcv" id="dcv">
+          <svg class="ln" id="dln"></svg>
+          <div class="dc" data-id="a" data-c style="--k:#22a35a;left:4%;top:6%;width:230px;--d:.2s"><h4 class="ed" contenteditable="true" spellcheck="false">Visita às Fajãs 🌊</h4><p class="ed" contenteditable="true" spellcheck="false">9.º B · 14 de maio · saída às 8h30 do portão principal.</p></div>
+          <div class="dc dtodo" data-id="b" style="left:4%;top:38%;width:230px;--d:.45s"><h4>Antes de partir</h4><div class="dprog"><b style="width:50%"></b></div><ul><li class="ok"><i></i><span>Autorizações dos pais</span></li><li class="ok"><i></i><span>Reservar autocarro</span></li><li><i></i><span>Guião de observação</span></li><li><i></i><span>Lanche e protetor solar</span></li></ul></div>
+          <div class="dc dimg" data-id="c" style="left:33%;top:6%;width:220px;--d:.7s"><svg viewBox="0 0 220 150" aria-hidden="true"><defs><linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3f5"/><stop offset="1" stop-color="#eaf6fb"/></linearGradient></defs><rect width="220" height="150" fill="url(#sea)"/><circle cx="178" cy="34" r="14" fill="#fde68a"/><path d="M0 60 L40 30 L85 56 L120 22 L170 70 L220 48 V100 H0Z" fill="#4d8b5f"/><path d="M0 92 Q50 84 100 96 T220 90 V150 H0Z" fill="#3b82c4"/><path d="M30 104 h40 M120 112 h50" stroke="#fff" stroke-width="2" opacity=".6"/><rect x="58" y="78" width="18" height="12" fill="#fff"/><path d="M56 78 l11-8 11 8z" fill="#c2410c"/></svg><small class="ed" contenteditable="true" spellcheck="false">Fajã dos Cubres — ponto de encontro</small></div>
+          <div class="dc dcol" data-id="d" style="left:62%;top:6%;width:230px;--d:.95s"><b>Grupos</b><div class="k">🟢 Grupo 1 — flora</div><div class="k">🔵 Grupo 2 — aves marinhas</div><div class="k">🟠 Grupo 3 — geologia</div></div>
+          <div class="dc" data-id="e" style="left:36%;top:55%;width:220px;--d:1.2s"><div class="dlink"><span class="f">G</span><div><b style="font-size:13.5px">Guião da visita</b><br><small>docs da turma · PDF</small></div></div></div>
+          <div class="dc dsw" data-id="f" style="left:64%;top:52%;--d:1.4s"><div style="background:#3b82c4"></div><small>Azul atlântico</small></div>
+          <div class="dc dboard" data-id="g" style="left:82%;top:52%;--d:1.6s"><div class="bi">📸</div><b>Fotografias</b><small>24 elementos</small></div>
+          <div class="dc dcm" data-id="h" style="left:62%;top:76%;width:250px;--d:1.8s"><span class="av">AM</span><b style="font-size:12.5px">Prof.ª A.</b><p style="margin-top:4px">Junto o mapa das fajãs ao guião?</p></div>
+          <svg class="cursor" id="cur" viewBox="0 0 24 24" style="left:70%;top:90%"><path d="M4 2l16 9-7 2-3 7z" fill="#1d2a23" stroke="#fff" stroke-width="1.5"/></svg>
+          <span class="dhint">Arraste cartões · arraste ferramentas da barra · clique nos textos</span>
+        </div>
+      </div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ===================== VALORES ===================== -->
+<div class="vals"><div class="w">
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><b>Os seus dados, na sua conta</b><span>Guardados de forma segura, sem publicidade</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="1"/><rect x="17" y="8" width="5" height="10" rx="1"/><path d="M6 18h6"/></svg><b>Em qualquer aparelho</b><span>Computador, tablet ou telemóvel</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/></svg><b>Feito para professores</b><span>Pensado para aulas, turmas e projetos</span></div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><b>Em português</b><span>Feito nos Açores para escolas portuguesas</span></div>
+</div></div>
+
+<!-- ===================== FUNCIONALIDADES ===================== -->
+<section class="sec" id="funcionalidades"><div class="w">
+  <div class="sec-h"><span class="eyebrow">Funcionalidades</span><h2>Tudo o que a sua ideia precisa, num só quadro</h2><p>Comece com uma nota solta. Acabe com um plano que toda a gente percebe.</p></div>
+
+  <div class="feat rv">
+    <div class="ft">
+      <span class="eyebrow">Captar</span>
+      <h3>Guarde a ideia antes que fuja</h3>
+      <p>Uma frase no intervalo, um esboço no fim da aula, uma gravação a caminho de casa. No SpruceNote tudo cabe no mesmo quadro, no sítio onde faz sentido.</p>
+      <ul><li>Notas com títulos, listas, destaques e ligações</li><li>Desenho à mão livre, também com caneta no tablet</li><li>Áudio, imagens e ficheiros arrastados para o quadro</li></ul>
+    </div>
+    <div class="art" style="--k:#e7f6ec"><div class="in">
+      <div class="pc" style="left:8%;top:10%;width:44%;--d:.1s;--rot:-3deg"><b>Ideia para a aula 🎯</b>Começar com uma pergunta: «Porque é que as baleias passam pelos Açores?»</div>
+      <div class="pc" style="left:56%;top:16%;width:36%;--d:.3s;--rot:2deg"><div class="mic"><i><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></i><div class="wave"><span style="height:8px"></span><span style="height:18px;animation-delay:.1s"></span><span style="height:12px;animation-delay:.2s"></span><span style="height:22px;animation-delay:.3s"></span><span style="height:10px;animation-delay:.4s"></span><span style="height:16px;animation-delay:.5s"></span><span style="height:7px;animation-delay:.6s"></span></div></div><small style="color:#6b7a72">Nota de voz · 0:42</small></div>
+      <div class="pc" style="left:12%;top:50%;width:48%;height:40%;padding:0;overflow:hidden;--d:.5s;--rot:1.5deg"><svg class="sk" viewBox="0 0 200 120" fill="none" stroke="#1d2a23" stroke-width="2.4" stroke-linecap="round"><path d="M20 80 C40 40, 70 40, 90 70 S140 100, 170 50"/><path d="M150 40 l22 8 -8 20"/><path d="M30 100 h50"/><circle cx="120" cy="35" r="10"/></svg></div>
+      <div class="pc" style="left:64%;top:56%;width:28%;--d:.7s;--rot:-2deg;background:#fff8e1"><b>Lembrar</b>Levar o mapa grande</div>
+    </div></div>
+  </div>
+
+  <div class="feat rev rv">
+    <div class="ft">
+      <span class="eyebrow">Recolher</span>
+      <h3>Traga a internet para o seu quadro</h3>
+      <p>Encontrou um vídeo, um artigo ou uma imagem perfeita para a próxima aula? Com o SpruceNote Web Clipper guarda-a com um clique, já no quadro certo.</p>
+      <ul><li>Guarde páginas, imagens e texto selecionado</li><li>Escolha o quadro antes de guardar</li><li>Cole endereços e imagens diretamente no quadro</li></ul>
+      <a class="more" href="#web-clipper">Conhecer o Web Clipper →</a>
+    </div>
+    <div class="art" style="--k:#e3f1fb"><div class="in">
+      <div class="brw pcx"><div class="bt0"><i></i><i></i><i></i><span></span></div><div class="ext"></div>
+        <div style="padding:14px"><div style="height:12px;width:60%;background:#e6ebe8;border-radius:6px;margin-bottom:10px"></div><div style="height:90px;border-radius:8px;background:linear-gradient(135deg,#bfe3f5,#4d8b5f)"></div><div style="height:8px;width:90%;background:#eef1ef;border-radius:4px;margin-top:10px"></div><div style="height:8px;width:75%;background:#eef1ef;border-radius:4px;margin-top:6px"></div></div>
+        <div class="pop"><b style="font-size:12.5px">Guardar no SpruceNote</b><div style="margin-top:6px;padding:5px 7px;border:1px solid #e3e8e4;border-radius:6px">📋 Ciências — 8.º A ▾</div><div class="bt1">Guardar</div></div>
+      </div>
+      <div class="pc" style="left:14%;top:70%;width:44%;--d:.5s;--rot:-2deg"><div class="dlink"><span class="f" style="width:30px;height:30px;border-radius:7px;background:#166534;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center">C</span><div><b style="margin:0">Cetáceos dos Açores</b><small style="color:#22a35a">guardado agora</small></div></div></div>
+    </div></div>
+  </div>
+
+  <div class="feat rv">
+    <div class="ft">
+      <span class="eyebrow">Organizar</span>
+      <h3>Veja o panorama e os pormenores</h3>
+      <p>Arrume cartões em colunas, ligue ideias com setas e abra quadros dentro de quadros. Um ano letivo inteiro fica a um clique — e cada aula também.</p>
+      <ul><li>Colunas para empilhar e ordenar cartões</li><li>Setas e linhas com etiquetas entre ideias</li><li>Quadros dentro de quadros, com caminho no topo</li><li>Cores, títulos, tabelas e listas de tarefas</li></ul>
+    </div>
+    <div class="art" style="--k:#fdf2e3"><div class="in">
+      <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 100 85" preserveAspectRatio="none" fill="none" stroke="#7a8a81" stroke-width=".5" stroke-dasharray="1.5 1.5"><path d="M37 22 Q48 18 56 26"/><path d="M37 50 Q50 60 56 56"/></svg>
+      <div class="pc" style="left:7%;top:10%;width:30%;padding:9px;background:#ece9df;--d:.1s"><b style="font-size:12.5px">1.º Período</b><div style="background:#fff;border-radius:5px;padding:6px;margin-top:5px;font-size:11.5px">Sistema solar</div><div style="background:#fff;border-radius:5px;padding:6px;margin-top:5px;font-size:11.5px">A Terra</div><div style="background:#fff;border-radius:5px;padding:6px;margin-top:5px;font-size:11.5px">Rochas</div></div>
+      <div class="pc" style="left:7%;top:58%;width:30%;text-align:center;--d:.3s"><div style="width:42px;height:42px;margin:0 auto 4px;border-radius:10px;background:linear-gradient(140deg,#4ade80,#166534);display:flex;align-items:center;justify-content:center;font-size:20px">🪐</div><b style="font-size:12px;margin:0">Projeto final</b></div>
+      <div class="pc" style="left:56%;top:12%;width:36%;border-top:4px solid #f39200;--d:.5s"><b>Aula 12 — Rochas</b>Recolher amostras no recreio e classificar em grupo.</div>
+      <div class="pc" style="left:56%;top:50%;width:36%;--d:.7s"><b>Tarefas</b><span style="color:#22a35a">✔</span> Preparar amostras<br><span style="color:#22a35a">✔</span> Ficha de registo<br>☐ Lupas</div>
+    </div></div>
+  </div>
+
+  <div class="feat rev rv">
+    <div class="ft">
+      <span class="eyebrow">Partilhar</span>
+      <h3>Trabalhe com a escola à sua volta</h3>
+      <p>Mostre um quadro numa reunião, deixe comentários aos colegas e organize o jornal escolar no JornalNote, um espaço à parte só para ele.</p>
+      <ul><li>Comentários com nome e hora em qualquer cartão</li><li>JornalNote para a redação do jornal escolar</li><li>Exportar para texto e guardar cópias</li></ul>
+    </div>
+    <div class="art" style="--k:#efeafb"><div class="in">
+      <div class="pc" style="left:8%;top:10%;width:50%;--d:.1s;--rot:-1.5deg"><b>📰 Jornal «Voz da Escola» — n.º 3</b>Fecho da edição: sexta-feira</div>
+      <div class="pc" style="left:50%;top:32%;width:42%;background:#fff8e1;--d:.3s;--rot:2deg"><span style="display:inline-flex;width:22px;height:22px;border-radius:50%;background:#8e6ac8;color:#fff;font-size:10px;font-weight:800;align-items:center;justify-content:center;margin-right:6px">JS</span><b style="display:inline">Redação</b><div style="margin-top:4px">A entrevista à cozinheira já está revista ✨</div></div>
+      <div class="pc" style="left:10%;top:44%;width:34%;--d:.5s"><b>Entrevistas</b>2 de 3 prontas<div class="dprog"><b style="width:66%;margin:0"></b></div></div>
+      <div class="pc" style="left:22%;top:70%;width:56%;--d:.7s;--rot:-1deg"><b>Fotografias da feira de ciências</b><div style="display:flex;gap:6px;margin-top:6px"><i style="flex:1;height:34px;border-radius:4px;background:#bfe3f5"></i><i style="flex:1;height:34px;border-radius:4px;background:#bbf7d0"></i><i style="flex:1;height:34px;border-radius:4px;background:#fde68a"></i></div></div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ===================== PARA QUEM ===================== -->
+<section class="sec uses" id="para-quem"><div class="w">
+  <div class="sec-h"><span class="eyebrow">Para quem</span><h2>Um quadro para cada coisa que acontece na escola</h2><p>Professores, diretores de turma, coordenadores e equipas de projeto usam o SpruceNote para pôr ordem no que fazem.</p></div>
+  <div class="ugrid" id="ugrid"></div>
+</div></section>
+
+<!-- ===================== MODELOS ===================== -->
+<section class="sec" id="modelos"><div class="w">
+  <div class="sec-h"><span class="eyebrow">Modelos</span><h2>Comece com meio caminho feito</h2><p>Escolha um modelo, mude o que quiser e fique com um quadro pronto em segundos.</p></div>
+  <div class="tpl-row" id="tpls"></div>
+</div></section>
+
+<!-- ===================== WEB CLIPPER ===================== -->
+<section class="sec" id="web-clipper" style="padding-top:20px"><div class="w">
+  <div class="clip">
+    <div>
+      <span class="eyebrow">SpruceNote Web Clipper</span>
+      <h2>Um clique e está no seu quadro</h2>
+      <p>A extensão para o Chrome guarda páginas, imagens e texto da internet diretamente no SpruceNote, enquanto prepara as aulas.</p>
+      <ol class="steps"><li>Descarregue a extensão e descompacte-a</li><li>No Chrome, abra <b>chrome://extensions</b>, ligue o «Modo de programador» e escolha «Carregar expandida»</li><li>Entre com a sua conta e escolha o quadro</li></ol>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="bt a" href="https://eduspruce.pt/extensao/sprucenote-web-clipper.zip">Descarregar a extensão</a><a class="bt o" href="https://eduspruce.pt/">Abrir o SpruceNote</a></div>
+    </div>
+    <div class="art rv" style="aspect-ratio:1.1"><div class="in">
+      <div class="pc" style="left:8%;top:8%;width:84%;height:48%;padding:0;overflow:hidden;--d:.1s"><div style="height:24px;background:#eef1ee;display:flex;align-items:center;gap:5px;padding:0 8px"><i style="width:7px;height:7px;border-radius:50%;background:#cfd6d1"></i><i style="width:7px;height:7px;border-radius:50%;background:#cfd6d1"></i><i style="width:7px;height:7px;border-radius:50%;background:#cfd6d1"></i></div><div style="padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px"><i style="height:70px;border-radius:6px;background:linear-gradient(135deg,#fde68a,#f39200);outline:3px solid #4ade80;outline-offset:2px"></i><div><i style="display:block;height:8px;background:#eef1ef;border-radius:4px;margin-bottom:6px"></i><i style="display:block;height:8px;width:80%;background:#eef1ef;border-radius:4px;margin-bottom:6px"></i><i style="display:block;height:8px;width:60%;background:#eef1ef;border-radius:4px"></i></div></div></div>
+      <div class="pc" style="left:30%;top:62%;width:60%;--d:.5s;--rot:-2deg"><b>✓ Guardado em «Plano de aula — 6.º C»</b><span style="color:#6b7a72">Imagem e ligação da página</span></div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ===================== APARELHOS ===================== -->
+<section class="sec" id="aparelhos" style="padding-top:60px"><div class="w">
+  <div class="sec-h"><span class="eyebrow">Aparelhos</span><h2>Na sala, em casa ou a caminho</h2><p>O SpruceNote abre no navegador do computador, do tablet e do telemóvel. Entre com a sua conta e encontra os seus quadros onde os deixou.</p></div>
+  <div class="devs">
+    <div class="mon"><div class="sc"><img src="../img/sprucenote.webp" alt="O SpruceNote num computador, com um quadro de notas" loading="lazy"></div><div class="st"></div></div>
+    <div class="tab"><div class="scr">
+      <div class="pc" style="left:8%;top:6%;width:56%;border-top:3px solid #22a35a"><b style="font-size:10.5px">Plano da semana</b>Seg — Rochas</div>
+      <div class="pc" style="left:30%;top:28%;width:62%;background:#ece9df"><b style="font-size:10px">A fazer</b><div style="background:#fff;border-radius:3px;padding:3px 5px;margin-top:3px">Corrigir fichas</div><div style="background:#fff;border-radius:3px;padding:3px 5px;margin-top:3px">Reunião DT</div></div>
+      <div class="pc" style="left:8%;top:58%;width:50%;height:26%;padding:0;overflow:hidden"><svg viewBox="0 0 100 60" style="width:100%;height:100%" fill="none" stroke="#1d2a23" stroke-width="1.8" stroke-linecap="round"><path d="M10 45 C25 15 45 15 55 35 S80 50 90 20"/></svg></div>
+    </div></div>
+    <div class="pho"><div class="scr">
+      <div class="pc" style="left:8%;top:6%;width:84%"><b style="font-size:10px">Ideias 💡</b>Feira do livro</div>
+      <div class="pc" style="left:8%;top:26%;width:84%"><b style="font-size:10px">Tarefas</b>☑ Cartazes<br>☐ Convites</div>
+      <div class="pc" style="left:8%;top:52%;width:84%;background:#fff8e1">🎙 0:18</div>
+    </div></div>
+  </div>
+</div></section>
+
+<!-- ===================== FINAL ===================== -->
+<section class="final"><div class="w">
+  <svg class="tree" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4ade80"/><stop offset="1" stop-color="#166534"/></linearGradient></defs><rect width="64" height="64" rx="16" fill="url(#lg2)"/><path d="M32 11 21 25h6l-9 11h7l-9 11h32l-9-11h7l-9-11h6z" fill="#fff"/><rect x="29.5" y="47" width="5" height="7" rx="1.5" fill="#fff" opacity=".85"/></svg>
+  <h2>A sua próxima grande ideia começa num quadro em branco</h2>
+  <p>O SpruceNote faz parte da EduSpruce. Entre com a sua conta e comece já.</p>
+  <a class="bt a" href="https://eduspruce.pt/">Começar a criar →</a>
+</div></section>
+</main>
+
+<footer><div class="w">
+  <div class="g">
+    <div><a class="logo" href="#topo"><svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#22a35a"/><path d="M32 11 21 25h6l-9 11h7l-9 11h32l-9-11h7l-9-11h6z" fill="#fff"/></svg>SpruceNote</a><p style="margin:0;max-width:280px">Quadros visuais para planear aulas, projetos, reuniões e o jornal escolar.</p></div>
+    <div><h4>Começar</h4><a href="#modelos">Modelos</a><a href="#para-quem">Ideias de uso</a><a href="#funcionalidades">Funcionalidades</a><a href="https://eduspruce.pt/">Abrir o SpruceNote</a></div>
+    <div><h4>Transferir</h4><a href="#web-clipper">Web Clipper para o Chrome</a><a href="#aparelhos">Computador, tablet e telemóvel</a></div>
+    <div><h4>Apoio</h4><a href="../manual/EduSpruce-Manual.pdf">Manual</a><a href="../privacidade.html">Privacidade</a><a href="../termos.html">Termos</a></div>
+    <div><h4>EduSpruce</h4><a href="../?landing">Página da EduSpruce</a><a href="https://eduspruce.pt/">Abrir a app</a></div>
+  </div>
+  <div class="cp"><span>© 2026 EduSpruce · SpruceNote</span><span>Feito nos Açores 🌲</span></div>
+</div></footer>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+/* barra de topo */
+addEventListener('scroll',()=>$('#bar').classList.toggle('sc',scrollY>8),{passive:true});
+$('#menu').onclick=()=>$('#nav').classList.toggle('on');
+$$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('on'));
+
+/* revelar ao deslizar */
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.25}):null;
+const watch=()=>$$('.rv:not(.on)').forEach(el=>io?io.observe(el):el.classList.add('on'));
+
+/* ---------- para quem: cartões ---------- */
+const P=(l,t,w,html,o='')=>`<div class="pc" style="left:${l}%;top:${t}%;width:${w}%;${o}">${html}</div>`;
+const USES=[
+ ['Planear aulas','Objetivos, atividades, recursos e avaliação de cada aula num relance.','#e7f6ec',P(8,14,40,'<b>Objetivos</b>Identificar rochas')+P(52,10,40,'<b>Atividades</b>☑ Aquecimento<br>☐ Trabalho de grupo')+P(14,58,36,'🔗 Vídeo da aula','border-top:3px solid #f39200')],
+ ['Projetos e PAP','Fases, prazos, materiais e evidências de cada projeto ou prova de aptidão.','#fdf2e3',P(6,12,28,'<b>A fazer</b>Guião','background:#ece9df')+P(36,12,28,'<b>Em curso</b>Protótipo','background:#ece9df')+P(66,12,28,'<b>Feito</b>Tema','background:#ece9df')+P(20,60,56,'📎 Relatório-final.pdf')],
+ ['Direção de turma','Assuntos para o conselho de turma, contactos a fazer e decisões tomadas.','#e3f1fb',P(8,12,46,'<b>Conselho de turma</b>Pontos a tratar')+P(58,26,34,'☐ Ligar ao EE','background:#fff8e1')+P(14,58,44,'<b>Decisões</b>Plano de apoio')],
+ ['Jornal escolar','Artigos, entrevistas e fotografias de cada edição no JornalNote.','#efeafb',P(8,10,56,'<b>📰 Edição n.º 3</b>Fecho: sexta')+P(56,40,36,'<b>Entrevistas</b>2 de 3')+P(10,60,40,'📷 Feira de ciências')],
+ ['Visitas de estudo','Autorizações, horários, grupos e guiões num só quadro.','#e6f4f1',P(8,12,42,'<b>Saída 8h30</b>Portão principal')+P(54,12,38,'☑ Autorizações<br>☐ Lanche')+P(20,56,50,'🗺 Percurso da visita','border-top:3px solid #3b82c4')],
+ ['Reuniões','Ordem de trabalhos, notas da reunião e o que fica para cada pessoa.','#f3f1e9',P(8,12,48,'<b>Ordem de trabalhos</b>1. Avaliação')+P(54,44,38,'💬 «Concordo»','background:#fff8e1')+P(10,58,40,'☐ Enviar ata')],
+ ['Clubes e eventos','Ideias, tarefas e cartazes para clubes, feiras e dias especiais.','#fde8e4',P(10,12,40,'<b>Feira do livro</b>Março')+P(54,14,36,'<div style="height:34px;border-radius:4px;background:linear-gradient(135deg,#fde68a,#e2775f)"></div>')+P(14,60,48,'☐ Cartazes ☐ Convites')],
+ ['Moodboards','Cores, imagens e referências para cartazes, cenários e trabalhos de artes.','#fbf6dc',P(8,14,22,'<div style="height:40px;background:#3b82c4;border-radius:3px"></div>')+P(32,14,22,'<div style="height:40px;background:#e2775f;border-radius:3px"></div>')+P(56,14,22,'<div style="height:40px;background:#fde68a;border-radius:3px"></div>')+P(14,62,60,'<b>Estilo</b>Calmo, natural')],
+ ['Investigação','Pergunta, fontes, notas e conclusões para trabalhos de pesquisa.','#eef3e1',P(8,10,60,'<b>Pergunta</b>Porque migram as aves?')+P(8,48,40,'🔗 Artigo científico')+P(52,48,40,'<b>Conclusões</b>…')],
+ ['Escrita e histórias','Personagens, cenas e linhas do tempo para escrita criativa e teatro.','#f6eef6',P(8,12,36,'<b>Personagem</b>Ana, 12 anos')+P(50,12,42,'<b>Cena 1</b>O porto ao amanhecer')+P(20,58,56,'⟶ Início · Meio · Fim')],
+ ['Planeamento anual','Períodos, unidades e momentos de avaliação do ano letivo inteiro.','#e7eef8',P(6,12,28,'<b>1.º P</b>3 unidades','background:#ece9df')+P(36,12,28,'<b>2.º P</b>2 unidades','background:#ece9df')+P(66,12,28,'<b>3.º P</b>Projeto','background:#ece9df')+P(24,62,50,'📅 Testes marcados')]
+];
+$('#ugrid').innerHTML=USES.map(([t,d,k,h])=>`<a class="uc" href="https://eduspruce.pt/"><div class="th rv" style="--k:${k}">${h}</div><div class="tx"><h3>${t}</h3><p>${d}</p></div></a>`).join('');
+
+/* ---------- modelos ---------- */
+const col=(l,c)=>`<div class="mini-col" style="left:${l}%;background:${c||'rgba(255,255,255,.55)'}"><i></i><i></i><i style="width:70%"></i></div>`;
+const TPLS=[
+ ['Plano de projeto','Colunas «A fazer», «Em curso» e «Feito».','#fdf2e3',col(6)+col(37)+col(68)],
+ ['Plano de aula','Identificação, objetivos, sumário, atividades e avaliação.','#e7f6ec',P(8,14,40,'<b>Objetivos</b>')+P(52,14,40,'<b>Sumário</b>')+P(8,56,40,'☐ Atividades')+P(52,56,40,'<b>Avaliação</b>','border-top:3px solid #f39200')],
+ ['Moodboard','Paleta de cores, sensações e referências.','#fbf6dc',['#166534','#4ade80','#fde68a','#e2775f'].map((c,i)=>P(6+i*23,16,20,`<div style="height:46px;background:${c};border-radius:3px"></div>`)).join('')+P(18,64,60,'<b>Sensação</b>Fresco')],
+ ['Storyboard','Seis cenas, cada uma com esboço e descrição.','#efeafb',[0,1,2].map(i=>P(6+i*31,10,27,'<div style="height:36px;background:#f1f1f1;border-radius:3px"></div>Cena '+(i+1))).join('')+[0,1,2].map(i=>P(6+i*31,55,27,'<div style="height:36px;background:#f1f1f1;border-radius:3px"></div>Cena '+(i+4))).join('')],
+ ['Brainstorm','Uma ideia central ligada às ideias à volta.','#e3f1fb','<svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 100 60" preserveAspectRatio="none" stroke="#8a978f" stroke-width=".4"><path d="M50 30 15 12M50 30 85 12M50 30 15 48M50 30 85 48"/></svg>'+P(36,40,28,'<b>Ideia central</b>','border-top:3px solid #22a35a')+P(4,8,24,'Ideia')+P(72,8,24,'Ideia')+P(4,70,24,'Ideia')+P(72,70,24,'Ideia')],
+ ['Pesquisa','Pergunta, fontes, notas, tabela e conclusões.','#eef3e1',P(8,10,84,'<b>Pergunta de investigação</b>')+P(8,46,40,'🔗 Fontes')+P(52,46,40,'<b>Conclusões</b>')],
+ ['Semana','Uma coluna por dia, com tarefas.','#e7eef8',[0,1,2,3,4].map(i=>`<div class="mini-col" style="left:${3+i*19.4}%;width:17%"><i></i><i style="width:60%"></i></div>`).join('')],
+ ['Reunião','Ordem de trabalhos, notas e próximos passos.','#f3f1e9',P(8,12,52,'<b>Ordem de trabalhos</b>')+P(56,40,36,'💬 Comentário','background:#fff8e1')+P(8,58,44,'☐ Próximos passos')]
+];
+$('#tpls').innerHTML=TPLS.map(([t,d,k,h])=>`<div class="tp"><div class="th rv" style="--k:${k}">${h}</div><div class="tx"><h3>${t}</h3><p>${d}</p></div></div>`).join('');
+watch();
+
+/* ---------- quadro de demonstração interativo ---------- */
+const cv=$('#dcv'),ln=$('#dln'),demo=$('#demo'),dsz=$('#dsz');let SC=1;
+function fitDemo(){const base=dsz.clientWidth<760?760:1120;demo.style.width=base+'px';SC=Math.min(1,dsz.clientWidth/base);dsz.parentElement.style.setProperty('--sc',SC);dsz.style.height=demo.offsetHeight*SC+'px'}
+fitDemo();
+const LINKS=[['a','b',''],['c','d','grupos'],['b','e','']];
+function box(id){const el=cv.querySelector(`.dc[data-id="${id}"]`);if(!el)return null;const r=el.getBoundingClientRect(),c=cv.getBoundingClientRect();return {x:(r.left-c.left)/SC,y:(r.top-c.top)/SC,w:r.width/SC,h:r.height/SC}}
+function edge(b,to){const cx=b.x+b.w/2,cy=b.y+b.h/2,dx=to.x-cx,dy=to.y-cy;const t=Math.min(dx?(b.w/2+5)/Math.abs(dx):1e9,dy?(b.h/2+5)/Math.abs(dy):1e9,1);return {x:cx+dx*t,y:cy+dy*t}}
+function lines(){
+  let h='';
+  for(const [a,b,lbl] of LINKS){const A=box(a),B=box(b);if(!A||!B)continue;
+    const ca={x:A.x+A.w/2,y:A.y+A.h/2},cb={x:B.x+B.w/2,y:B.y+B.h/2},p=edge(A,cb),q=edge(B,ca);
+    const dx=q.x-p.x,dy=q.y-p.y,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L;
+    h+=`<path d="M${p.x},${p.y} L${q.x},${q.y}" stroke="#6b7a72" stroke-width="2" fill="none" stroke-dasharray="${lbl?'6 5':''}"/><path d="M${q.x},${q.y} L${q.x-ux*10-uy*5},${q.y-uy*10+ux*5} L${q.x-ux*10+uy*5},${q.y-uy*10-ux*5}Z" fill="#6b7a72"/>`;
+    if(lbl){const mx=(p.x+q.x)/2,my=(p.y+q.y)/2;h+=`<rect x="${mx-28}" y="${my-10}" width="56" height="20" rx="4" fill="#fff" stroke="#e6e3da"/><text x="${mx}" y="${my+4}" text-anchor="middle" font-size="11" fill="#1d2a23" font-family="Figtree">${lbl}</text>`}
+  }
+  ln.innerHTML=h;
+}
+let dr=null,zTop=10,touched=false;
+cv.addEventListener('pointerdown',e=>{
+  const c=e.target.closest('.dc');if(!c)return;
+  if(e.target.closest('.dtodo li i')){const li=e.target.closest('li');li.classList.toggle('ok');const ul=li.parentElement,n=ul.children.length,d=ul.querySelectorAll('.ok').length;c.querySelector('.dprog b').style.width=d/n*100+'%';return}
+  if(e.target.isContentEditable&&document.activeElement===e.target)return;
+  touched=true;
+  const r=c.getBoundingClientRect(),cr=cv.getBoundingClientRect();
+  dr={c,ox:e.clientX-r.left,oy:e.clientY-r.top,cr,sx:e.clientX,sy:e.clientY,moved:false,ed:e.target.isContentEditable};
+  if(!dr.ed)e.preventDefault();
+});
+addEventListener('pointermove',e=>{
+  if(!dr)return;
+  if(!dr.moved){if(Math.hypot(e.clientX-dr.sx,e.clientY-dr.sy)<5)return;dr.moved=true;dr.c.classList.add('drag');dr.c.style.zIndex=++zTop;dr.c.style.animation='none';document.activeElement&&document.activeElement.blur&&document.activeElement.blur()}
+  const x=clamp((e.clientX-dr.cr.left-dr.ox)/SC,0,dr.cr.width/SC-dr.c.offsetWidth),y=clamp((e.clientY-dr.cr.top-dr.oy)/SC,0,dr.cr.height/SC-dr.c.offsetHeight);
+  dr.c.style.left=x+'px';dr.c.style.top=y+'px';lines();
+});
+addEventListener('pointerup',()=>{if(dr){dr.c.classList.remove('drag');dr=null}});
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+/* ferramentas: arrastar ou clicar para criar cartões */
+const NEW={
+  nota:()=>`<h4 class="ed" contenteditable="true">Nova nota</h4><p class="ed" contenteditable="true">Escreva aqui…</p>`,
+  tarefas:()=>`<h4>Tarefas</h4><div class="dprog"><b style="width:0"></b></div><ul><li><i></i><span>Primeira tarefa</span></li><li><i></i><span>Segunda tarefa</span></li></ul>`,
+  ligacao:()=>`<div class="dlink"><span class="f">W</span><div><b style="font-size:13.5px">Página guardada</b><br><small>www.exemplo.pt</small></div></div>`,
+  cor:()=>{const c=['#22a35a','#f39200','#8e6ac8','#e2775f','#38bdf8'][Math.floor(Math.random()*5)];return `<div style="background:${c}"></div><small>${c.toUpperCase()}</small>`},
+  quadro:()=>`<div class="bi">🌲</div><b>Novo quadro</b><small>0 elementos</small>`,
+  comentario:()=>`<span class="av">EU</span><b style="font-size:12.5px">Eu</b><p class="ed" contenteditable="true" style="margin-top:4px">Escreva um comentário…</p>`
+};
+const CLS={tarefas:'dtodo',cor:'dsw',quadro:'dboard',comentario:'dcm'};
+let tdr=null,nid=0;
+function addCard(t,x,y){
+  const c=document.createElement('div');c.className='dc '+(CLS[t]||'');c.dataset.id='n'+(++nid);
+  if(t==='nota'){c.dataset.c='';c.style.setProperty('--k','#38bdf8')}
+  c.style.cssText+=`;left:${x}px;top:${y}px;${['cor','quadro'].includes(t)?'':'width:210px;'}--d:0s;z-index:${++zTop}`;
+  c.innerHTML=NEW[t]();cv.appendChild(c);
+  const cw=cv.offsetWidth,ch=cv.offsetHeight;c.style.left=clamp(x,0,cw-c.offsetWidth)+'px';c.style.top=clamp(y,0,ch-c.offsetHeight)+'px';
+  const ed=c.querySelector('.ed');if(ed&&t!=='nota')setTimeout(()=>{ed.focus();document.execCommand&&document.execCommand('selectAll',false,null)},50);
+}
+$('#dside').addEventListener('pointerdown',e=>{const b=e.target.closest('.dtool');if(!b)return;e.preventDefault();touched=true;tdr={t:b.dataset.t,sx:e.clientX,sy:e.clientY,g:null}});
+addEventListener('pointermove',e=>{
+  if(!tdr)return;if(!tdr.g&&Math.hypot(e.clientX-tdr.sx,e.clientY-tdr.sy)<6)return;
+  if(!tdr.g){tdr.g=document.createElement('div');tdr.g.className='dc';tdr.g.style.cssText='position:fixed;pointer-events:none;z-index:99;opacity:.9;font-weight:700;color:#166534;padding:10px 14px;animation:none';tdr.g.textContent=$(`.dtool[data-t="${tdr.t}"]`).textContent.trim();document.body.appendChild(tdr.g)}
+  tdr.g.style.left=e.clientX-20+'px';tdr.g.style.top=e.clientY-14+'px';
+});
+addEventListener('pointerup',e=>{
+  if(!tdr)return;const t=tdr;tdr=null;const cr=cv.getBoundingClientRect();
+  if(t.g){t.g.remove();if(e.clientX>cr.left&&e.clientX<cr.right&&e.clientY>cr.top&&e.clientY<cr.bottom)addCard(t.t,(e.clientX-cr.left)/SC-20,(e.clientY-cr.top)/SC-14)}
+  else addCard(t.t,cr.width/SC*.38+Math.random()*60,cr.height/SC*.42+Math.random()*60);
+});
+
+/* cursor animado até a pessoa mexer */
+const cur=$('#cur');const path=[[30,30],[55,45],[47,78],[20,62],[70,90]];let pi=0;
+function moveCur(){if(touched){cur.style.display='none';return}const [x,y]=path[pi++%path.length];cur.style.left=x+'%';cur.style.top=y+'%';setTimeout(moveCur,1800)}
+setTimeout(moveCur,2200);
+
+addEventListener('resize',()=>{fitDemo();lines()});
+setTimeout(lines,60);setTimeout(lines,1000);setTimeout(lines,2200);
+document.fonts&&document.fonts.ready.then(lines);
+</script>
+</body>
+</html>
