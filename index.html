@@ -15,7 +15,7 @@ body{margin:0;background:var(--sky);color:var(--ink);font:400 17px/1.55 var(--bo
 img{max-width:100%;display:block;height:auto}a{color:var(--sge2)}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-.w{max-width:1160px;margin:0 auto;padding:0 24px}
+.w{max-width:none;margin:0 auto;padding:0 clamp(18px,4vw,80px)}
 h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.02em;text-wrap:balance}
 h2{font-size:clamp(30px,4.4vw,54px);line-height:1.02;font-weight:700}
 p{margin:0}.lead{font-size:clamp(18px,1.7vw,21px);color:var(--ink2);max-width:34em}
@@ -28,7 +28,7 @@ main,header,footer{position:relative;z-index:1}
 .bar{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:#ffffffb8;border-bottom:1px solid var(--line)}
 .bar .w{display:flex;align-items:center;gap:14px;height:62px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 21px var(--disp);letter-spacing:-.02em}
-.relogio{margin-left:auto;display:flex;align-items:center;gap:8px;font:600 15px var(--disp);font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff}
+.relogio{margin-left:auto;display:flex;white-space:nowrap;align-items:center;gap:8px;font:600 15px var(--disp);font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff}
 .relogio i{width:8px;height:8px;border-radius:50%;background:var(--sun);animation:pulsa 1.6s infinite}
 @keyframes pulsa{50%{opacity:.25}}
 .bar a.t{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;padding:8px 6px}
@@ -40,7 +40,7 @@ main,header,footer{position:relative;z-index:1}
 .bar,.logo,.relogio{transition:background .4s,color .4s}
 .n .bar{background:#0c2f42d9;border-color:#ffffff22}.n .logo,.n .bar a.t{color:#fff}.n .relogio{background:#fff;color:var(--ink)}.n .bar .bt.a{background:var(--sun);color:var(--ink)}
 
-/* abertura: 08:15 */
+/* abertura: 08:30 */
 .abre{padding:56px 0 40px}
 .abre .w{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:48px;align-items:center}
 h1{font-size:clamp(46px,7.6vw,104px);line-height:.92;font-weight:800;letter-spacing:-.045em}
@@ -228,7 +228,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .notas .nab{display:inline-flex;gap:4px;padding:4px;background:rgba(255,255,255,.1);border-radius:999px;margin-bottom:22px}
 .notas .nab button{font:600 15px/1 inherit;color:#e2e8f0;background:none;border:0;padding:10px 18px;border-radius:999px;cursor:pointer}
 .notas .nab button[aria-selected=true]{background:#f97316;color:#fff}
-.notas .mold{position:relative;margin:0 auto;max-width:1108px!important;width:100%;box-sizing:border-box;border:4px solid #f15a2b;border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);max-width:100%}
+.notas .mold{position:relative;margin:0 auto;max-width:min(1600px,100%)!important;width:100%;box-sizing:border-box;border:4px solid #f15a2b;border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);max-width:100%}
 .notas .esc{position:absolute;left:0;top:0;width:1100px;height:640px;transform-origin:0 0}
 .notas .leg{color:var(--ink2);margin:16px auto 0;font-size:15px;text-align:center;max-width:none}
 .lnd-mq label{border:0!important;background:none!important;padding:3px 0!important;border-radius:0!important;margin:0!important;box-shadow:none!important;min-height:0!important}
@@ -370,7 +370,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .vit-marca{display:flex;justify-content:center;align-items:center;gap:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;opacity:.92;margin-top:6px}
 .vit h2{color:#fff;margin:8px auto 10px;max-width:16em;text-shadow:0 3px 0 rgba(0,0,0,.2)}
 .vit .lead{color:#e2e8f0;max-width:640px;margin:0 auto 26px}
-.vit-mold{position:relative;margin:0 auto;max-width:1108px;width:100%;border:4px solid var(--vb);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);background:#fff;text-align:left}
+.vit-mold{position:relative;margin:0 auto;max-width:1600px;width:100%;border:4px solid var(--vb);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);background:#fff;text-align:left}
 .vit-esc{position:absolute;left:0;top:0;width:1100px;height:640px;transform-origin:0 0;color:#0f172a}
 .vit-leg{color:var(--ink2);margin:16px auto 0;font-size:15px;max-width:none}
 .vit-esc svg{display:inline-block}
@@ -546,7 +546,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
       <div class="sa-pf"><a href="#spruceapps">Conhecer todas as SpruceApps →</a><a href="https://eduspruce.pt/" class="sa-ab">Abrir a EduSpruce</a></div>
     </div>
   </div>
-  <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:15</span></span>
+  <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:30 · 1.º tempo</span></span>
   <a class="t" href="manual/EduSpruce-Manual.pdf">Manual</a>
   <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a>
 </div></header>
@@ -555,12 +555,12 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 <section class="abre"><div class="w">
   <div>
     <h1><span>Menos papelada.</span><span class="l2">Mais tempo para ensinar.</span></h1>
-    <p class="lead">A EduSpruce acompanha o seu dia de escola, da chamada das 08:15 à pauta do fim do período. Desça a página e experimente cada momento do dia, aqui mesmo.</p>
+    <p class="lead">A EduSpruce acompanha o seu dia de escola, da chamada das 08:30 à pauta do fim do período. Desça a página e experimente cada momento do dia, aqui mesmo.</p>
     <div class="cta"><a class="bt a" href="https://eduspruce.pt/">Abrir a EduSpruce</a><a class="bt b" href="manual/EduSpruce-Manual.pdf">Ler o manual</a></div>
     <p class="nota">Entra-se com a conta Google. Funciona no computador, no iPad e no telemóvel.</p>
   </div>
   <div class="jan" id="chamada">
-    <div class="top">7.º A, Inglês <small>Lição 25, 08:15</small></div>
+    <div class="top">7.º A, Inglês <small>Lição 25, 08:30</small></div>
     <div class="cx">
       <div class="cham" id="cham" role="group" aria-label="Chamada: toque num aluno para marcar falta"></div>
       <div class="pe"><b id="pres">20/20</b><span>presentes. Toque num aluno para marcar falta.</span><button class="bt a s" id="conf">Confirmar chamada</button></div>
@@ -569,8 +569,8 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
   </div>
 </div></section>
 
-<section class="tempo inv" data-h="09:00"><div class="w">
-  <div class="tx"><span class="hora">09:00</span><h2>O sumário escreve-se na aula, não ao domingo</h2>
+<section class="tempo inv" data-h="09:15"><div class="w">
+  <div class="tx"><span class="hora">09:15</span><h2>O sumário escreve-se na aula, não ao domingo</h2>
     <p class="lead">As lições numeram-se sozinhas a partir do seu horário. Escreve o sumário, confirma as presenças e fica feito.</p>
     <ul class="lst"><li>Faltas do professor, substituições e reposições contadas</li><li>Aulas previstas e dadas por período</li><li>Planta da sala e observações rápidas por aluno</li></ul></div>
   <div class="jan"><div class="top">Aulas e sumários <small>guarda sozinho</small></div><div class="cx">
@@ -578,8 +578,8 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="sum" id="sum" aria-live="off"></div><div class="grv" id="grv">Guardado. A lição 26 já tem data.</div></div></div>
 </div></section>
 
-<section class="tempo" data-h="10:05"><div class="w">
-  <div class="tx"><span class="hora">10:05</span><h2>Quem vai ao quadro?</h2>
+<section class="tempo" data-h="10:20"><div class="w">
+  <div class="tx"><span class="hora">10:20</span><h2>Quem vai ao quadro?</h2>
     <p class="lead">Rode a roda. O sorteio só escolhe entre os presentes e não repete ninguém até todos terem saído.</p>
     <ul class="lst"><li>Um aluno, pares ou grupos</li><li>Em ecrã inteiro, para projetar</li><li>Pares equilibrados para a produção oral</li></ul></div>
   <div><div class="roda"><canvas id="roda" width="600" height="600" aria-hidden="true"></canvas></div>
@@ -587,8 +587,8 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="cen"><button class="bt a" id="rodar">Rodar a roda</button></div></div>
 </div></section>
 
-<section class="tempo inv" data-h="11:45"><div class="w">
-  <div class="tx"><span class="hora">11:45</span><h2>Cinco minutos de Arena antes do almoço</h2>
+<section class="tempo inv" data-h="12:00"><div class="w">
+  <div class="tx"><span class="hora">12:00</span><h2>Cinco minutos de Arena antes do almoço</h2>
     <p class="lead">Jogos de perguntas com onze modos. Os alunos entram pelo telemóvel com um código, sem contas. A Arena nunca conta para a nota.</p>
     <ul class="lst"><li>Pulso: verificação rápida, sempre formativa</li><li>Provas e Forms: testes digitais com correção automática</li><li>As classificações entram na grelha só se quiser</li></ul></div>
   <div class="arena" id="arena"><div class="pl"><span id="aq">Pergunta 1 de 3</span><b id="ap">0 pts</b></div>
@@ -596,8 +596,8 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="ops" id="aops"></div><div class="msg" id="amsg" role="status"></div></div>
 </div></section>
 
-<section class="tempo" data-h="14:30"><div class="w">
-  <div class="tx"><span class="hora">14:30</span><h2>A nota faz-se à sua frente</h2>
+<section class="tempo" data-h="13:45"><div class="w">
+  <div class="tx"><span class="hora">13:45</span><h2>A nota faz-se à sua frente</h2>
     <p class="lead">Mexa nos domínios e veja a classificação a mudar. Na app é igual: lança os itens do teste e a percentagem de cada domínio, a nota e o nível calculam-se sozinhos.</p>
     <ul class="lst"><li>Critérios e ponderações por turma</li><li>Níveis de 1 a 5 ou escala de 0 a 20</li><li>Análise por domínio, instrumento, turma e aluno</li></ul></div>
   <div class="jan"><div class="top">Avaliação, 1.º período <small>4 domínios de 25%</small></div><div class="cx" id="aval">
@@ -609,8 +609,8 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="calc" id="calc"></div></div></div>
 </div></section>
 
-<section class="notas" id="notas" data-h="15:20"><div class="w">
-  <span class="hora">15:20</span>
+<section class="notas" id="notas" data-h="14:30"><div class="w">
+  <span class="hora">14:30</span>
   <h2>Organize-se. Continue a criar.</h2>
   <p class="lead">O SpruceNote é um quadro livre para planear aulas, projetos e reuniões. O JornalNote faz o mesmo para o jornal escolar. Na primeira vez que os abre, a app mostra-lhe este exemplo.</p>
   <div class="nab" role="tablist" aria-label="Quadros de exemplo"><button role="tab" aria-selected="true" data-n="sn">SpruceNote</button><button role="tab" aria-selected="false" data-n="snj">JornalNote</button></div>
@@ -684,8 +684,8 @@ aj();addEventListener('resize',aj);
 document.querySelectorAll('.notas .nab button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.notas .nab button').forEach(x=>x.setAttribute('aria-selected',x===b));e.innerHTML=document.getElementById('n-'+b.dataset.n).innerHTML});
 if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new IntersectionObserver(v=>{if(v[0].isIntersecting){e.innerHTML=e.innerHTML;e.style.visibility='';io.disconnect()}},{threshold:.25});io.observe(m)}})();</script>
 
-<section class="vit vit-spruceit" id="app-demo-spruceit" data-h="15:35" style="--vbg:linear-gradient(172deg,#4c1d95 0,#6d28d9 32%,#4338ca 62%,#fff 62.2%);--vb:#facc15"><div class="w">
-  <span class="hora">15:35</span>
+<section class="vit vit-spruceit" id="app-demo-spruceit" data-h="15:30" style="--vbg:linear-gradient(172deg,#4c1d95 0,#6d28d9 32%,#4338ca 62%,#fff 62.2%);--vb:#facc15"><div class="w">
+  <span class="hora">15:30</span>
   <span class="vit-marca"><svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg> Spruce It</span>
   <h2>Aprender é o melhor jogo.</h2>
   <p class="lead">Jogos de perguntas com Bichos, modos de jogo e corridas ao pódio — a revisão que os alunos pedem para repetir.</p>
@@ -698,8 +698,8 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
   <p class="vit-leg">Escolha um conjunto de perguntas, um modo de jogo e mostre o código à turma · nunca conta para a nota. Dados fictícios.</p>
 </div></section>
 
-<section class="vit vit-forms" id="app-demo-forms" data-h="15:45" style="--vbg:linear-gradient(172deg,#0b5f6b 0,#0e7490 62%,#fff 62.2%);--vb:#14b8a6"><div class="w">
-  <span class="hora">15:45</span>
+<section class="vit vit-forms" id="app-demo-forms" data-h="15:50" style="--vbg:linear-gradient(172deg,#0b5f6b 0,#0e7490 62%,#fff 62.2%);--vb:#14b8a6"><div class="w">
+  <span class="hora">15:50</span>
   <span class="vit-marca"><svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9z"/><path d="M9 11h6M9 15h4"/></svg> Formulários</span>
   <h2>Pergunte. Recolha. Analise.</h2>
   <p class="lead">Formulários e testes online: os alunos respondem pelo QR code, sem contas, e os testes corrigem-se sozinhos.</p>
@@ -714,8 +714,8 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
   <p class="vit-leg">Crie um questionário ou formulário, partilhe o código com a turma e veja as respostas a chegar em direto. Dados fictícios.</p>
 </div></section>
 
-<section class="vit vit-provas" id="app-demo-provas" data-h="15:55" style="--vbg:linear-gradient(172deg,#0f172a 0,#1e3a5f 62%,#fff 62.2%);--vb:#22c55e"><div class="w">
-  <span class="hora">15:55</span>
+<section class="vit vit-provas" id="app-demo-provas" data-h="16:15" style="--vbg:linear-gradient(172deg,#0f172a 0,#1e3a5f 62%,#fff 62.2%);--vb:#22c55e"><div class="w">
+  <span class="hora">16:15</span>
   <span class="vit-marca"><svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 21l5-3 5 3-1.5-7"/></svg> Provas</span>
   <h2>Avaliar em minutos. Ensinar o resto do tempo.</h2>
   <p class="lead">Crie a prova, agende-a para a turma e deixe a correção automática fazer o trabalho repetitivo — as classificações seguem para a avaliação.</p>
@@ -730,8 +730,8 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
   <p class="vit-leg">Criar · Agendar · Corrigir — com banco de exercícios, correção automática e classificações de 0 a 20 valores. Dados fictícios.</p>
 </div></section>
 
-<section class="ecras" data-h="16:10"><div class="w">
-  <span class="hora">16:10</span>
+<section class="ecras" data-h="17:00"><div class="w">
+  <span class="hora">17:00</span>
   <h2>Agora os ecrãs verdadeiros</h2>
   <p class="lead">O que experimentou acima é uma amostra. Estes são ecrãs da app, com os dados de demonstração.</p>
   <div class="abas" id="abas" role="tablist" aria-label="Ecrãs da app"></div>
@@ -739,16 +739,16 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
   <p class="leg" id="leg"></p>
 </div></section>
 
-<section class="tudo" data-h="17:20"><div class="w">
-  <span class="hora">17:20</span>
+<section class="tudo" data-h="18:30"><div class="w">
+  <span class="hora">18:30</span>
   <h2>Tudo o que a EduSpruce faz, <span id="nfx">37</span> funcionalidades</h2>
   <p class="lead">Já experimentou cinco lá em cima. Aqui estão as restantes, cada uma a mostrar o que faz. Filtre pelo que lhe interessa.</p>
   <div class="filt" id="filt" role="group" aria-label="Filtrar funcionalidades"></div>
   <div class="fx" id="fx"></div>
 </div></section>
 
-<section class="sapps" id="spruceapps" data-h="18:30"><div class="w">
-  <span class="hora">18:30</span>
+<section class="sapps" id="spruceapps" data-h="20:00"><div class="w">
+  <span class="hora">20:00</span>
   <h2>SpruceApps: uma app para cada parte do dia</h2>
   <p class="lead">A EduSpruce junta nove apps numa só conta. Cada uma faz bem uma coisa, e todas partilham as mesmas turmas, alunos e calendário: o que acontece numa aparece nas outras.</p>
   <div class="sa-lig" aria-label="Como as apps se ligam"><div><b>Uma só entrada</b><span>Entra com Google e tem todas as apps, em qualquer aparelho.</span></div><div><b>Ligadas à Avaliação</b><span>Formulários e Provas podem contar para a nota e aparecer na ficha de cada aluno.</span></div><div><b>Escolha as suas</b><span>Ligue só as apps que usa. As que desliga desaparecem do menu.</span></div><div><b>Sem misturas</b><span>Cada escola e cada ano letivo ficam separados.</span></div></div>
@@ -784,7 +784,7 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
     <details><summary>Onde aprendo a usar tudo?</summary><p>No <a href="manual/EduSpruce-Manual.pdf">manual em PDF</a>, que percorre todos os menus com imagens e exemplos, e no botão de ajuda de cada ecrã da app.</p></details>
   </div>
 
-  <div class="fim"><h2>Amanhã às 08:15, experimente com a sua turma</h2>
+  <div class="fim"><h2>Amanhã às 08:30, experimente com a sua turma</h2>
     <div class="cta"><a class="bt a" href="https://eduspruce.pt/">Abrir a EduSpruce</a><a class="bt b" href="manual/EduSpruce-Manual.pdf">Ler o manual</a></div></div>
 </div></section>
 </main>
@@ -797,7 +797,7 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
 const AL=[['AS','Ana'],['RB','Rodrigo'],['TA','Teresa'],['GF','Guilherme'],['MS','Marta'],['MB','Martim'],['RA','Rita'],['LV','Leonardo'],['CF','Catarina'],['HT','Henrique'],['MR','Mariana'],['VC','Vasco'],['RC','Raquel'],['DP','Diogo'],['JR','Joana'],['SÁ','Santiago'],['LG','Luísa'],['LR','Luís'],['GM','Gabriela'],['PP','Pedro']];
 const falt=new Set();
 
-/* ---------- 08:15 · chamada ---------- */
+/* ---------- 08:30 · chamada ---------- */
 const cham=$('#cham'),pres=$('#pres'),selo=$('#selo');
 const conta=()=>{pres.textContent=(AL.length-falt.size)+'/'+AL.length;selo.classList.remove('on');desenhaRoda()};
 AL.forEach(([i,n],k)=>{const b=document.createElement('button');b.className='al';b.type='button';b.innerHTML=i+'<small>'+n+'</small>';b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',n+', presente');
@@ -811,10 +811,14 @@ const secs=[...document.querySelectorAll('[data-h]')],rel=$('#rel'),sol=$('#sol'
 const min=h=>{const[a,b]=h.split(':');return a*60+ +b},fmt=m=>String(Math.floor(m/60)).padStart(2,'0')+':'+String(Math.round(m%60)).padStart(2,'0');
 const CEU=[[0,[230,243,250]],[.3,[244,250,253]],[.55,[255,250,238]],[.78,[253,232,208]],[1,[236,188,160]]];
 const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
-let tk=0;function rola(){tk=0;const y=scrollY+innerHeight*.45;let m=495;const P=[[0,495],...secs.map(s=>[s.offsetTop,min(s.dataset.h)])];
+/* horário escolar: tempos de 45 min, intervalos e almoço; depois das 17:00 vem a noite */
+const TEMPOS=[['08:30','09:15'],['09:15','10:00'],['10:20','11:05'],['11:05','11:50'],['12:00','12:45'],['13:45','14:30'],['14:30','15:15'],['15:30','16:15'],['16:15','17:00']].map(t=>t.map(min));
+const tempo=m=>{const i=TEMPOS.findIndex(t=>m>=t[0]&&m<t[1]);if(i>=0)return (i+1)+'.º tempo';if(m>=765&&m<825)return 'almoço';if(m>=510&&m<1020)return 'intervalo';return m>=1020&&m<1140?'fim das aulas':m>=1140?'noite':''};
+let tk=0;function rola(){tk=0;const y=scrollY+innerHeight*.45;let m=510;const P=[[0,510],...secs.map(s=>[s.offsetTop,min(s.dataset.h)])];
   for(let i=0;i<P.length;i++){const a=P[i],b=P[i+1];if(!b||y<b[0]){m=b?a[1]+(b[1]-a[1])*Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0]))):a[1];break}}
-  rel.textContent=fmt(Math.round(m/5)*5);
-  const noite=$('.noite').offsetTop,p=Math.max(0,Math.min(1,scrollY/(noite-innerHeight*.5)));
+  const mm=Math.round(m/5)*5,tt=tempo(mm);rel.textContent=fmt(mm)+(tt&&innerWidth>480?' · '+tt:'');
+  /* o sol segue a hora: nasce às 08:30, põe-se ao fim da tarde (19:00), depois noite */
+  const noite=$('.noite').offsetTop,p=Math.max(0,Math.min(1,(m-510)/(1140-510)));
   let c=CEU[0][1];for(let i=0;i<CEU.length-1;i++){const a=CEU[i],b=CEU[i+1];if(p>=a[0]&&p<=b[0]){c=mix(a[1],b[1],(p-a[0])/(b[0]-a[0]));break}}
   document.body.style.background='rgb('+c+')';
   /* arco do sol: nasce à direita em cima, põe-se à esquerda em baixo */
