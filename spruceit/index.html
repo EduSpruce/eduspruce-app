@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spruce It · Jogos de perguntas para a sala de aula</title>
+<meta name="description" content="Spruce It: jogos de perguntas com Bichos e modos de jogo originais para rever a matéria na sala de aula. Parte da EduSpruce.">
+<meta property="og:title" content="Spruce It · Jogos de perguntas para a sala de aula"><meta property="og:description" content="Spruce It: jogos de perguntas com Bichos e modos de jogo originais para rever a matéria na sala de aula. Parte da EduSpruce."><meta property="og:type" content="website">
+<link rel="icon" href="../favicon.png"><link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
+<meta name="theme-color" content="#1b93c6">
+<style>
+@font-face{font-family:Bricolage;src:url(../fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:Figtree;src:url(../fonts/figtree.woff2) format("woff2");font-weight:300 900;font-display:swap}
+:root{
+  --pin:#1b93c6;--pin2:#147aa6;--pinL:#5bc0e8;--pinXL:#e8f4fa;--sun:#f39200;--sky:#38bdf8;
+  --ink:#333;--ink2:#5f6b76;--bg:#f2f4f6;--paper:#fff;--line:#33333322;--cream:#e9edf0;
+  --disp:Bricolage,Georgia,serif;--r:0;color-scheme:light
+}
+@media (prefers-color-scheme:dark){:root{--ink:#e7ebee;--ink2:#a5b0b9;--bg:#15191d;--paper:#1d2227;--line:#ffffff1c;--cream:#1a1f24;--pinXL:#16313f;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font:17px/1.6 Figtree,system-ui,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+a{color:inherit}
+img{max-width:100%;display:block}
+.w{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.02em;line-height:1.05;margin:0}
+.bt{white-space:nowrap;display:inline-flex;align-items:center;gap:8px;font:700 16px/1 Figtree,sans-serif;padding:15px 24px;border-radius:0;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.bt:hover{transform:translateY(-2px)}
+.bt.a{background:var(--pin);color:#fff;text-transform:none;box-shadow:0 10px 24px -10px #1b93c699}
+.bt.a:hover{background:var(--pin2)}
+.bt.o{border-color:currentColor;background:transparent}
+.bt.s{padding:10px 18px;font-size:15px}
+.mut{color:var(--ink2)}
+.eyebrow{display:inline-block;font:700 13px/1 Figtree;letter-spacing:.12em;text-transform:uppercase;color:var(--pin);background:var(--pinXL);padding:7px 12px;border-radius:0}
+@media (prefers-color-scheme:dark){.eyebrow{color:var(--pinL)}}
+
+/* ---------- barra de topo ---------- */
+.bar{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .2s}
+.bar.sc{border-color:var(--line)}
+.bar .w{display:flex;align-items:center;gap:22px;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font:700 21px/1 var(--disp);letter-spacing:-.02em}
+.logo small{white-space:nowrap;font:600 12px/1 Figtree;color:var(--ink2);border-left:1px solid var(--line);padding-left:10px;margin-left:2px}
+.nav{display:flex;gap:4px;margin-left:12px}
+.nav a{white-space:nowrap;text-decoration:none;font-weight:600;font-size:15px;color:var(--ink2);padding:8px 12px;border-radius:0}
+.nav a:hover{color:var(--ink);background:var(--pinXL)}
+.bar .sp{flex:1}
+.bar .t{font-weight:600;font-size:15px;text-decoration:none;color:var(--ink2)}
+.menu{display:none;background:none;border:0;color:inherit;padding:6px}
+@media (max-width:560px){.logo small,.hs{display:none}.bar .w{gap:12px}}
+@media (max-width:1040px){.nav,.bar .t{display:none}.menu{display:block}
+  .nav.on{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--paper);padding:12px 20px;border-bottom:1px solid var(--line);margin:0}}
+
+/* ---------- herói ---------- */
+.hero{padding:48px 0 40px;text-align:center;position:relative}
+.hero h1{font-size:clamp(44px,7.4vw,96px);font-weight:700;max-width:980px;margin:18px auto 18px}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,#1b93c6 10%,#147aa6 55%,#f39200);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{font-size:clamp(18px,2vw,22px);max-width:640px;margin:0 auto 28px;color:var(--ink2)}
+.hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hero .nota{margin-top:14px;font-size:14px;color:var(--ink2)}
+
+/* quadro de demonstração (interativo) */
+.demo-wrap{margin:44px auto 0;max-width:1120px;position:relative}
+.demo{position:relative;border-radius:0;overflow:hidden;background:#fff;box-shadow:0 40px 90px -30px rgba(16,38,27,.45),0 0 0 1px rgba(16,38,27,.08);text-align:left;color:#1d2a23;font:14px/1.45 Figtree,sans-serif}
+.dtop{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px;border-bottom:1px solid #e6e3da;background:#fff}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%;background:#e5e1d6}
+.dcr{font-size:13px;color:#6b7a72}.dcr b{color:#1d2a23}
+.dtop .dsp{flex:1}
+.dchip{font-size:12px;padding:5px 10px;border-radius:0;background:#e8f4fa;color:var(--pin);font-weight:700}
+.dbody{display:flex;height:560px}
+.dside{width:64px;background:#5b5b5b;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0}
+.dtool{width:54px;border:0;background:none;color:#e6e6e6;font:600 10px/1.1 Figtree;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:0;cursor:grab;touch-action:none}
+.dtool:hover{background:rgba(255,255,255,.1)}
+.dtool svg{width:20px;height:20px}
+.dcv{flex:1;position:relative;overflow:hidden;background:#f6f4ee radial-gradient(#d9d4c4 1.1px,transparent 1.2px) 0 0/22px 22px;touch-action:none}
+.dcv svg.ln{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.dc{position:absolute;background:#fff;border:1px solid #e6e3da;border-radius:0;box-shadow:0 1px 2px rgba(20,40,30,.08),0 4px 12px rgba(20,40,30,.06);padding:12px 14px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;animation:pop .6s var(--d,0s) cubic-bezier(.2,.8,.3,1.25) both}
+.dc.drag{cursor:grabbing;box-shadow:0 18px 40px rgba(0,0,0,.18);z-index:20;transform:rotate(-1.5deg)}
+.dc[data-c]{border-top:4px solid var(--k)}
+.dc h4{margin:0 0 4px;font:700 15px/1.25 Figtree}
+.dc p{margin:0;color:#46594f;font-size:13px}
+.dc .ed{outline:none;cursor:text}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.95)}}
+.dtodo li{list-style:none;display:flex;gap:7px;align-items:center;font-size:13px;padding:2px 0}
+.dtodo ul{margin:6px 0 0;padding:0}
+.dtodo i{width:14px;height:14px;border-radius:0;border:1.6px solid #9aa9a1;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dtodo li.ok i{background:#2e8b57;border-color:#2e8b57}
+.dtodo li.ok i::after{content:"";width:4px;height:7px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.dtodo li.ok span{text-decoration:line-through;color:#9aa9a1}
+.dprog{height:4px;background:#ebe7dc;border-radius:0;overflow:hidden;margin-top:6px}.dprog b{display:block;height:100%;background:#2e8b57;transition:width .3s}
+.dimg{padding:0;overflow:hidden}
+.dimg svg{display:block;width:100%}
+.dimg small{display:block;padding:7px 10px;color:#6b7a72;font-size:12px}
+.dcol{background:#ece9df;padding:10px}
+.dcol>b{display:block;font-size:13.5px;padding:0 2px 8px}
+.dcol .k{background:#fff;border-radius:0;padding:9px 10px;font-size:12.5px;margin-bottom:7px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.dlink{display:flex;gap:10px;align-items:center}
+.dlink .f{width:34px;height:34px;border-radius:0;background:#1b93c6;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none}
+.dlink small{color:#2e8b57;font-size:11.5px}
+.dsw{padding:0;overflow:hidden;width:120px}
+.dsw div{height:64px}.dsw small{display:block;padding:6px 9px;font-size:11.5px;color:#6b7a72}
+.dboard{text-align:center;width:118px}
+.dboard .bi{width:56px;height:56px;margin:0 auto 6px;border-radius:0;background:#1b93c6;display:flex;align-items:center;justify-content:center;font-size:26px}
+.dboard b{font-size:13px}.dboard small{display:block;color:#8a978f;font-size:11px}
+.dcm{background:#fff8e1;border-color:#f5d97a}
+.dcm .av{width:24px;height:24px;border-radius:50%;background:#2e8b57;color:#fff;font-size:10px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-right:6px;vertical-align:middle}
+.dhint{position:absolute;right:14px;bottom:12px;background:#5b5b5b;color:#fff;font-size:12.5px;padding:7px 12px;border-radius:0;pointer-events:none;opacity:.92}
+.cursor{position:absolute;width:22px;height:22px;pointer-events:none;z-index:30;transition:left 1s cubic-bezier(.5,0,.2,1),top 1s cubic-bezier(.5,0,.2,1)}
+.flt{position:absolute;z-index:5;font:700 13px/1.2 Figtree;background:var(--paper);color:var(--ink);padding:9px 13px;border-radius:0;box-shadow:0 12px 30px -10px rgba(0,0,0,.3);display:flex;gap:8px;align-items:center;animation:bob 5s ease-in-out infinite}
+.flt b{width:26px;height:26px;border-radius:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.flt.f1{left:-52px;bottom:70px}.flt.f2{right:-36px;top:300px;animation-delay:-2.5s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@media (max-width:1200px){.flt{display:none}}
+.demo-wrap{--sc:1}
+.demo-sz{position:relative;width:100%}
+.demo-sz>.demo{transform-origin:0 0;transform:scale(var(--sc));position:absolute;left:0;top:0}
+
+/* ---------- blocos de funcionalidades ---------- */
+section{position:relative}
+.sec{padding:110px 0}
+.sec-h{text-align:center;max-width:760px;margin:0 auto 56px}
+.sec-h h2{font-size:clamp(34px,4.6vw,58px);font-weight:700;margin:14px 0 14px}
+.sec-h p{font-size:19px;color:var(--ink2);margin:0}
+.feat{display:grid;grid-template-columns:1fr 1.15fr;gap:70px;align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.feat:first-of-type{border-top:0}
+.feat.rev .ft{order:2}
+.ft h3{font-size:clamp(28px,3.2vw,40px);font-weight:700;margin:12px 0 14px}
+.ft p{color:var(--ink2);font-size:18px;margin:0 0 16px}
+.ft ul{list-style:none;padding:0;margin:0 0 18px}
+.ft li{padding:6px 0 6px 30px;position:relative}
+.ft li::before{content:"";position:absolute;left:0;top:10px;width:18px;height:18px;border-radius:0;background:var(--pinXL) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23166534' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12 4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat}
+.ft a.more{font-weight:700;color:var(--pin);text-decoration:none}
+@media (prefers-color-scheme:dark){.ft a.more{color:var(--pinL)}}
+.ft a.more:hover{text-decoration:underline}
+.art{position:relative;aspect-ratio:1.18;border-radius:0;overflow:hidden;background:var(--k,#e8f6ee)}
+.art .in{position:absolute;inset:0}
+@media (max-width:860px){.feat{grid-template-columns:1fr;gap:28px}.feat.rev .ft{order:0}}
+/* peças das ilustrações (cores fixas, como imagens) */
+.pc{position:absolute;background:#fff;border-radius:0;box-shadow:0 8px 24px -8px rgba(16,38,27,.3);padding:12px 14px;font:13px/1.4 Figtree;color:#1d2a23}
+.pc b{display:block;font-size:14px;margin-bottom:3px}
+.rv .pc{opacity:0;transform:translateY(24px) rotate(var(--rot,0deg));transition:opacity .6s var(--d,0s),transform .7s var(--d,0s) cubic-bezier(.2,.8,.3,1.2)}
+.rv.on .pc{opacity:1;transform:translateY(0) rotate(var(--rot,0deg))}
+.mic{display:flex;align-items:center;gap:8px}
+.mic i{width:30px;height:30px;border-radius:50%;background:#e2775f;display:flex;align-items:center;justify-content:center;flex:none}
+.wave{display:flex;gap:2px;align-items:center;height:24px}
+.wave span{width:3px;background:#e2775f;border-radius:0;animation:wv 1s ease-in-out infinite}
+@keyframes wv{50%{height:4px!important}}
+.brw{position:absolute;left:8%;top:9%;width:84%;height:62%;background:#fff;border-radius:0;box-shadow:0 14px 40px -12px rgba(0,0,0,.3);overflow:hidden}
+.brw .bt0{height:28px;background:#eef1ee;display:flex;align-items:center;gap:5px;padding:0 10px}
+.brw .bt0 i{width:8px;height:8px;border-radius:50%;background:#cfd6d1}
+.brw .bt0 span{margin-left:10px;flex:1;height:14px;border-radius:0;background:#fff}
+.brw .ext{position:absolute;right:10px;top:4px;width:22px;height:20px;border-radius:0;background:#1b93c6}
+.pop{position:absolute;right:10px;top:34px;width:180px;background:#fff;border:1px solid #e3e8e4;border-radius:0;box-shadow:0 10px 30px -10px rgba(0,0,0,.3);padding:10px;font:12px/1.35 Figtree;color:#1d2a23}
+.pop .bt1{margin-top:8px;background:#1b93c6;color:#fff;border-radius:0;text-align:center;padding:6px;font-weight:700}
+.sk{position:absolute;inset:0;width:100%;height:100%}
+.sk path{stroke-dasharray:600;stroke-dashoffset:600}
+.rv.on .sk path{animation:draw 2.2s .4s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- para quem ---------- */
+.uses{background:var(--cream)}
+.ugrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.uc{background:var(--paper);border:1px solid var(--line);border-radius:0;overflow:hidden;text-decoration:none;transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.uc:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(16,38,27,.35)}
+.uc .th{height:150px;position:relative;background:var(--k);overflow:hidden}
+.uc .th .pc{padding:7px 9px;font-size:10.5px;border-radius:0}
+.uc .th .pc b{font-size:11px;margin:0}
+.uc .tx{padding:16px 18px 18px}
+.uc h3{font-size:20px;margin:0 0 4px}
+.uc p{margin:0;color:var(--ink2);font-size:15px;line-height:1.45}
+
+/* ---------- valores ---------- */
+.vals{padding:44px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.vals .w{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.vals b{display:block;font:700 19px/1.2 var(--disp);margin-bottom:4px}
+.vals span{color:var(--ink2);font-size:14.5px}
+.vals svg{width:30px;height:30px;color:var(--pin);margin-bottom:8px}
+@media (prefers-color-scheme:dark){.vals svg{color:var(--pinL)}}
+@media (max-width:760px){.vals .w{grid-template-columns:1fr 1fr}}
+
+/* ---------- modelos ---------- */
+.tpl-row{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 24px 24px;margin:0 -24px;scrollbar-width:thin}
+.tp{flex:0 0 280px;scroll-snap-align:start;background:var(--paper);border:1px solid var(--line);border-radius:0;overflow:hidden}
+.tp .th{height:170px;background:var(--k);position:relative}
+.tp .tx{padding:14px 16px 16px}.tp h3{font-size:19px;margin:0 0 4px}.tp p{margin:0;color:var(--ink2);font-size:14.5px;line-height:1.45}
+.mini-col{position:absolute;top:18px;width:26%;bottom:18px;background:rgba(255,255,255,.55);border-radius:0;padding:6px}
+.mini-col i{display:block;height:20px;background:#fff;border-radius:0;margin-bottom:5px;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* ---------- aparelhos ---------- */
+.devs{display:flex;align-items:flex-end;justify-content:center;gap:28px;margin-top:20px;flex-wrap:wrap}
+.mon{width:min(560px,100%)}
+.mon .sc{border:12px solid #1d2a23;border-bottom-width:16px;border-radius:0;aspect-ratio:16/10;overflow:hidden;background:#f6f4ee}
+.mon .sc img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.mon .st{width:120px;height:46px;margin:0 auto;background:linear-gradient(#2b3a32,#1d2a23);clip-path:polygon(28% 0,72% 0,86% 100%,14% 100%)}
+.tab{width:250px;aspect-ratio:3/4;border:12px solid #1d2a23;border-radius:0;overflow:hidden;background:#f6f4ee;position:relative}
+.pho{width:130px;aspect-ratio:9/19;border:8px solid #1d2a23;border-radius:0;overflow:hidden;background:#f6f4ee;position:relative}
+.scr{position:absolute;inset:0;background:#f6f4ee radial-gradient(#d9d4c4 1px,transparent 1.1px) 0 0/14px 14px}
+.scr .pc{padding:6px 8px;font-size:9.5px;border-radius:0}
+
+/* ---------- web clipper ---------- */
+.clip{background:linear-gradient(160deg,#1b93c6,#11698f);color:#fff;border-radius:0;padding:64px;display:grid;grid-template-columns:1.1fr 1fr;gap:50px;align-items:center;overflow:hidden;position:relative}
+.clip h2{font-size:clamp(32px,4vw,50px);margin:14px 0}
+.clip p{color:#e3f2f9;font-size:18px}
+.clip .eyebrow{background:rgba(255,255,255,.12);color:#e8f4fa}
+.clip .bt.a{background:#f39200;color:#fff}
+.clip .bt.o{color:#fff}
+.clip .steps{counter-reset:s;list-style:none;padding:0;margin:20px 0 26px}
+.clip .steps li{counter-increment:s;padding:6px 0 6px 40px;position:relative;color:#eef7fb}
+.clip .steps li::before{content:counter(s);position:absolute;left:0;top:5px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.clip .art{background:rgba(255,255,255,.08)}
+@media (max-width:860px){.clip{grid-template-columns:1fr;padding:36px 26px}}
+
+/* ---------- final e rodapé ---------- */
+.final{text-align:center;padding:120px 0;background:radial-gradient(ellipse at 50% 120%,#cfeaf6 0,transparent 60%)}
+@media (prefers-color-scheme:dark){.final{background:radial-gradient(ellipse at 50% 120%,#16313f 0,transparent 60%)}}
+.final h2{font-size:clamp(38px,6vw,76px);font-weight:700;margin:0 auto 18px;max-width:880px}
+.final p{font-size:20px;color:var(--ink2);margin:0 0 30px}
+.tree{width:84px;height:84px;margin:0 auto 18px}
+footer{background:#3f3f3f;color:#d0d0d0;padding:64px 0 34px;font-size:15px}
+footer .g{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:30px}
+footer h4{color:#fff;font:700 14px/1 Figtree;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 14px}
+footer a{display:block;text-decoration:none;padding:4px 0;color:#d0d0d0}
+footer a:hover{color:#fff}
+footer .logo{color:#fff;margin-bottom:12px}
+footer .cp{border-top:1px solid #ffffff1a;margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13.5px}
+@media (max-width:860px){footer .g{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv .pc{opacity:1;transform:none}}
+
+/* comum às maquetes */
+.bv-sp{flex:1}
+.bv-si,.bv-fm,.bv-pv{width:1100px;height:640px;font-family:inherit;font-size:13px;line-height:1.35;text-align:left;overflow:hidden;position:relative}
+.bv-si *,.bv-fm *,.bv-pv *{box-sizing:border-box}
+.bv-si [style*="--d"],.bv-fm [style*="--d"],.bv-pv [style*="--d"]{animation:bvIn .5s var(--d) cubic-bezier(.2,.9,.3,1.25) both}
+@keyframes bvIn{from{opacity:0;transform:translateY(16px) scale(.94)}}
+.bv-si h5,.bv-fm h5,.bv-pv h5{margin:0 0 10px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.bv-si h5 em,.bv-fm h5 em,.bv-pv h5 em{margin-left:auto;font-style:normal;font-weight:600;font-size:12px;opacity:.7}
+/* Spruce It */
+.bv-si{background:radial-gradient(circle at 20% 10%,#8b5cf6,#5b21b6 45%,#312e81);color:#fff;padding:18px 22px}
+.bv-si::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.08) 2px,transparent 2.5px);background-size:28px 28px}
+.bv-sitop{position:relative;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.bv-silogo{font-size:28px;font-weight:900;letter-spacing:-.02em;text-shadow:0 3px 0 rgba(0,0,0,.25)}.bv-silogo i{font-style:normal;color:#facc15;margin-left:2px}
+.bv-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.16);padding:6px 11px;border-radius:999px;font-weight:700;font-size:12px}
+.bv-tempo{background:#facc15;color:#3b0764;font-weight:900;padding:6px 12px;border-radius:999px;animation:bvPul 1s 2s infinite}
+@keyframes bvPul{50%{transform:scale(1.08)}}
+.bv-sigr{position:relative;display:grid;grid-template-columns:330px 1fr 250px;gap:16px;height:480px}
+.bv-sic{background:#fff;color:#1e1b4b;border-radius:18px;padding:16px;box-shadow:0 6px 0 rgba(0,0,0,.18)}
+.bv-lob{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.bv-lob small{color:#6b7280;font-weight:600}.bv-url{font-size:17px;color:#6d28d9}
+.bv-cod{font-size:44px;font-weight:900;letter-spacing:.06em;color:#1e1b4b;margin:2px 0 12px;font-variant-numeric:tabular-nums}
+.bv-jog{display:grid;grid-template-columns:repeat(4,1fr);gap:8px 6px;width:100%}
+.bv-j{display:flex;flex-direction:column;align-items:center;font-weight:700;font-size:11.5px;animation-name:bvPop!important}
+@keyframes bvPop{0%{opacity:0;transform:scale(.2) rotate(-20deg)}70%{transform:scale(1.15) rotate(6deg)}100%{opacity:1;transform:none}}
+.bv-bi{width:52px;height:52px;animation:bvSalta 2.4s ease-in-out infinite}.bv-j:nth-child(2n) .bv-bi{animation-delay:.6s}.bv-j:nth-child(3n) .bv-bi{animation-delay:1.1s}
+@keyframes bvSalta{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.bv-pu{animation:bvOlho 4s infinite}@keyframes bvOlho{0%,45%{transform:translateX(0)}50%,70%{transform:translateX(1.5px)}75%,100%{transform:translateX(0)}}
+.bv-per{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(#fff,#f5f3ff)}
+.bv-pnum{font-weight:800;color:#7c3aed;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.bv-ptxt{font-size:40px;font-weight:900;margin:12px 0 22px;color:#1e1b4b}
+.bv-res{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.bv-r{display:flex;align-items:center;gap:12px;padding:20px 16px;border-radius:14px;background:var(--c);color:#fff;font-size:26px;font-weight:900;box-shadow:0 5px 0 rgba(0,0,0,.2);text-shadow:0 2px 0 rgba(0,0,0,.2)}
+.bv-r i{font-style:normal;font-size:18px;opacity:.85}
+.bv-r:not(.ok){animation:bvIn .5s var(--d) both,bvApaga 6s 3.2s infinite!important}
+.bv-r.ok{animation:bvIn .5s var(--d) both,bvCerto 6s 3.2s infinite!important}
+@keyframes bvApaga{0%,8%{opacity:1}14%,70%{opacity:.25;transform:scale(.97)}80%,100%{opacity:1;transform:none}}
+@keyframes bvCerto{0%,8%{transform:none;box-shadow:0 5px 0 rgba(0,0,0,.2)}14%,70%{transform:scale(1.06);box-shadow:0 0 0 5px #fff,0 0 0 9px #22c55e}80%,100%{transform:none}}
+.bv-barra{width:100%;height:8px;border-radius:9px;background:#ede9fe;margin-top:18px;overflow:hidden}.bv-barra span{display:block;height:100%;width:100%;background:linear-gradient(90deg,#facc15,#f97316);transform-origin:left;animation:bvTempo 6s 1.4s linear infinite}
+@keyframes bvTempo{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.bv-cl{display:grid;grid-template-columns:22px 62px 1fr 34px;align-items:center;gap:6px;padding:7px 0;font-weight:700;font-size:12.5px}
+.bv-cl b{width:22px;height:22px;border-radius:50%;background:#ede9fe;color:#6d28d9;display:grid;place-items:center;font-size:11px}
+.bv-cl:nth-of-type(1) b{background:#facc15;color:#713f12}.bv-cl:nth-of-type(2) b{background:#e5e7eb;color:#374151}.bv-cl:nth-of-type(3) b{background:#fdba74;color:#7c2d12}
+.bv-cl div{height:10px;border-radius:9px;background:#f3f4f6;overflow:hidden}.bv-cl div i{display:block;height:100%;width:var(--w);border-radius:9px;background:linear-gradient(90deg,#8b5cf6,#6d28d9);transform-origin:left;animation:bvBarra 1s calc(var(--d) + .2s) cubic-bezier(.2,.8,.3,1) both}
+.bv-cl em{font-style:normal;font-size:11px;color:#6b7280;text-align:right}
+@keyframes bvBarra{from{transform:scaleX(0)}}
+.bv-modos{position:relative;display:flex;gap:10px;margin-top:14px;justify-content:center}
+.bv-modos span{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:999px;font-weight:800;font-size:12.5px}
+.bv-modos span:first-child{background:#facc15;color:#3b0764;border-color:#facc15}
+/* Formulários */
+.bv-fm{background:#f3f2f1;color:#252423}
+.bv-fmtop{display:flex;align-items:center;gap:14px;background:#0e7490;color:#fff;padding:12px 20px}
+.bv-fmtop b{display:flex;align-items:center;gap:6px;font-size:15px}
+.bv-fmtb{font-weight:600;opacity:.8;padding:4px 2px;border-bottom:2px solid transparent}.bv-fmtb.on{opacity:1;border-color:#fff}.bv-fmtb em{font-style:normal;background:#fff;color:#0e7490;border-radius:9px;padding:0 6px;font-size:11px;margin-left:3px}
+.bv-fmbt{display:inline-flex;align-items:center;gap:5px;background:#fff;color:#0e7490;padding:6px 12px;border-radius:6px;font-weight:700}
+.bv-fmgr{display:grid;grid-template-columns:1fr 400px;gap:18px;padding:18px 20px}
+.bv-fmed{display:flex;flex-direction:column;gap:10px}
+.bv-fmcab{background:#fff;border-top:6px solid #0e7490;border-radius:6px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.1)}.bv-fmcab b{font-size:20px;display:block}.bv-fmcab small{color:#605e5c}
+.bv-fq{background:#fff;border-radius:6px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.1);display:flex;flex-direction:column;gap:7px}
+.bv-fq b{font-weight:600;font-size:14px}
+.bv-fq label{display:flex;align-items:center;gap:9px;color:#323130}.bv-fq label span{width:15px;height:15px;border-radius:50%;border:1.5px solid #8a8886}
+.bv-fq label.bv-sel span{border-color:#0e7490;box-shadow:inset 0 0 0 3px #fff;background:#0e7490;animation:bvMarca 6s 1.2s infinite}
+@keyframes bvMarca{0%,10%{background:#fff}15%,100%{background:#0e7490}}
+.bv-est{display:flex;gap:6px;font-size:26px;color:#d2d0ce}.bv-est i{font-style:normal;animation:bvEst 6s var(--d) infinite!important}
+.bv-est i:nth-child(5){animation-name:none!important}
+@keyframes bvEst{0%{color:#d2d0ce;transform:scale(1)}6%{color:#f59e0b;transform:scale(1.3)}12%,85%{color:#f59e0b;transform:scale(1)}95%,100%{color:#d2d0ce}}
+.bv-txt{border-bottom:1.5px solid #0e7490;padding:6px 2px;color:#323130}.bv-txt span{display:inline-block;overflow:hidden;white-space:nowrap;border-right:2px solid #0e7490;width:0;animation:bvEscreve 6s 2.4s steps(28) infinite,bvCursor .7s step-end infinite}
+@keyframes bvEscreve{0%{width:0}35%,90%{width:28ch}100%{width:0}}@keyframes bvCursor{50%{border-color:transparent}}
+.bv-fmres{display:flex;flex-direction:column;gap:12px}
+.bv-fc{background:#fff;border-radius:6px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.bv-dn{display:flex;align-items:center;gap:18px}.bv-dn svg{width:110px;height:110px;transform:rotate(-90deg)}
+.bv-dn circle{fill:none;stroke-width:7;stroke-dasharray:0 100;animation:bvDn 1.2s 1s ease forwards}
+.bv-dn .a{stroke:#0e7490;--v:71 29;--o:0}.bv-dn .b{stroke:#f59e0b;--v:21 79;stroke-dashoffset:-71}.bv-dn .c{stroke:#e11d48;--v:8 92;stroke-dashoffset:-92}
+@keyframes bvDn{to{stroke-dasharray:var(--v)}}
+.bv-dn ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:12.5px}.bv-dn li{display:flex;align-items:center;gap:7px}.bv-dn li i{width:10px;height:10px;border-radius:2px}.bv-dn li b{margin-left:6px}
+.bv-hb,.bv-q{display:grid;grid-template-columns:34px 1fr 38px;align-items:center;gap:8px;padding:4px 0;font-size:12px}
+.bv-hb div,.bv-q div{height:9px;border-radius:5px;background:#edebe9;overflow:hidden}
+.bv-hb div i,.bv-q div i{display:block;height:100%;width:var(--w);background:#0e7490;border-radius:5px;transform-origin:left;animation:bvBarra 1s calc(var(--d) + .2s) cubic-bezier(.2,.8,.3,1) both}
+.bv-hb em,.bv-q em{font-style:normal;text-align:right;color:#605e5c}
+.bv-qr{display:flex;gap:14px;align-items:center;position:relative}.bv-qr b{display:block;font-size:15px;color:#0e7490}.bv-qr small{display:block;color:#605e5c}
+.bv-qrc{display:grid;grid-template-columns:repeat(7,10px);gap:1px;padding:6px;border:1px solid #e1dfdd;border-radius:4px}.bv-qrc i{width:10px;height:10px}.bv-qrc i.p{background:#252423}
+.bv-novo{position:absolute;right:12px;top:10px;background:#22c55e;color:#fff;font-weight:700;font-size:11px;padding:3px 8px;border-radius:9px;opacity:0;animation:bvNovo 3s 2.6s infinite}
+@keyframes bvNovo{0%{opacity:0;transform:translateY(6px)}15%,60%{opacity:1;transform:none}80%,100%{opacity:0;transform:translateY(-8px)}}
+/* Provas */
+.bv-pv{display:flex;background:#f6f8fb;color:#0f172a}
+.bv-pvlado{width:58px;background:#0f172a;display:flex;flex-direction:column;align-items:center;gap:16px;padding:18px 0;color:#94a3b8}.bv-pvlado i{width:36px;height:36px;display:grid;place-items:center;border-radius:10px}.bv-pvlado i.on{background:#22c55e;color:#fff}
+.bv-pvm{flex:1;padding:18px 22px}
+.bv-pvtop{display:flex;align-items:center;margin-bottom:14px}.bv-pvtop small{display:block;color:#64748b}.bv-pvtop b{font-size:18px}
+.bv-pvbt{display:inline-flex;align-items:center;gap:6px;background:#22c55e;color:#fff;font-weight:700;padding:8px 14px;border-radius:10px}
+.bv-pvgr{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:auto auto;gap:14px}
+.bv-pvc{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.bv-pvh{display:flex;gap:12px;align-items:center;margin-bottom:16px}.bv-pvh b{font-size:16px;display:block}.bv-pvh small{color:#64748b}
+.bv-pvic{width:42px;height:42px;border-radius:12px;background:#dcfce7;color:#15803d;display:grid;place-items:center}
+.bv-pass{display:flex;align-items:center;gap:8px}
+.bv-p{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;padding:12px 6px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0}
+.bv-p span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#22c55e;color:#fff;margin-bottom:2px}.bv-p small{color:#64748b;font-size:11.5px}
+.bv-seta{flex:none;width:18px;height:2px;background:#cbd5e1;position:relative}.bv-seta::after{content:'';position:absolute;right:-1px;top:-4px;border:5px solid transparent;border-left-color:#cbd5e1;border-right:0}
+.bv-prog{margin-top:14px}.bv-prog div{height:10px;border-radius:9px;background:#e2e8f0;overflow:hidden}.bv-prog div i{display:block;height:100%;background:linear-gradient(90deg,#22c55e,#16a34a);transform-origin:left;animation:bvProg 5s 1.8s ease-in-out infinite}
+.bv-prog small{display:block;margin-top:6px;color:#64748b}
+@keyframes bvProg{0%{transform:scaleX(0)}45%,90%{transform:scaleX(1)}100%{transform:scaleX(1);opacity:.6}}
+.bv-hist{display:flex;align-items:flex-end;gap:10px;height:150px;padding-top:6px}
+.bv-hist>div{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:5px;animation:none!important}
+.bv-hist i{width:100%;height:var(--h);border-radius:6px 6px 2px 2px;background:linear-gradient(#4ade80,#16a34a);transform-origin:bottom;animation:bvAlto .9s var(--d) cubic-bezier(.2,.8,.3,1.2) both}
+.bv-hist>div:nth-child(-n+2) i{background:linear-gradient(#fca5a5,#dc2626)}
+.bv-hist small{font-size:10.5px;color:#64748b}
+@keyframes bvAlto{from{transform:scaleY(0)}}
+.bv-q{grid-template-columns:170px 1fr 38px}.bv-q div i{background:#22c55e}
+.bv-al{display:grid;grid-template-columns:28px 1fr 34px;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #f1f5f9}
+.bv-al span{width:26px;height:26px;border-radius:50%;background:#e0f2fe;color:#0369a1;display:grid;place-items:center;font-weight:700;font-size:11px}
+.bv-al em{font-style:normal;font-weight:800;text-align:right;color:#15803d}.bv-al em.neg{color:#dc2626}
+.bv-pexp{margin-top:10px;display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#15803d;font-size:12.5px}
+@media (prefers-reduced-motion:reduce){.bv-si *,.bv-fm *,.bv-pv *{animation:none!important}}
+
+.bv-cla{display:flex;flex-direction:column}
+.bv-pod{margin-top:auto;display:flex;align-items:flex-end;justify-content:center;gap:6px}
+.bv-pod>div{display:flex;flex-direction:column;align-items:center;width:62px;animation:bvIn .6s var(--d) both}
+.bv-pod .bv-bi{width:44px;height:44px}
+.bv-pod b{display:grid;place-items:center;width:100%;border-radius:8px 8px 0 0;color:#fff;font-size:20px;font-weight:900;transform-origin:bottom;animation:bvAlto .8s calc(var(--d) + .1s) cubic-bezier(.2,.8,.3,1.3) both}
+.bv-pod>div:nth-child(1) b{height:70px;background:#94a3b8}.bv-pod>div:nth-child(2) b{height:100px;background:#facc15;color:#713f12}.bv-pod>div:nth-child(3) b{height:50px;background:#fb923c}
+
+
+.logo{white-space:nowrap}
+.mlg{display:inline-grid;place-items:center;width:34px;height:34px}.mlg svg{width:20px;height:20px}
+.mmold{position:relative;margin:0 auto;border:4px solid var(--mc,#1b93c6);overflow:hidden;box-shadow:0 30px 70px -25px rgba(12,47,66,.55);width:100%;max-width:1108px;box-sizing:border-box}
+.mmold .mesc{position:absolute;left:0;top:0;width:1100px;height:640px;transform-origin:0 0}
+.feat.inv .ft{order:0}
+.mbi{display:flex;gap:4px}.mbi svg{width:44px;height:44px}
+.mres{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.mres i{font-style:normal;color:#fff;font-weight:800;padding:8px;text-align:center}.mres i.ok{outline:3px solid #22c55e;outline-offset:2px}
+.mbar{display:grid;gap:6px;margin-top:8px}.mbar span{display:block;font-size:11.5px;color:#fff;font-weight:700;padding:4px 8px;width:var(--w);background:#16a34a;white-space:nowrap}.mbar span.m{background:#dc2626}
+.mest{font-size:24px;color:#f59e0b;letter-spacing:2px}
+.mqr{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;aspect-ratio:1}.mqr i.p{background:#1d2a23}
+.mdn{width:90px;height:90px;border-radius:50%;background:conic-gradient(#0e7490 0 71%,#f59e0b 71% 92%,#e11d48 92%);-webkit-mask:radial-gradient(circle,transparent 52%,#000 53%);mask:radial-gradient(circle,transparent 52%,#000 53%);margin:4px auto 8px}
+.mprog{height:10px;background:#e2e8f0;margin:10px 0 6px;overflow:hidden}.mprog i{display:block;height:100%;background:#16a34a;animation:bvProg 5s 1s ease-in-out infinite;transform-origin:left}
+.mhist{display:flex;align-items:flex-end;gap:6px;height:90px;margin-top:8px}.mhist i{flex:1;height:var(--h);background:#16a34a}.mhist i.n{background:#dc2626}
+.mbichos{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;max-width:820px;margin:0 auto}
+.mbichos>div{display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:700}.mbichos svg{width:96px;height:96px}
+.mbichos.on>div{animation:bvPop .6s var(--d) both}
+.mmods{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.mmod{aspect-ratio:1.3;background:linear-gradient(var(--a),var(--b));color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:18px;font-weight:800;font-size:20px;box-shadow:0 10px 26px -14px rgba(0,0,0,.4)}.mmod small{font-weight:600;font-size:13px;opacity:.95}
+.mmods.on .mmod{animation:bvIn .6s var(--d) both}
+.mpas{list-style:none;padding:0;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;max-width:1080px}
+.mpas li{background:var(--paper);border:1px solid var(--line);padding:22px 20px;position:relative}
+.mpas.on li{animation:bvIn .6s var(--d) both}
+.mpas b{display:grid;place-items:center;width:38px;height:38px;background:var(--mc,#1b93c6);color:#fff;font:800 18px var(--disp);margin-bottom:12px}
+.mpas h4{margin:0 0 4px;font:700 18px var(--disp)}.mpas p{margin:0;color:var(--ink2);font-size:15px}
+@media (max-width:760px){.mbichos{grid-template-columns:repeat(3,1fr)}.mmods{grid-template-columns:repeat(2,1fr)}.mbichos svg{width:72px;height:72px}}
+
+:root{--mc:#7c3aed}
+</style>
+</head>
+<body>
+<header class="bar" id="bar"><div class="w">
+  <a class="logo" href="#topo" aria-label="Spruce It, início"><span class="mlg" style="background:linear-gradient(135deg,#f39200,#c2410c)"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></span> Spruce It <small>da EduSpruce</small></a>
+  <nav class="nav" id="nav"><a href="#funcionalidades">Funcionalidades</a><a href="#bichos">Bichos</a><a href="#como">Como funciona</a><a href="../sprucenote/">SpruceNote</a><a href="../formularios/">Formulários</a><a href="../provas/">Provas</a></nav>
+  <span class="sp"></span>
+  <a class="t" href="../?landing">EduSpruce</a>
+  <a class="bt a s" href="https://eduspruce.pt/"><span>Abrir<span class="hs"> a EduSpruce</span></span></a>
+  <button class="menu" id="menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<main id="topo">
+<section class="hero"><div class="w">
+  <span class="eyebrow">Jogos de revisão para a sala de aula</span>
+  <h1>Aprender é <em>o melhor jogo</em></h1>
+  <p class="lead">Perguntas, Bichos e modos de jogo que transformam a revisão da matéria na parte preferida da aula — e que nunca contam para a nota.</p>
+  <div class="cta"><a class="bt a" href="https://eduspruce.pt/">Criar um jogo →</a><a class="bt o" href="#funcionalidades">Ver como funciona</a></div>
+  <p class="nota">Incluído na EduSpruce · Os alunos entram com um código, sem contas · Sem anúncios</p>
+  <div class="demo-wrap"><div class="flt f1"><b style="background:#f39200">★</b>Escolha o modo de jogo</div><div class="flt f2"><b style="background:#7c3aed">⚡</b>Os alunos entram com um código</div>
+    <div class="mmold" id="mmold"><div class="mesc" id="mesc"><div class="bv-si"><div class="bv-sitop"><b class="bv-silogo">Spruce<i>It</i></b><span class="bv-chip"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg> Corrida ao Cume</span><span class="bv-sp"></span><span class="bv-tempo">⏱ 0:18</span><span class="bv-chip"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.7c2 .7 3.2 2.6 3.5 5.3"/></svg> 8 jogadores</span></div>
+      <div class="bv-sigr"><div class="bv-sic bv-lob"><small>Entrar em</small><b class="bv-url">eduspruce.pt/spruceit</b><small>com o código</small><div class="bv-cod">482 913</div>
+        <div class="bv-jog"><div class="bv-j" style="--d:0.4s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Leo</span></div><div class="bv-j" style="--d:0.68s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#4ade80" stroke="#16a34a" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Bia</span></div><div class="bv-j" style="--d:0.9600000000000001s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#60a5fa" stroke="#1d4ed8" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Rui</span></div><div class="bv-j" style="--d:1.2400000000000002s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Inês</span></div><div class="bv-j" style="--d:1.52s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#facc15" stroke="#a16207" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Tomás</span></div><div class="bv-j" style="--d:1.8000000000000003s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#c084fc" stroke="#7e22ce" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#7e22ce" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Rita</span></div><div class="bv-j" style="--d:2.08s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Duarte</span></div><div class="bv-j" style="--d:2.3600000000000003s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#fb7185" stroke="#be123c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Matilde</span></div></div></div>
+      <div class="bv-sic bv-per"><div class="bv-pnum">Pergunta 4 de 10</div><div class="bv-ptxt">Quanto é 7 × 8?</div><div class="bv-res"><div class="bv-r" style="--c:#facc15;--d:1.2s"><i>▲</i>54</div><div class="bv-r ok" style="--c:#3b82f6;--d:1.3199999999999998s"><i>◆</i>56</div><div class="bv-r" style="--c:#22c55e;--d:1.44s"><i>●</i>63</div><div class="bv-r" style="--c:#ef4444;--d:1.56s"><i>■</i>48</div></div><div class="bv-barra"><span></span></div></div>
+      <div class="bv-sic bv-cla"><h5><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="M8.5 14 7 21l5-3 5 3-1.5-7"/></svg> Pódio</h5><div class="bv-cl" style="--d:1.6s;--w:100.00000000000001%"><b>1</b><span>Rita</span><div><i></i></div><em>920</em></div><div class="bv-cl" style="--d:1.75s;--w:93.47826086956522%"><b>2</b><span>Leo</span><div><i></i></div><em>860</em></div><div class="bv-cl" style="--d:1.9000000000000001s;--w:80.43478260869566%"><b>3</b><span>Bia</span><div><i></i></div><em>740</em></div><div class="bv-cl" style="--d:2.05s;--w:66.30434782608697%"><b>4</b><span>Duarte</span><div><i></i></div><em>610</em></div><div class="bv-cl" style="--d:2.2s;--w:52.173913043478265%"><b>5</b><span>Rui</span><div><i></i></div><em>480</em></div><div class="bv-pod"><div style="--d:2.6s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><b>2</b></div><div style="--d:2.9s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#c084fc" stroke="#7e22ce" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#7e22ce" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><b>1</b></div><div style="--d:2.4s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#4ade80" stroke="#16a34a" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><b>3</b></div></div></div></div>
+      <div class="bv-modos"><span style="--d:2.2s">Corrida ao Cume</span><span style="--d:2.3200000000000003s">Pesca no Lago</span><span style="--d:2.4400000000000004s">Rainha do Pinhal</span><span style="--d:2.56s">Ao teu ritmo</span><span style="--d:2.68s">Torre de Blocos</span></div></div></div></div></div>
+</div></section>
+<section class="sec" id="funcionalidades"><div class="w"><div class="sec-h"><span class="eyebrow">Funcionalidades</span><h2>Revisão a sério, com cara de jogo</h2><p>O mesmo conjunto de perguntas serve para muitos jogos diferentes — e para muitas aulas.</p></div>
+ <div class="feat rv"><div class="ft"><span class="eyebrow">Motivar</span><h3>Os alunos pedem para jogar outra vez</h3><p>Cada aluno escolhe o seu Bicho, sobe no pódio e quer bater o próprio recorde. A competição é saudável e toda a gente responde.</p><ul><li>Bichos colecionáveis, todos originais</li><li>Pódio e classificação em direto</li><li>Jogo por equipas ou ao ritmo de cada um</li></ul></div><div class="art" style="--k:#f3e8ff"><div class="in"><div class="pc" style="left:8%;top:10%;width:40%;--d:0.1s;--rot:-3deg;"><b>🏆 Pódio</b>1.º Rita · 920<br>2.º Leo · 860<br>3.º Bia · 740</div><div class="pc" style="left:54%;top:14%;width:38%;--d:0.3s;--rot:2deg;"><div class="mbi"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#c084fc" stroke="#7e22ce" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#7e22ce" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#4ade80" stroke="#16a34a" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div><small>8 jogadores ligados</small></div><div class="pc" style="left:20%;top:58%;width:56%;--d:0.5s;--rot:-1deg;"><b>Quanto é 7 × 8?</b><div class="mres"><i style="background:#facc15">54</i><i class="ok" style="background:#3b82f6">56</i><i style="background:#22c55e">63</i><i style="background:#ef4444">48</i></div></div></div></div></div>
+ <div class="feat rv inv"><div class="ft"><span class="eyebrow">Preparar</span><h3>Perguntas prontas em minutos</h3><p>Escreva as perguntas, cole-as de um documento ou importe um CSV. Reaproveite conjuntos de outros anos no Banco.</p><ul><li>Escolha múltipla, verdadeiro/falso e resposta curta</li><li>Imagens nas perguntas e nas opções</li><li>Banco de conjuntos por ano letivo</li></ul></div><div class="art" style="--k:#fff7ed"><div class="in"><div class="pc" style="left:10%;top:12%;width:78%;--d:0.1s;--rot:-2deg;"><b>Frações — 5.º ano</b><small>12 perguntas · editado hoje</small></div><div class="pc" style="left:16%;top:40%;width:66%;--d:0.3s;--rot:1deg;"><b>1.</b> Qual é a fração equivalente a ½?<br><small>✔ 2/4 · 3/5 · 1/3 · 4/6</small></div><div class="pc" style="left:24%;top:68%;width:52%;--d:0.5s;--rot:-1deg;">⬆ <b>Importar CSV</b> ou colar texto</div></div></div></div>
+ <div class="feat rv"><div class="ft"><span class="eyebrow">Jogar</span><h3>Modos de jogo originais</h3><p>Corrida ao Cume, Pesca no Lago, Rainha do Pinhal, Ao teu ritmo e muitos outros — escolha o que combina com a turma e com o tempo que tem.</p><ul><li>Jogos ao vivo projetados no quadro</li><li>Modo ao teu ritmo para trabalho de casa</li><li>Tempo por pergunta e número de rondas à escolha</li></ul></div><div class="art" style="--k:#ecfeff"><div class="in"><div class="pc" style="left:8%;top:8%;width:40%;--d:0.1s;--rot:2deg;"><b>Corrida ao Cume</b><small>Quem chega primeiro ao topo</small></div><div class="pc" style="left:54%;top:8%;width:40%;--d:0.22s;--rot:-2deg;"><b>Pesca no Lago</b><small>Cada resposta certa, um peixe</small></div><div class="pc" style="left:8%;top:38%;width:40%;--d:0.33999999999999997s;--rot:2deg;"><b>Rainha do Pinhal</b><small>Conquiste o pinhal</small></div><div class="pc" style="left:54%;top:38%;width:40%;--d:0.45999999999999996s;--rot:-2deg;"><b>Ao teu ritmo</b><small>Para casa, sem pressa</small></div><div class="pc" style="left:8%;top:68%;width:40%;--d:0.58s;--rot:2deg;"><b>Torre de Blocos</b><small>Empilhe sem deixar cair</small></div><div class="pc" style="left:54%;top:68%;width:40%;--d:0.7s;--rot:-2deg;"><b>Equipas</b><small>Juntos contra o relógio</small></div></div></div></div>
+ <div class="feat rv inv"><div class="ft"><span class="eyebrow">Analisar</span><h3>Veja logo o que ficou por perceber</h3><p>No fim do jogo, o relatório mostra as perguntas que mais falharam e como correu a cada aluno. O Spruce It nunca conta para a nota.</p><ul><li>Relatório por pergunta e por aluno</li><li>Histórico de jogos da turma</li><li>Exportar para Excel</li></ul></div><div class="art" style="--k:#ecfdf5"><div class="in"><div class="pc" style="left:8%;top:10%;width:84%;--d:0.1s;--rot:-1deg;"><b>Relatório · Frações</b><div class="mbar"><span style="--w:92%">Q1</span><span style="--w:71%">Q2</span><span style="--w:44%" class="m">Q3</span><span style="--w:83%">Q4</span></div></div><div class="pc" style="left:46%;top:64%;width:44%;--d:0.4s;--rot:2deg;">⚠ <b>Q3</b> · rever na próxima aula</div></div></div></div>
+ </div></section>
+ <section class="sec uses" id="bichos"><div class="w"><div class="sec-h"><span class="eyebrow">O que é um Bicho?</span><h2>Um amigo em forma de cubo que adora jogar</h2><p>Cada aluno joga com um Bicho. Há raposas, sapos, robôs, polvos e dezenas de outros — todos desenhados de raiz para a EduSpruce.</p></div>
+ <div class="mbichos rv"><div style="--d:0.0s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f97316" stroke="#c2410c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Raposa</span></div><div style="--d:0.08s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#4ade80" stroke="#16a34a" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Sapo</span></div><div style="--d:0.16s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#60a5fa" stroke="#1d4ed8" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#1d4ed8" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Robô</span></div><div style="--d:0.24s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#f472b6" stroke="#be185d" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Urso</span></div><div style="--d:0.32s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#facc15" stroke="#a16207" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Abelha</span></div><div style="--d:0.4s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#c084fc" stroke="#7e22ce" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#7e22ce" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Polvo</span></div><div style="--d:0.48s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#2dd4bf" stroke="#0f766e" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Lontra</span></div><div style="--d:0.56s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#fb7185" stroke="#be123c" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Cogumelo</span></div><div style="--d:0.64s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#94a3b8" stroke="#475569" stroke-width="3"/><path d="M22 10 L18 1 M38 10 L42 1" stroke="#475569" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Robô Bip</span></div><div style="--d:0.72s"><svg viewBox="0 0 60 60" class="bv-bi" aria-hidden="true"><rect x="6" y="10" width="48" height="44" rx="12" fill="#fde68a" stroke="#b45309" stroke-width="3"/><circle cx="14" cy="10" r="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/><circle cx="46" cy="10" r="6" fill="#fde68a" stroke="#b45309" stroke-width="3"/><circle cx="22" cy="28" r="6" fill="#fff"/><circle cx="38" cy="28" r="6" fill="#fff"/><circle class="bv-pu" cx="23" cy="29" r="3" fill="#111827"/><circle class="bv-pu" cx="39" cy="29" r="3" fill="#111827"/><path d="M24 41 Q30 46 36 41" stroke="#111827" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg><span>Panda</span></div></div></div></section>
+ <section class="sec" id="como"><div class="w"><div class="sec-h"><span class="eyebrow">Como funciona</span><h2>Do conjunto de perguntas ao pódio em cinco passos</h2></div>
+ <ol class="mpas rv"><li style="--d:0.0s"><b>1</b><h4>Escolha as perguntas</h4><p>Um conjunto seu, do Banco ou importado.</p></li><li style="--d:0.12s"><b>2</b><h4>Escolha o modo</h4><p>Ao vivo na aula ou ao ritmo de cada um.</p></li><li style="--d:0.24s"><b>3</b><h4>Mostre o código</h4><p>Os alunos entram em eduspruce.pt/spruceit.</p></li><li style="--d:0.36s"><b>4</b><h4>Joguem e revejam</h4><p>A matéria revista sem dar por isso.</p></li><li style="--d:0.48s"><b>5</b><h4>Veja os resultados</h4><p>O que correu bem e o que falta rever.</p></li></ol></div></section>
+<section class="final"><div class="w"><h2>A próxima revisão pode ser o ponto alto da semana</h2><p>O Spruce It faz parte da EduSpruce. Entre com a sua conta e crie o primeiro jogo.</p><a class="bt a" href="https://eduspruce.pt/">Criar um jogo →</a></div></section>
+</main>
+<footer><div class="w">
+  <div class="g">
+    <div><a class="logo" href="#topo"><span class="mlg" style="background:linear-gradient(135deg,#f39200,#c2410c)"><svg class="ic" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg></span> Spruce It</a><p style="margin:0;max-width:280px">jogos de perguntas com Bichos e modos de jogo originais para rever a matéria na sala de aula. Parte da EduSpruce.</p></div>
+    <div><h4>SpruceApps</h4><a href="../sprucenote/">SpruceNote</a><a href="../spruceit/">Spruce It</a><a href="../formularios/">Formulários</a><a href="../provas/">Provas</a></div>
+    <div><h4>Apoio</h4><a href="../manual/EduSpruce-Manual.pdf">Manual</a><a href="../privacidade.html">Privacidade</a><a href="../termos.html">Termos</a></div>
+    <div><h4>EduSpruce</h4><a href="../?landing">Página da EduSpruce</a><a href="https://eduspruce.pt/">Abrir a app</a></div>
+  </div>
+  <div class="cp"><span>© 2026 EduSpruce · Spruce It</span><span>Feito nos Açores 🌲</span></div>
+</div></footer>
+<script>
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+addEventListener('scroll',()=>$('#bar').classList.toggle('sc',scrollY>8),{passive:true});
+$('#menu').onclick=()=>$('#nav').classList.toggle('on');$$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('on'));
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.2}):null;
+$$('.rv').forEach(el=>io?io.observe(el):el.classList.add('on'));
+const m=$('#mmold'),e=$('#mesc');const aj=()=>{const w=Math.min(m.clientWidth,1100),s=w/1100;e.style.transform='scale('+s+')';m.style.height=(640*s+8)+'px'};aj();addEventListener('resize',aj);
+</script>
+</body>
+</html>
