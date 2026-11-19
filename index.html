@@ -25,7 +25,7 @@ p{margin:0}.lead{font-size:clamp(18px,1.7vw,21px);color:var(--ink2);max-width:34
 main,header,footer{position:relative;z-index:1}
 
 /* barra */
-.bar{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:#ffffffb8;border-bottom:1px solid var(--line)}
+.bar{position:sticky;top:0;z-index:30;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:#e6f3fad1;border-bottom:1px solid var(--line)}
 .bar .w{display:flex;align-items:center;gap:14px;height:62px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font:700 21px var(--disp);letter-spacing:-.02em}
 .relogio{margin-left:auto;display:flex;white-space:nowrap;align-items:center;gap:8px;font:600 15px var(--disp);font-variant-numeric:tabular-nums;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff}
@@ -332,7 +332,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .sa-t{display:flex;flex-direction:column;align-items:center;text-align:center;gap:5px;padding:10px 6px;border-radius:12px;text-decoration:none;color:var(--ink)}
 .sa-t:hover,.sa-t:focus-visible{background:var(--sky,#e6f3fa)}
 .sa-t b{font:700 14px var(--body);line-height:1.15}.sa-t>span:last-child{font-size:11.5px;line-height:1.25;color:var(--ink2)}.sa-t .sa-ic{color:#fff}
-.sa-ic{border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 6px 14px -8px var(--a2)}
+.sa-ic{border-radius:14px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;background:color-mix(in srgb,var(--a1) 55%,var(--a2));box-shadow:none}
 .sa-pf{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .sa-pf a{font-weight:700;font-size:14px;color:var(--sge2,#11698f);text-decoration:none}.sa-pf a:hover{text-decoration:underline}
 .sa-pf .sa-ab{background:var(--ink);color:#fff;padding:8px 14px;border-radius:10px}.sa-pf .sa-ab:hover{text-decoration:none}
@@ -348,7 +348,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .sa-gh h3{font:700 26px var(--disp);margin:0}.sa-gh p{margin:0;color:var(--ink2)}
 .sa-cs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .sa-c{position:relative;background:#fff;border-radius:18px;padding:20px 20px 16px;box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column;scroll-margin-top:84px;overflow:hidden;transition:transform .25s,box-shadow .25s}
-.sa-c::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:linear-gradient(90deg,var(--a1),var(--a2))}
+.sa-c::before{content:"";position:absolute;left:0;right:0;top:0;height:5px;background:color-mix(in srgb,var(--a1) 55%,var(--a2))}
 .sa-c:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px var(--a2),0 0 0 1px var(--line)}
 .sa-c:target{box-shadow:0 0 0 3px var(--a1)}
 .sa-ch{display:flex;gap:14px;align-items:center}
@@ -530,6 +530,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .bv-pod>div:nth-child(1) b{height:70px;background:#94a3b8}
 .bv-pod>div:nth-child(2) b{height:100px;background:#facc15;color:#713f12}
 .bv-pod>div:nth-child(3) b{height:50px;background:#fb923c}
+.sa-c,.card{box-shadow:0 30px 60px -34px rgba(12,47,66,.35),0 0 0 1px var(--line)!important}footer .acores{color:#fff;font-weight:600;white-space:nowrap}footer .acores::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sun);margin:0 7px 1px 2px}
 </style></head>
 <body>
 <div id="sol" aria-hidden="true"></div>
@@ -548,6 +549,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
   </div>
   <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:30 · 1.º tempo</span></span>
   <a class="t" href="manual/EduSpruce-Manual.pdf">Manual</a>
+  <a class="t" href="changelog/">Changelog</a>
   <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a>
 </div></header>
 
@@ -789,7 +791,7 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
 </div></section>
 </main>
 
-<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa</span><span><a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a></span></div></footer>
+<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa · <b class="acores">Orgulhosamente feito nos Açores</b></span><span><a href="changelog/">Changelog</a> &nbsp; <a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a></span></div></footer>
 
 <script>
 (()=>{const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
