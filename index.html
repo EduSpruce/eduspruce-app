@@ -15,7 +15,7 @@ body{margin:0;background:var(--sky);color:var(--ink);font:400 17px/1.55 var(--bo
 img{max-width:100%;display:block;height:auto}a{color:var(--sge2)}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-.w{max-width:none;margin:0 auto;padding:0 clamp(18px,4vw,80px)}
+.w{max-width:1640px;margin:0 auto;padding:0 clamp(18px,4vw,80px)}.ecras .w{max-width:1400px}
 h1,h2,h3{font-family:var(--disp);margin:0;letter-spacing:-.02em;text-wrap:balance}
 h2{font-size:clamp(30px,4.4vw,54px);line-height:1.02;font-weight:700}
 p{margin:0}.lead{font-size:clamp(18px,1.7vw,21px);color:var(--ink2);max-width:34em}
@@ -124,7 +124,7 @@ input[type=range]{width:100%;accent-color:var(--sge);height:28px}
 .abas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 .abas button{border:0;background:#ffffffb0;box-shadow:inset 0 0 0 1.5px var(--line);border-radius:99px;padding:9px 16px;font-weight:600;font-size:15px;transition:background .2s,color .2s}
 .abas button[aria-selected=true]{background:var(--ink);color:#fff;box-shadow:none}
-.palco{position:relative;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -40px #0c2f4288,0 0 0 1px var(--line);background:#fff;aspect-ratio:1600/1007}
+.palco{position:relative;max-width:1240px;margin-inline:auto;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -40px #0c2f4288,0 0 0 1px var(--line);background:#fff;aspect-ratio:1600/1007}
 .palco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.03);transition:opacity .45s,transform .6s}
 .palco img.on{opacity:1;transform:none}
 .leg{margin-top:14px;color:var(--ink2);min-height:3.2em;max-width:46em}
@@ -228,7 +228,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .notas .nab{display:inline-flex;gap:4px;padding:4px;background:rgba(255,255,255,.1);border-radius:999px;margin-bottom:22px}
 .notas .nab button{font:600 15px/1 inherit;color:#e2e8f0;background:none;border:0;padding:10px 18px;border-radius:999px;cursor:pointer}
 .notas .nab button[aria-selected=true]{background:#f97316;color:#fff}
-.notas .mold{position:relative;margin:0 auto;max-width:min(1600px,100%)!important;width:100%;box-sizing:border-box;border:4px solid #f15a2b;border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);max-width:100%}
+.notas .mold{position:relative;margin:0 auto;max-width:min(1240px,100%)!important;width:100%;box-sizing:border-box;border:4px solid #f15a2b;border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);max-width:100%}
 .notas .esc{position:absolute;left:0;top:0;width:1100px;height:640px;transform-origin:0 0}
 .notas .leg{color:var(--ink2);margin:16px auto 0;font-size:15px;text-align:center;max-width:none}
 .lnd-mq label{border:0!important;background:none!important;padding:3px 0!important;border-radius:0!important;margin:0!important;box-shadow:none!important;min-height:0!important}
@@ -370,7 +370,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .vit-marca{display:flex;justify-content:center;align-items:center;gap:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:14px;opacity:.92;margin-top:6px}
 .vit h2{color:#fff;margin:8px auto 10px;max-width:16em;text-shadow:0 3px 0 rgba(0,0,0,.2)}
 .vit .lead{color:#e2e8f0;max-width:640px;margin:0 auto 26px}
-.vit-mold{position:relative;margin:0 auto;max-width:1600px;width:100%;border:4px solid var(--vb);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);background:#fff;text-align:left}
+.vit-mold{position:relative;margin:0 auto;max-width:1240px;width:100%;border:4px solid var(--vb);border-radius:10px;overflow:hidden;box-shadow:0 24px 60px -20px rgba(0,0,0,.5);background:#fff;text-align:left}
 .vit-esc{position:absolute;left:0;top:0;width:1100px;height:640px;transform-origin:0 0;color:#0f172a}
 .vit-leg{color:var(--ink2);margin:16px auto 0;font-size:15px;max-width:none}
 .vit-esc svg{display:inline-block}
@@ -679,7 +679,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="mqd-cursor" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 2 L4 20 L9 15 L12 22 L15 21 L12 14 L19 14 Z"/></svg></div>
    </div></div></div></template>
 <script>(function(){const m=document.getElementById('nmold'),e=document.getElementById('nesc');if(!m)return;
-const aj=()=>{const w=Math.min(m.clientWidth,1100),s=w/1100;e.style.transform='scale('+s+')';m.style.height=(640*s+8)+'px'};
+const aj=()=>{const s=(m.clientWidth)/1100;e.style.transform='scale('+s+')';m.style.height=(640*s+8)+'px'};
 aj();addEventListener('resize',aj);
 document.querySelectorAll('.notas .nab button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.notas .nab button').forEach(x=>x.setAttribute('aria-selected',x===b));e.innerHTML=document.getElementById('n-'+b.dataset.n).innerHTML});
 if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new IntersectionObserver(v=>{if(v[0].isIntersecting){e.innerHTML=e.innerHTML;e.style.visibility='';io.disconnect()}},{threshold:.25});io.observe(m)}})();</script>
@@ -931,7 +931,7 @@ p.addEventListener('click',e=>{if(e.target.closest('a'))set(false)});})();
 
 <script>
 /* demonstrações das apps: ajustar ao tamanho e repetir as animações quando entram no ecrã */
-(()=>{const M=[...document.querySelectorAll('.vit-mold')];const aj=()=>M.forEach(m=>{const e=m.querySelector('.vit-esc');const w=Math.min(m.clientWidth,1100),k=w/1100;e.style.transform='scale('+k+')';m.style.height=(640*k)+'px'});aj();addEventListener('resize',aj);
+(()=>{const M=[...document.querySelectorAll('.vit-mold')];const aj=()=>M.forEach(m=>{const e=m.querySelector('.vit-esc');const k=m.clientWidth/1100;e.style.transform='scale('+k+')';m.style.height=(640*k)+'px'});aj();addEventListener('resize',aj);
 if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){const e=en.target.querySelector('.vit-esc');const h=e.innerHTML;e.innerHTML='';void e.offsetWidth;e.innerHTML=h}}),{threshold:.35});M.forEach(m=>io.observe(m))}})();
 </script>
 </body></html>
