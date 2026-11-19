@@ -223,7 +223,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 
 /* SpruceNote e JornalNote: quadro de demonstração (ao estilo do Milanote) */
 .notas{padding:84px 0 70px;background:linear-gradient(172deg,#2b3a4c 0 62%,#fff 62.2%);color:#fff;text-align:center}
-.notas .hora{color:#fde68a}.notas h2{color:#fff;font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,5vw,58px);line-height:1.06;margin:6px 0 10px}
+.notas .hora{color:#fde68a}.notas h2{color:#fff;font-size:clamp(30px,5vw,58px);line-height:1.06;margin:6px 0 10px}
 .notas .lead{color:#cbd5e1;max-width:640px;margin:0 auto 18px}
 .notas .nab{display:inline-flex;gap:4px;padding:4px;background:rgba(255,255,255,.1);border-radius:999px;margin-bottom:22px}
 .notas .nab button{font:600 15px/1 inherit;color:#e2e8f0;background:none;border:0;padding:10px 18px;border-radius:999px;cursor:pointer}
@@ -233,7 +233,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .notas .leg{color:var(--ink2);margin:16px auto 0;font-size:15px;text-align:center;max-width:none}
 .lnd-mq label{border:0!important;background:none!important;padding:3px 0!important;border-radius:0!important;margin:0!important;box-shadow:none!important;min-height:0!important}
 /* a «app» falsa — cores fixas, iguais em claro e escuro, como uma imagem */
-.lnd-mq .mqd-app{width:1100px;height:640px;display:flex;flex-direction:column;background:#fff;color:#1f2937;font:13px/1.35 system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;text-align:left}
+.lnd-mq .mqd-app{width:1100px;height:640px;display:flex;flex-direction:column;background:#fff;color:#1f2937;font-family:inherit;font-size:13px;line-height:1.35;text-align:left}
 .lnd-mq .mqd-tb{display:flex;align-items:center;gap:8px;padding:9px 14px;font-size:11.5px;color:#475569}
 .lnd-mq .mqd-bc i{margin:0 6px;font-style:normal;color:#cbd5e1}
 .lnd-mq .mqd-b{font-weight:600;color:#111827}
@@ -241,7 +241,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .lnd-mq .mqd-b.c2{font-weight:400;color:#64748b}.lnd-mq .mqd-b.c2::before{background:#e07a5f}
 .lnd-mq .mqd-tbi{margin-left:auto;display:flex;gap:12px;color:#64748b}
 .lnd-mq .mqd-ti{position:relative;text-align:center;padding:2px 0 9px;border-bottom:1px solid #e5e7eb}
-.lnd-mq .mqd-ti b{font:700 17px Georgia,serif;color:#111827}
+.lnd-mq .mqd-ti b{font-family:inherit;font-weight:700;font-size:17px;color:#111827}
 .lnd-mq .mqd-tia{position:absolute;right:14px;top:4px;display:flex;align-items:center;gap:6px;font-size:11px;color:#475569}
 .lnd-mq .mqd-tia span{margin-left:10px}
 .lnd-mq .mqd-bd{flex:1;display:flex;min-height:0}
@@ -251,7 +251,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .lnd-mq .mqd-cv{flex:1;position:relative;background:#eceef1;overflow:hidden}
 .lnd-mq .mqd-c{position:absolute;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12);animation:mqdCart .55s var(--d,0s) cubic-bezier(.2,.8,.3,1.2) both}
 @keyframes mqdCart{from{opacity:0;transform:translateY(18px) scale(.96)}}
-.lnd-mq .mqd-c h5{margin:0;text-align:center;font:700 14px Georgia,serif;color:#111827}
+.lnd-mq .mqd-c h5{margin:0;text-align:center;font-family:inherit;font-weight:700;font-size:14px;color:#111827}
 .lnd-mq .mqd-c>small{display:block;text-align:center;color:#94a3b8;font-size:10.5px;margin-bottom:8px}
 .lnd-mq .mqd-sobre{left:46px;top:18px;width:250px;padding:14px 12px 10px}
 .lnd-mq .mqd-sobre p{margin:0 0 10px;font-size:11.5px;line-height:1.45;color:#334155;border:1px solid #f1f5f9;padding:8px}
@@ -265,12 +265,12 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .lnd-mq .mqd-cor div{height:78px;background:var(--k);color:#fff;font-size:11px;padding:8px}
 .lnd-mq .mqd-cor span{display:block;padding:8px;font-size:10.5px;color:#334155}
 .lnd-mq .mqd-logo{left:40px;top:300px;width:262px;height:118px;display:flex;align-items:center;justify-content:center;background:#d4d7dc}
-.lnd-mq .mqd-logo b{font:900 26px/1 'Arial Black',Impact,sans-serif;letter-spacing:.02em;color:#111;transform:scaleY(1.25)}
+.lnd-mq .mqd-logo b{font-family:inherit;font-weight:900;font-size:26px;line-height:1;letter-spacing:.02em;color:#111;transform:scaleY(1.25)}
 .lnd-mq .mqd-seta{position:absolute;left:292px;top:272px;width:118px;height:58px;fill:none;stroke:#22c55e;stroke-width:3;stroke-linecap:round;stroke-dasharray:180;stroke-dashoffset:180;animation:mqdTraco .9s 1.3s ease forwards}
 @keyframes mqdTraco{to{stroke-dashoffset:0}}
 .lnd-mq .mqd-insp{left:566px;top:18px;width:236px;padding:12px 10px 8px}
 .lnd-mq .mqd-abc{height:96px;display:flex;align-items:center;justify-content:center;background:#22c55e}
-.lnd-mq .mqd-abc b{font:900 62px/1 'Arial Black',Impact,sans-serif;color:#052e16}
+.lnd-mq .mqd-abc b{font-family:inherit;font-weight:900;font-size:62px;line-height:1;color:#052e16}
 .lnd-mq .mqd-leg{display:block;padding:7px 4px 10px;font-size:10.5px;color:#334155}
 .lnd-mq .mqd-vid{height:92px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e3a5f,#64748b 60%,#e2e8f0)}
 .lnd-mq .mqd-vid i{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;animation:mqdPulsa 2.4s 3s infinite}
