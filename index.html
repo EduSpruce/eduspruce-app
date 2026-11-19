@@ -316,14 +316,29 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .lnd-mq .mqd-cursor svg{width:100%;height:100%;fill:#111827;stroke:#fff;stroke-width:1.4}
 @keyframes mqdRato{0%{opacity:0;left:640px;top:120px}6%{opacity:1}30%{left:56px;top:470px;transform:scale(1)}33%{transform:scale(.8)}36%{transform:scale(1);left:56px;top:470px}60%{left:470px;top:476px}70%{left:470px;top:476px;opacity:1}85%{opacity:0}100%{opacity:0;left:640px;top:120px}}
 @media (prefers-reduced-motion:reduce){.lnd-mq *{animation-duration:.01s!important;animation-iteration-count:1!important;animation-delay:0s!important}.lnd-mq .mqd-cursor{display:none}}
+
+/* apps da EduSpruce no topo */
+.apps{flex:1;display:flex;justify-content:center;align-items:center;gap:6px;min-width:0}
+.apps+.relogio{margin-left:0}
+.esapp{display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:99px;text-decoration:none;color:var(--ink);font:600 15px var(--body);white-space:nowrap;transition:background .2s,color .4s}
+.esapp:hover,.esapp:focus-visible{background:#0c2f4212}
+.esapp-i{width:30px;height:30px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2))}
+.esapp.esman{padding:5px}.esapp-m{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.n .esapp{color:#fff}.n .esapp-m{color:#fff;box-shadow:inset 0 0 0 1.5px #ffffff44}.n .esapp:hover{background:#ffffff1a}
+@media (max-width:760px){.esapp-l{display:none}.esapp{padding:4px}.apps{gap:2px}.bar .w{gap:8px}}
+@media (max-width:480px){.bar .logo{font-size:0;gap:0}.bar .bt.s{padding:9px 12px}}
 </style></head>
 <body>
 <div id="sol" aria-hidden="true"></div>
 
 <header class="bar"><div class="w">
   <a class="logo" href="#topo" aria-label="EduSpruce, início"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1b93c6"/><g transform="translate(32 32) scale(.9) translate(-33.8 -32)"><path d="M29.29 47C36.53 47 40.84 43.69 40.84 38.14C40.84 33.47 37.57 30.65 31.92 29.41L29.39 28.82C26.78 28.24 25.08 27.37 25.08 25.57C25.08 23.94 26.51 22.75 29.27 22.75C32.06 22.75 33.61 23.98 33.8 26.1H40.45C40.37 20.69 36.06 17 29.29 17C22.67 17 17.92 20.63 17.92 26.04C17.92 30.43 20.98 32.96 26.02 34.12L29.12 34.84C32.31 35.57 33.84 36.45 33.84 38.12C33.84 39.98 32.08 41.25 29.22 41.25C26.06 41.25 23.96 39.8 23.8 36.96H17.16C17.27 43.71 21.98 47 29.29 47Z" fill="#fff"/><circle cx="46.2" cy="43" r="4.3" fill="#f39200"/></g></svg>EduSpruce</a>
+  <!-- Apps da EduSpruce com página própria: acrescentar aqui uma <a class="esapp"> por cada app nova (cor do ícone = cor da app no tema SGE) -->
+  <nav class="apps" aria-label="Apps da EduSpruce">
+    <a class="esapp" href="sprucenote/" title="SpruceNote — quadros visuais para a escola"><span class="esapp-i" style="--a1:#f59e0b;--a2:#b45309"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="8" height="8" rx="1" transform="rotate(-8 7 9)"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="8" y="13" width="8" height="8" rx="1" transform="rotate(5 12 17)"/></svg></span><span class="esapp-l">SpruceNote</span></a>
+    <a class="esapp esman" href="manual/EduSpruce-Manual.pdf" title="Manual da EduSpruce (PDF)" aria-label="Manual"><span class="esapp-i esapp-m"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M8 7h8M8 11h6"/></svg></span></a>
+  </nav>
   <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:15</span></span>
-  <a class="t" href="manual/EduSpruce-Manual.pdf">Manual</a>
   <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a>
 </div></header>
 
