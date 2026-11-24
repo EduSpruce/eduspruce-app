@@ -1,9 +1,11 @@
 <!doctype html>
 <html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>EduSpruce — um dia de escola, sem papelada</title>
+<link rel="canonical" href="https://eduspruce.app/"><meta property="og:url" content="https://eduspruce.app/"><meta property="og:site_name" content="EduSpruce"><meta property="og:locale" content="pt_PT"><meta property="og:image" content="https://eduspruce.app/img/og/eduspruce.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="A EduSpruce acompanha o dia do professor: chamada, sumários, testes, jogos de perguntas, avaliação por domínios, reuniões e direção de turma. Experimente aqui mesmo, sem conta.">
-<meta property="og:title" content="EduSpruce — um dia de escola, sem papelada"><meta property="og:description" content="Faça a chamada, sorteie um aluno e calcule uma nota aqui mesmo na página."><meta property="og:image" content="img/avaliacao.webp"><meta property="og:type" content="website">
-<link rel="icon" href="favicon.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#e6f3fa">
+<meta property="og:title" content="EduSpruce — um dia de escola, sem papelada"><meta property="og:description" content="Faça a chamada, sorteie um aluno e calcule uma nota aqui mesmo na página."><meta property="og:type" content="website">
+<link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.png" type="image/png"><link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Organization", "name": "EduSpruce", "url": "https://eduspruce.app/", "logo": "https://eduspruce.app/icons/icon-512.png"}, {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "EduSpruce", "applicationCategory": "EducationalApplication", "operatingSystem": "Web", "inLanguage": "pt-PT", "url": "https://eduspruce.pt/", "description": "A EduSpruce acompanha o dia do professor: chamada, sumários, testes, jogos de perguntas, avaliação por domínios, reuniões e direção de turma. Experimente aqui mesmo, sem conta.", "image": "https://eduspruce.app/img/og/eduspruce.jpg"}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Preciso de instalar alguma coisa?", "acceptedAnswer": {"@type": "Answer", "text": "Não. A EduSpruce abre no navegador. No iPad e no telemóvel pode adicioná-la ao ecrã principal e passa a abrir em ecrã inteiro."}}, {"@type": "Question", "name": "Como consigo acesso?", "acceptedAnswer": {"@type": "Answer", "text": "Entre em eduspruce.pt com a sua conta Google. O acesso é por autorização: a conta tem de ser autorizada pelo administrador da EduSpruce antes da primeira entrada. Os alunos nunca precisam de conta."}}, {"@type": "Question", "name": "Os alunos precisam de conta?", "acceptedAnswer": {"@type": "Answer", "text": "Não. No Spruce It!, no Spruce Live, no Spruce Forms, no Spruce Exam e na autoavaliação entram com um código ou QR code que o professor mostra."}}, {"@type": "Question", "name": "Substitui o programa de gestão da escola?", "acceptedAnswer": {"@type": "Answer", "text": "Não. É o caderno do professor: prepara a avaliação, os sumários e as reuniões. Pode importar dados do programa da escola, mas nunca escreve nele."}}, {"@type": "Question", "name": "Serve para cursos profissionais e PROFIJ?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Tem módulos e UFCD, mecanismo de recuperação, planos de recuperação e uma área para a coordenação do PROFIJ, sem misturar com o ensino regular."}}, {"@type": "Question", "name": "Dou aulas em duas escolas. Funciona?", "acceptedAnswer": {"@type": "Answer", "text": "Sim. Cada escola tem o seu calendário, a sua organização do ano e os seus cargos, e os dados nunca se misturam."}}, {"@type": "Question", "name": "Onde aprendo a usar tudo?", "acceptedAnswer": {"@type": "Answer", "text": "No manual em PDF, que percorre todos os menus com imagens e exemplos, e no botão de ajuda de cada ecrã da app."}}]}]</script><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="theme-color" content="#e6f3fa">
 <link rel="preload" href="fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:Bricolage;src:url(fonts/bricolage.woff2) format("woff2");font-weight:200 800;font-display:swap}
@@ -531,10 +533,15 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
 .bv-pod>div:nth-child(2) b{height:100px;background:#facc15;color:#713f12}
 .bv-pod>div:nth-child(3) b{height:50px;background:#fb923c}
 .sa-c,.card{box-shadow:0 30px 60px -34px rgba(12,47,66,.35),0 0 0 1px var(--line)!important}footer .acores{color:#fff;font-weight:600;white-space:nowrap}footer .acores::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sun);margin:0 7px 1px 2px}
+.salta{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none}.salta:focus{top:10px}
+.bar nav{display:contents}
+footer a,.sa-lk,.sa-pf a{display:inline-flex;align-items:center;min-height:24px;padding-block:3px}
+.mqd-com span.r{color:var(--sge2);font-weight:600}
 </style></head>
 <body>
 <div id="sol" aria-hidden="true"></div>
 
+<a class="salta" href="#conteudo">Saltar para o conteúdo</a>
 <header class="bar"><div class="w">
   <a class="logo" href="#topo" aria-label="EduSpruce, início"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1b93c6"/><g transform="translate(32 32) scale(.9) translate(-33.8 -32)"><path d="M29.29 47C36.53 47 40.84 43.69 40.84 38.14C40.84 33.47 37.57 30.65 31.92 29.41L29.39 28.82C26.78 28.24 25.08 27.37 25.08 25.57C25.08 23.94 26.51 22.75 29.27 22.75C32.06 22.75 33.61 23.98 33.8 26.1H40.45C40.37 20.69 36.06 17 29.29 17C22.67 17 17.92 20.63 17.92 26.04C17.92 30.43 20.98 32.96 26.02 34.12L29.12 34.84C32.31 35.57 33.84 36.45 33.84 38.12C33.84 39.98 32.08 41.25 29.22 41.25C26.06 41.25 23.96 39.8 23.8 36.96H17.16C17.27 43.71 21.98 47 29.29 47Z" fill="#fff"/><circle cx="46.2" cy="43" r="4.3" fill="#f39200"/></g></svg>EduSpruce</a>
   <div class="sa-wrap">
@@ -548,12 +555,13 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     </div>
   </div>
   <span class="relogio" title="A página percorre um dia de escola"><i></i><span id="rel">08:30 · 1.º tempo</span></span>
+  <nav aria-label="Principal"><a class="t" href="#perguntas">Perguntas</a>
   <a class="t" href="manual/EduSpruce-Manual.pdf">Manual</a>
   <a class="t" href="changelog/">Changelog</a>
-  <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a>
+  <a class="bt a s" href="https://eduspruce.pt/">Abrir a app</a></nav>
 </div></header>
 
-<main id="topo">
+<main id="topo"><span id="conteudo" tabindex="-1"></span>
 <section class="abre"><div class="w">
   <div>
     <h1><span>Menos papelada.</span><span class="l2">Mais tempo para ensinar.</span></h1>
@@ -628,7 +636,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="mqd-c mqd-insp" style="--d:1.35s"><h5>Inspiração</h5><small>1 cartão, 1 ficheiro</small><div class="mqd-abc"><b>Abc</b></div><span class="mqd-leg">Tipografia dos cartazes</span>
       <div class="mqd-vid"><i>▶</i></div><div class="mqd-fich"><span>▷</span><b>visita-de-estudo.mp4</b><small><u>Descarregar</u> · 48,2 MB</small></div></div>
     <div class="mqd-c mqd-textura" style="--d:1.65s"><div></div><span>Textura dos cartazes</span></div>
-    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">P</div><div><b>Prof.ª Marta</b> <small>12 nov.</small><p>Era ótimo levarmos estes cartazes à reunião de grupo.</p><a>Responder</a></div></div>
+    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">P</div><div><b>Prof.ª Marta</b> <small>12 nov.</small><p>Era ótimo levarmos estes cartazes à reunião de grupo.</p><span class="r">Responder</span></div></div>
     <div class="mqd-c mqd-lista" style="--d:1.95s"><h5>Esta semana</h5><label class="f"><span></span>Rever os critérios de avaliação</label><label class=" mqd-anim"><span></span>Preparar o Teste 2</label><label class=""><span></span>Atualizar sumários</label></div>
     <div class="mqd-c mqd-q mqd-q1" style="--d:2.1s"><div><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div><b>Brainstorm</b><small>12 cartões</small></div>
     <svg class="mqd-lig" viewBox="0 0 70 30" aria-hidden="true"><path d="M2 6 L68 26"/></svg>
@@ -651,7 +659,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="mqd-c mqd-insp" style="--d:1.35s"><h5>Inspiração</h5><small>1 cartão, 1 ficheiro</small><div class="mqd-abc"><b>Abc</b></div><span class="mqd-leg">Tipografia dos cartazes</span>
       <div class="mqd-vid"><i>▶</i></div><div class="mqd-fich"><span>▷</span><b>visita-de-estudo.mp4</b><small><u>Descarregar</u> · 48,2 MB</small></div></div>
     <div class="mqd-c mqd-textura" style="--d:1.65s"><div></div><span>Textura dos cartazes</span></div>
-    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">P</div><div><b>Prof.ª Marta</b> <small>12 nov.</small><p>Era ótimo levarmos estes cartazes à reunião de grupo.</p><a>Responder</a></div></div>
+    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">P</div><div><b>Prof.ª Marta</b> <small>12 nov.</small><p>Era ótimo levarmos estes cartazes à reunião de grupo.</p><span class="r">Responder</span></div></div>
     <div class="mqd-c mqd-lista" style="--d:1.95s"><h5>Esta semana</h5><label class="f"><span></span>Rever os critérios de avaliação</label><label class=" mqd-anim"><span></span>Preparar o Teste 2</label><label class=""><span></span>Atualizar sumários</label></div>
     <div class="mqd-c mqd-q mqd-q1" style="--d:2.1s"><div><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div><b>Brainstorm</b><small>12 cartões</small></div>
     <svg class="mqd-lig" viewBox="0 0 70 30" aria-hidden="true"><path d="M2 6 L68 26"/></svg>
@@ -671,7 +679,7 @@ footer{background:#0c2f42;color:#9fb9c6;font-size:14.5px;padding:26px 0 34px}foo
     <div class="mqd-c mqd-insp" style="--d:1.35s"><h5>Capa</h5><small>1 cartão, 1 ficheiro</small><div class="mqd-abc"><b>Aa</b></div><span class="mqd-leg">Tipo de letra da manchete</span>
       <div class="mqd-vid"><i>▶</i></div><div class="mqd-fich"><span>▷</span><b>entrevista.mp4</b><small><u>Descarregar</u> · 132,6 MB</small></div></div>
     <div class="mqd-c mqd-textura" style="--d:1.65s"><div></div><span>Papel reciclado</span></div>
-    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">R</div><div><b>Revisora</b> <small>14 nov.</small><p>Falta a legenda da fotografia da página 3.</p><a>Responder</a></div></div>
+    <div class="mqd-c mqd-com" style="--d:2.4s"><div class="mqd-av">R</div><div><b>Revisora</b> <small>14 nov.</small><p>Falta a legenda da fotografia da página 3.</p><span class="r">Responder</span></div></div>
     <div class="mqd-c mqd-lista" style="--d:1.95s"><h5>Fecho da edição</h5><label class="f"><span></span>Recolher os artigos das turmas</label><label class=" mqd-anim"><span></span>Rever os textos</label><label class=""><span></span>Paginar e imprimir</label></div>
     <div class="mqd-c mqd-q mqd-q1" style="--d:2.1s"><div><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="1"/><rect x="13" y="4" width="7" height="7" rx="1"/><rect x="4" y="13" width="7" height="7" rx="1"/><rect x="13" y="13" width="7" height="7" rx="1"/></svg></div><b>Reportagens</b><small>6 cartões</small></div>
     <svg class="mqd-lig" viewBox="0 0 70 30" aria-hidden="true"><path d="M2 6 L68 26"/></svg>
@@ -777,8 +785,9 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
     <div><h3>Importe o horário e o calendário</h3><p>Dois PDF bastam para a app numerar as lições e contar as aulas previstas.</p></div>
   </div>
 
-  <div class="faq"><h2>Perguntas de quem ainda não experimentou</h2>
+  <div class="faq" id="perguntas"><h2>Perguntas de quem ainda não experimentou</h2>
     <details><summary>Preciso de instalar alguma coisa?</summary><p>Não. A EduSpruce abre no navegador. No iPad e no telemóvel pode adicioná-la ao ecrã principal e passa a abrir em ecrã inteiro.</p></details>
+    <details><summary>Como consigo acesso?</summary><p>Entre em eduspruce.pt com a sua conta Google. O acesso é por autorização: a conta tem de ser autorizada pelo administrador da EduSpruce antes da primeira entrada. Os alunos nunca precisam de conta.</p></details>
     <details><summary>Os alunos precisam de conta?</summary><p>Não. No Spruce It!, no Spruce Live, no Spruce Forms, no Spruce Exam e na autoavaliação entram com um código ou QR code que o professor mostra.</p></details>
     <details><summary>Substitui o programa de gestão da escola?</summary><p>Não. É o caderno do professor: prepara a avaliação, os sumários e as reuniões. Pode importar dados do programa da escola, mas nunca escreve nele.</p></details>
     <details><summary>Serve para cursos profissionais e PROFIJ?</summary><p>Sim. Tem módulos e UFCD, mecanismo de recuperação, planos de recuperação e uma área para a coordenação do PROFIJ, sem misturar com o ensino regular.</p></details>
@@ -791,7 +800,7 @@ if('IntersectionObserver'in window){e.style.visibility='hidden';const io=new Int
 </div></section>
 </main>
 
-<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa · <b class="acores">Orgulhosamente feito nos Açores</b></span><span><a href="changelog/">Changelog</a> &nbsp; <a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a> &nbsp; <a href="licencas.html">Licenças</a></span></div></footer>
+<footer><div class="w"><span>© 2026 EduSpruce, plataforma integrada de gestão educativa · <b class="acores">Orgulhosamente feito nos Açores</b></span><span><a href="changelog/">Changelog</a> &nbsp; <a href="privacidade.html">Privacidade</a> &nbsp; <a href="termos.html">Termos</a> &nbsp; <a href="licencas.html">Licenças</a> &nbsp; <a href="#perguntas">Perguntas frequentes</a></span></div></footer>
 
 <script>
 (()=>{const $=s=>document.querySelector(s),RM=matchMedia('(prefers-reduced-motion:reduce)').matches;

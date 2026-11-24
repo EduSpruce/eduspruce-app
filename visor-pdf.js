@@ -3,16 +3,16 @@
    eduspruce.pt (usa o pdf.js já incluído na app) e a eduspruce.app (carrega o pdf.js quando é preciso). */
 (function(){
   if(window.esVisorPdf)return;
-  const CDN='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  /* pdf.js 4.10.38 (compilação legacy) alojado no próprio site: sem CDN externo e sem a falha CVE-2024-4367 da 3.11 */
+  const PDFJS_DIR=new URL('/vendor/pdfjs/',location.href).href;
   let libP=null;
   const carregaScript=src=>new Promise((ok,ko)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=ko;document.head.appendChild(s)});
   function lib(){
     if(libP)return libP;
     libP=(async()=>{
       if(typeof getPdfLib==='function'){try{return await getPdfLib()}catch(_){}}
-      if(!window.pdfjsLib)await carregaScript(CDN+'pdf.min.js');
-      const L=window.pdfjsLib;
-      if(!L.GlobalWorkerOptions.workerSrc){try{const t=await fetch(CDN+'pdf.worker.min.js').then(r=>r.text());L.GlobalWorkerOptions.workerSrc=URL.createObjectURL(new Blob([t],{type:'text/javascript'}))}catch(_){L.GlobalWorkerOptions.workerSrc=CDN+'pdf.worker.min.js'}}
+      const L=window.pdfjsLib||(window.pdfjsLib=await import(PDFJS_DIR+'pdf.min.mjs'));
+      if(!L.GlobalWorkerOptions.workerSrc)L.GlobalWorkerOptions.workerSrc=PDFJS_DIR+'pdf.worker.min.mjs';
       return L})();
     libP.catch(()=>{libP=null});return libP}
   const SVG={
